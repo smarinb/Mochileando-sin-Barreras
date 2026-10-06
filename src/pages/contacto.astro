@@ -9,6 +9,9 @@ const EMAIL = 'equipo@mochileandosinbarreras.com';
 const FORM_ENDPOINT = `https://formsubmit.co/${EMAIL}`;
 const FORM_ENDPOINT_AJAX = `https://formsubmit.co/ajax/${EMAIL}`;
 const THANKS_URL = '/contacto?enviado=1';
+// Captcha Cloudflare Turnstile (ver functions/api/contacto.ts). Sin clave, el formulario envía directo a FormSubmit con la trampa antispam.
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const ENDPOINT = TURNSTILE_SITE_KEY ? '/api/contacto' : FORM_ENDPOINT_AJAX;
 
 const metadata = {
   title: 'Contacto',
@@ -77,9 +80,9 @@ const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800 dark:text-
 
         <form
           id="contact-form"
-          action={FORM_ENDPOINT}
+          action={TURNSTILE_SITE_KEY ? '/api/contacto' : FORM_ENDPOINT}
           method="POST"
-          data-endpoint={FORM_ENDPOINT_AJAX}
+          data-endpoint={ENDPOINT}
           class="space-y-6"
         >
           <p class="text-sm text-slate-700 dark:text-slate-300">Los campos marcados con <span aria-hidden="true">*</span> son obligatorios.</p>
@@ -169,6 +172,16 @@ const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800 dark:text-
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_next" value={THANKS_URL} />
+
+          {
+            TURNSTILE_SITE_KEY && (
+              <>
+                <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-language="es" data-theme="auto" data-action="contacto" />
+                <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+                <p class="text-xs text-slate-600 dark:text-slate-400">Protegido con Cloudflare Turnstile para evitar spam.</p>
+              </>
+            )
+          }
 
           <button
             id="submit-btn"
@@ -290,6 +303,10 @@ const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800 dark:text-
     showStatus('ok', '<strong>¡Mensaje enviado!</strong> Gracias por escribirnos, te responderemos lo antes posible.');
   }
 
+  if (new URLSearchParams(location.search).get('error') === '1') {
+    showStatus('error', '<strong>No hemos podido enviar el mensaje.</strong> Inténtalo de nuevo o escríbenos a <a class="font-semibold underline" href="mailto:equipo@mochileandosinbarreras.com">equipo@mochileandosinbarreras.com</a>.');
+  }
+
   const messages: Record<string, string> = {
     nombre: 'Escribe tu nombre.',
     email: 'Escribe un correo electrónico válido, por ejemplo nombre@ejemplo.com.',
@@ -345,6 +362,7 @@ const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800 dark:text-
         '<strong>No hemos podido enviar el mensaje.</strong> Inténtalo de nuevo en unos minutos o escríbenos directamente a <a class="font-semibold underline" href="mailto:equipo@mochileandosinbarreras.com">equipo@mochileandosinbarreras.com</a>.'
       );
     } finally {
+      (window as any).turnstile?.reset();
       submitBtn.disabled = false;
       submitBtn.removeAttribute('aria-busy');
       submitLabel.textContent = 'Enviar mensaje';

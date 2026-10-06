@@ -20,6 +20,8 @@ Este sitio **no instala cookies de analítica, de publicidad ni de seguimiento p
 | `msb-consent-v1` | Almacenamiento local (propio) | Guardar tu elección sobre cookies | 12 meses |
 | `msb-barra-cta` | Almacenamiento de sesión (propio) | Recordar que has cerrado la barra de aviso inferior en móvil | Hasta cerrar la pestaña |
 
+El formulario de [contacto](/contacto) incorpora **Cloudflare Turnstile**, un captcha de seguridad contra el spam que no se usa para publicidad ni seguimiento y es necesario para proteger el formulario que tú solicitas usar.
+
 ## 3. Contenido de terceros incrustado (requiere tu consentimiento)
 
 Algunos artículos incluyen contenido de terceros que **puede instalar cookies o acceder a información de tu dispositivo**. No se carga hasta que lo aceptas en el banner («Aceptar todo» o, desde «Configurar», «Contenido de terceros»). Si rechazas, en su lugar verás un enlace a ese contenido.

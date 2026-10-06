@@ -19,7 +19,7 @@ Esta política explica cómo se tratan los datos personales de quienes visitan h
 
 **Navegación.** Al visitar el sitio, el servidor que lo aloja puede registrar de forma automática datos técnicos como la dirección IP, la fecha y hora de acceso, las páginas visitadas y el navegador utilizado. Se tratan para que el sitio funcione y para garantizar su seguridad. La base jurídica es el interés legítimo del responsable (art. 6.1.f RGPD).
 
-**Comunicaciones por correo electrónico y formulario de contacto.** Si nos escribes por correo o a través del [formulario de contacto](/contacto), trataremos tu nombre, tu dirección de correo y el contenido de tu mensaje para responderte. La base jurídica es tu consentimiento al contactarnos (art. 6.1.a RGPD) o la aplicación de medidas a petición tuya.
+**Comunicaciones por correo electrónico y formulario de contacto.** El formulario usa Cloudflare Turnstile, un captcha para evitar el spam que analiza señales técnicas del navegador (por ejemplo la IP) solo para distinguir personas de bots; es una medida de seguridad necesaria (interés legítimo, art. 6.1.f RGPD). Si nos escribes por correo o a través del [formulario de contacto](/contacto), trataremos tu nombre, tu dirección de correo y el contenido de tu mensaje para responderte. La base jurídica es tu consentimiento al contactarnos (art. 6.1.a RGPD) o la aplicación de medidas a petición tuya.
 
 **Contenido de terceros.** Si aceptas el contenido de terceros en el banner de cookies, tu navegador se conecta con YouTube, Google Maps o Amazon para mostrarte vídeos, mapas y productos, y esos terceros pueden tratar datos como tu dirección IP o identificadores de cookies bajo sus propias políticas. La base jurídica es tu consentimiento (art. 6.1.a RGPD), que puedes retirar en cualquier momento desde «Configurar cookies» en el pie de página.
 
@@ -35,7 +35,7 @@ No cedemos tus datos a terceros salvo obligación legal. Para prestar el servici
 
 - **Alojamiento web y red de distribución (CDN):** Cloudflare, Inc. (EE. UU.), adherida al Marco de Privacidad de Datos UE-EE. UU.
 - **Correo electrónico:** **[RELLENAR: proveedor de correo, por ejemplo Google Workspace o el que uses]**
-- **Envío del formulario de contacto:** FormSubmit (formsubmit.co), servicio que reenvía los mensajes del formulario a nuestro correo.
+- **Envío del formulario de contacto:** una función alojada en Cloudflare comprueba el captcha (Cloudflare Turnstile) y reenvía el mensaje a FormSubmit (formsubmit.co), servicio que lo entrega a nuestro correo.
 
 Si alguno de estos proveedores está fuera del Espacio Económico Europeo, la transferencia se ampara en las garantías previstas por el RGPD (por ejemplo, cláusulas contractuales tipo o decisión de adecuación).
 
