@@ -81,7 +81,11 @@ export const headerData = {
     },
     {
       text: 'Acerca de',
-      href: getPermalink('/acerca-de'),
+      links: [
+        { text: 'Quiénes somos', href: getPermalink('/acerca-de') },
+        { text: 'Contacto', href: getPermalink('/contacto') },
+        { text: 'Trabajemos juntos', href: getPermalink('/trabajemos') },
+      ],
     },
   ],
   actions: [

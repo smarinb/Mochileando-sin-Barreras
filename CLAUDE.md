@@ -100,7 +100,7 @@ La web se organiza en **clústeres temáticos** definidos en `src/data/clusters.
 *   **Sitemap:** excluye `/tag/*` y paginación. Las páginas de paginación son `noindex`.
 *   **Botones de afiliado:** `BotonAfiliado` con subtítulo propio (el texto por defecto habla de «tarifas para tu destino» y solo vale para seguros).
 *   **Clúster sin pilar todavía:** en `clusters.ts` el campo `pillar` es opcional (caso actual de *Alquiler de coches*). Al crear `/mejor-alquiler-de-coches.astro`, descomentar `pillar` en su entrada y añadir la guía como primer elemento del desplegable «Coches» en `navigation.ts`.
-*   **Menú principal:** máximo ~7 elementos (se solapa por debajo de 1100 px). «Contacto» vive solo en el pie.
+*   **Menú principal:** máximo ~7 elementos (se solapa por debajo de 1100 px). «Contacto» está en el desplegable «Acerca de» (junto a Quiénes somos y Trabajemos juntos) y en el pie.
 
 ---
 
