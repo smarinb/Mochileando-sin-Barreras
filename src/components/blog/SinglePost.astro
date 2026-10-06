@@ -27,6 +27,7 @@ const { post, url } = Astro.props;
 const cluster = getClusterByCategoryTitle(post.category?.title);
 const isMoney = !!cluster && !cluster.group;
 const isSeguros = cluster?.slug === 'seguros-de-viaje';
+const heymondoCollab = !!post.tags?.some((t) => t.slug === 'heymondo');
 const wasUpdated = !!post.updateDate && post.updateDate.getTime() !== post.publishDate.getTime();
 const autores = post.author ?? 'Cris y Sergio';
 ---
@@ -98,7 +99,7 @@ const autores = post.author ?? 'Cris y Sergio';
           isMoney && (
             <p class="max-w-3xl mx-auto mb-6 rounded-lg border-l-4 border-accent bg-[#FDF2F0] px-4 py-3 text-sm text-[#5c2924] dark:bg-slate-800 dark:text-slate-200 sm:mx-auto">
               <strong>Transparencia:</strong> este artículo incluye enlaces de afiliado. Si contratas desde ellos recibimos una comisión sin coste extra para ti.
-              Solo recomendamos lo que usaríamos nosotros. <a href="/acerca-de#como-trabajamos" class="font-semibold underline">Cómo trabajamos</a>.
+              Solo recomendamos lo que usaríamos nosotros.{heymondoCollab && " Además, Heymondo nos cede las pólizas de larga estancia (se renuevan cada tres meses) como parte de una colaboración."} <a href="/acerca-de#como-trabajamos" class="font-semibold underline">Cómo trabajamos</a>.
             </p>
           )
         }
