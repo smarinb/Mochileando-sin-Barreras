@@ -35,3 +35,35 @@ export const responsiveTablesRehypePlugin: RehypePlugin = () => {
     }
   };
 };
+
+// Enlaces de afiliado escritos como markdown dentro de los posts: se marcan con rel="nofollow sponsored noopener" y se abren en pestaña nueva.
+const AFFILIATE_HOSTS = ['civitatis.com', 'booking.com', 'discovercars.com', 'rentalcars.com', 'heymondo.es', 'n26.com', 'amazon.es'];
+const AFFILIATE_REDIRECTORS = ['holafly.sjv.io', 'clk.tradedoubler.com', 'clk.roamic.com', 'bit.ly', 'amzn.to', 'share.bnext.es', 'go.nordvpn.net'];
+
+const isAffiliateHref = (href: string) => {
+  let url: URL;
+  try {
+    url = new URL(href);
+  } catch {
+    return false;
+  }
+  const host = url.hostname.replace(/^www\./, '');
+  if (AFFILIATE_REDIRECTORS.includes(host)) return true;
+  const known = AFFILIATE_HOSTS.some((h) => host === h || host.endsWith(`.${h}`));
+  return known && ['aid', 'a_aid', 'cod_descuento', 'affiliated', 'tag'].some((k) => url.searchParams.has(k));
+};
+
+export const affiliateLinksRehypePlugin: RehypePlugin = () => {
+  return function (tree) {
+    const walk = (node: any) => {
+      if (node.type === 'element' && node.tagName === 'a' && typeof node.properties?.href === 'string') {
+        if (isAffiliateHref(node.properties.href)) {
+          node.properties.rel = ['nofollow', 'sponsored', 'noopener'];
+          node.properties.target = '_blank';
+        }
+      }
+      node.children?.forEach(walk);
+    };
+    walk(tree);
+  };
+};

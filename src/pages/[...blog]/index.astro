@@ -18,6 +18,7 @@ import { findImage } from '~/utils/images';
 import { truncateAtWord } from '~/utils/utils';
 import type { MetaData } from '~/types';
 import RelatedPosts from '~/components/blog/RelatedPosts.astro';
+import ClusterLinks from '~/components/blog/ClusterLinks.astro';
 import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import { SITE } from 'astrowind:config';
@@ -31,6 +32,9 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post } = Astro.props as Props;
+
+// El <Indice /> del MDX lee los encabezados del post desde aquí (se rellena antes de renderizar el contenido).
+Astro.locals.headings = post.headings;
 
 const url = getCanonical(getPermalink(post.permalink, 'post'));
 const image = (await findImage(post.image)) as ImageMetadata | string | undefined;
@@ -79,8 +83,22 @@ const articleSchema = {
   mainEntityOfPage: String(url),
 };
 
+// FAQPage: solo se emite si el post define `faqs` en su frontmatter.
+// Las preguntas deben estar también visibles en el artículo (requisito de Google).
+const faqSchema = post.faqs?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: post.faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    }
+  : null;
+
 const breadcrumbs = [
-  { text: 'Home', href: getPermalink('/') },
+  { text: 'Inicio', href: getPermalink('/') },
   ...(isBlogListRouteEnabled ? [{ text: 'Blog', href: getBlogPermalink() }] : []),
   ...(post.category && isBlogCategoryRouteEnabled
     ? [{ text: post.category.title, href: getPermalink(post.category.slug, 'category') }]
@@ -90,11 +108,13 @@ const breadcrumbs = [
 ---
 
 <Layout metadata={metadata}>
-  <StructuredData slot="head" schema={articleSchema} />
+  <StructuredData slot="head" schema={faqSchema ? [articleSchema, faqSchema] : articleSchema} />
   <Breadcrumbs bar hideCurrent items={breadcrumbs} />
+  <ClusterLinks variant="top" categoryTitle={post.category?.title} currentSlug={post.slug} />
   <SinglePost post={{ ...post, image: image }} url={url}>
     {post.Content && <post.Content />}
   </SinglePost>
+  <ClusterLinks variant="bottom" categoryTitle={post.category?.title} currentSlug={post.slug} />
   <ToBlogLink />
   <RelatedPosts post={post} />
 </Layout>

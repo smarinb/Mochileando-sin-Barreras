@@ -1,9 +1,49 @@
-@import 'tailwindcss';
+/* Tailwind solo escanea src/ (antes escaneaba también copias de seguridad, scripts y documentación). */
+@import 'tailwindcss' source('../../');
 
 @plugin "@tailwindcss/typography";
 
 /* shadcn/ui-compatible tokens derived from the --aw-* variables. */
 @import './shadcn.css';
+
+/* --- COLORES DE LA MARCA MOCHILEANDO SIN BARRERAS --- */
+:root {
+  /* Marca (hex del logo): turquesa #36A09F, turquesa claro #61B4BA, terracota #D87068.
+     Estas variantes cumplen contraste AA (WCAG 2.1) para texto y botones sobre fondo claro. */
+  --aw-color-primary: #1f7f7e; /* relleno con texto blanco: 4.78:1 */
+  --aw-color-primary-hover: #186867; /* hover con texto blanco: 6.53:1 */
+  --aw-color-secondary: #61B4BA; /* solo decorativo */
+  --aw-color-accent: #D87068; /* decorativo e iconos; con texto blanco solo en tamaño grande */
+  --aw-color-accent-hover: #c26159;
+  --aw-color-accent-strong: #b4524a; /* relleno con texto blanco: 4.95:1 */
+  --aw-color-accent-soft: #f4a29b; /* texto sobre fotos oscurecidas (hero) */
+  --aw-color-accent-text: #9a4a43; /* texto sobre fondo claro: 5.81:1 */
+  --aw-color-link: #1f7f7e; /* enlaces sobre fondo claro: 4.54:1 */
+  --aw-color-text-heading: rgb(0 0 0);
+  --aw-color-text-default: rgb(16 16 16);
+  --aw-color-text-muted: rgb(16 16 16 / 66%);
+  /* Fondo cambiado a un tono cáscara de huevo cálido (Hex: #FAF9F6) */
+  --aw-color-bg-page: rgb(250 249 246); 
+  --aw-color-bg-page-dark: rgb(15 23 42);
+}
+
+.dark {
+  --aw-color-primary: #1f7f7e; /* relleno con texto blanco: 4.78:1 */
+  --aw-color-primary-hover: #186867;
+  --aw-color-secondary: #61B4BA;
+  --aw-color-accent: #D87068;
+  --aw-color-accent-hover: #c26159;
+  --aw-color-accent-strong: #b4524a;
+  --aw-color-accent-soft: #f4a29b;
+  --aw-color-accent-text: #e0807a; /* texto sobre azul noche 6.41:1 y sobre tarjetas slate-800 5.25:1 */
+  --aw-color-link: #61B4BA; /* enlaces sobre azul noche: 7.43:1 */
+  --aw-color-text-heading: rgb(247 248 248);
+  --aw-color-text-default: rgb(229 231 235);
+  --aw-color-text-muted: rgb(229 231 235 / 66%);
+  --aw-color-bg-page: rgb(15 23 42);
+  --aw-color-bg-page-dark: rgb(15 23 42);
+}
+/* ---------------------------------------------------- */
 
 @variant dark (&:where(.dark, .dark *));
 
@@ -17,6 +57,11 @@
   --color-default: var(--aw-color-text-default);
   --color-muted: var(--aw-color-text-muted);
   --color-link: var(--aw-color-link, var(--aw-color-primary));
+  --color-primary-hover: var(--aw-color-primary-hover);
+  --color-accent-hover: var(--aw-color-accent-hover);
+  --color-accent-strong: var(--aw-color-accent-strong);
+  --color-accent-soft: var(--aw-color-accent-soft);
+  --color-accent-text: var(--aw-color-accent-text);
 
   --font-sans:
     var(--aw-font-sans, ui-sans-serif), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -55,11 +100,11 @@
 }
 
 @utility btn {
-  @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base text-page leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
+  @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base text-page leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
 }
 
 @utility btn-primary {
-  @apply btn font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
+  @apply btn font-semibold bg-primary text-white border-primary hover:bg-primary-hover hover:border-primary-hover hover:text-white dark:text-white;
 }
 
 @utility btn-secondary {
@@ -149,4 +194,20 @@
 .dark .astro-code span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
+}
+
+/* Foco de teclado visible y de marca (2px, contraste >= 3:1 sobre fondo claro y oscuro). */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--aw-color-link);
+  outline-offset: 2px;
+}
+
+/* Selección de texto con la marca */
+::selection {
+  background-color: color-mix(in srgb, #36a09f 30%, white);
+  color: #0f172a;
+}
+.dark ::selection {
+  background-color: color-mix(in srgb, #61b4ba 45%, #0f172a);
+  color: #ffffff;
 }

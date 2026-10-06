@@ -1,0 +1,18 @@
+---
+const { titulo, tipo = 'info' } = Astro.props as { titulo?: string; tipo?: 'info' | 'alerta' };
+
+// Definimos colores según el tipo de caja
+const colores = {
+  info: 'bg-[#E5F5F6] border-primary text-[#1f5c5b] dark:bg-slate-800 dark:border-secondary dark:text-slate-100', // Turquesa claro
+  alerta: 'bg-[#FDF2F0] border-accent text-[#8a3c35] dark:bg-slate-800 dark:border-accent dark:text-slate-100', // Terracota claro
+};
+
+const clasesBase = colores[tipo] || colores.info;
+---
+
+<div class={`border-l-4 p-6 my-8 rounded-r-lg shadow-sm ${clasesBase}`}>
+  {titulo && <h4 class="font-bold text-xl mb-2 mt-0">{titulo}</h4>}
+  <div class="prose-p:mt-0 prose-p:mb-2 last:mb-0">
+    <slot /> <!-- Aquí es donde se inyectará el texto que escribas en el artículo -->
+  </div>
+</div>

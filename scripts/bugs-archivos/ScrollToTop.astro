@@ -1,0 +1,51 @@
+---
+// Botón "Volver arriba".
+// El <script> de Astro se carga una sola vez aunque haya <ClientRouter />: los listeners
+// van en `window`/`document` (una vez) y se vuelve a evaluar la posición en cada navegación.
+---
+
+<button
+  id="scroll-to-top"
+  type="button"
+  aria-label="Volver arriba"
+  inert
+  class="pointer-events-none fixed bottom-6 right-6 z-50 translate-y-10 rounded-full bg-[#D87068] p-3 text-white opacity-0 shadow-xl transition-all duration-300 hover:scale-110 hover:bg-[#c26159] motion-reduce:transition-none motion-reduce:hover:scale-100"
+>
+  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<script>
+  const SHOW_AFTER_PX = 400;
+  const HIDDEN = ['opacity-0', 'translate-y-10', 'pointer-events-none'];
+  const VISIBLE = ['opacity-100', 'translate-y-0', 'pointer-events-auto'];
+
+  // Guardia: aunque el script se evaluara más de una vez, los listeners se registran una sola vez.
+  const w = window as Window & { __scrollTopInit?: boolean };
+
+  function update() {
+    const button = document.getElementById('scroll-to-top');
+    if (!button) return;
+    const show = window.scrollY > SHOW_AFTER_PX;
+    button.classList.remove(...(show ? HIDDEN : VISIBLE));
+    button.classList.add(...(show ? VISIBLE : HIDDEN));
+    // `inert` evita que el botón invisible reciba foco con el teclado
+    button.toggleAttribute('inert', !show);
+  }
+
+  if (!w.__scrollTopInit) {
+    w.__scrollTopInit = true;
+
+    window.addEventListener('scroll', update, { passive: true });
+    document.addEventListener('astro:page-load', update);
+
+    document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element) || !event.target.closest('#scroll-to-top')) return;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  update();
+</script>

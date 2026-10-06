@@ -1,0 +1,76 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const EMAIL = 'equipo@mochileandosinbarreras.com';
+
+const metadata = {
+  title: 'Trabajemos juntos: publicidad y colaboraciones',
+  description:
+    'Colabora con Mochileando sin Barreras: patrocinios y publicidad sobre turismo accesible para viajeros sordos o con dificultades auditivas.',
+  canonical: '/trabajemos',
+};
+
+const breadcrumbs = [{ text: 'Inicio', href: getPermalink('/') }, { text: 'Trabajemos juntos' }];
+
+const temas = [
+  'Material de viaje.',
+  'Aplicaciones móviles y herramientas útiles para la comunicación durante el viaje.',
+  'Accesorios para conservar audífonos e implantes en buen estado mientras viajas.',
+  'Alojamientos accesibles.',
+  'Restaurantes accesibles.',
+  'Ocio y actividades culturales accesibles: club nocturno, eventos deportivos, rutas guiadas en lenguaje de signos, excursiones…',
+  'Congresos y conferencias mundiales relacionados.',
+  'Transportes con comunicación adaptada.',
+  'Webs de viajes con accesibilidad a la información.',
+  'Agencias de viajes especializadas en ofrecer servicios al colectivo sordo.',
+];
+
+const formas = [
+  'Publicación patrocinada de productos: probamos el producto y contamos nuestra experiencia en este blog.',
+  'Campaña de divulgación en redes sociales sobre el producto o marca.',
+  'Promociones y concursos.',
+  'Reseñas sobre la marca o producto en sitios web relacionados.',
+  'Banners publicitarios.',
+  'Patrocinio de marca sobre un producto utilizado en ruta.',
+  'Participación en eventos relacionados para hablar de la marca o producto.',
+];
+---
+
+<Layout metadata={metadata}>
+  <Breadcrumbs bar items={breadcrumbs} />
+
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-3xl">
+    <h1 class="text-3xl md:text-4xl font-bold font-heading mb-6">Trabajemos juntos</h1>
+
+    <div class="prose dark:prose-invert max-w-none">
+      <h2>Publicidad</h2>
+      <p>
+        Mochileando sin barreras es un blog donde, además de contar nuestra experiencia personal viajando sin billete de vuelta, pretendemos proporcionar
+        información útil sobre turismo accesible para el colectivo sordo. Y lo hacemos a través de nuestro proyecto <a href="/sordomundo">Sordomundo</a>.
+      </p>
+      <p>
+        En internet podemos encontrar mucha información sobre viajes, pero no específicamente para personas sordas. Es por eso que solo se aceptarán
+        patrocinios y publicidad relacionada con el <strong>turismo accesible</strong> y que consideremos que sean de interés para nuestros lectores.
+      </p>
+
+      <h2>¿Qué temas nos interesan?</h2>
+      <p>Todos los que tengan como objetivo hacer más fácil la ruta del viajero con dificultades auditivas. Por ejemplo:</p>
+      <ul>
+        {temas.map((t) => <li>{t}</li>)}
+      </ul>
+
+      <h2>¿Cómo lo haríamos?</h2>
+      <ul>
+        {formas.map((f) => <li>{f}</li>)}
+      </ul>
+
+      <h2>Escríbenos</h2>
+      <p>
+        Si quieres consultarnos algo o deseas comenzar una relación comercial con nosotros, puedes escribirnos a
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a> o usar el <a href="/contacto">formulario de contacto</a> y elegir el motivo «Colaboración o publicidad».
+      </p>
+    </div>
+  </section>
+</Layout>

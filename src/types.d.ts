@@ -24,12 +24,18 @@ export interface Post {
   tags?: Taxonomy[];
   author?: string;
 
+  /** Preguntas frecuentes del post (se emiten como schema FAQPage). */
+  faqs?: Array<{ q: string; a: string }>;
+
   metadata?: MetaData;
 
   draft?: boolean;
 
   /** Rendered Astro component factory for the post body. */
   Content?: AstroComponentFactory;
+
+  /** Encabezados del artículo (h1-h6), usados por el índice de contenidos. */
+  headings?: Array<{ depth: number; slug: string; text: string }>;
 
   /** Estimated reading time in minutes. */
   readingTime?: number;

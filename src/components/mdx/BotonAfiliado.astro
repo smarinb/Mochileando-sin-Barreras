@@ -1,0 +1,18 @@
+---
+// `rel` por defecto = enlace de afiliado. Para enlaces SIN afiliación (p. ej. web oficial de una marca) usar rel="nofollow noopener noreferrer".
+const { href, text, rel = "nofollow sponsored noopener" } = Astro.props;
+---
+
+<div class="not-prose bg-teal-50 dark:bg-slate-800 border-l-4 border-primary p-4 rounded-r-xl my-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+  <div class="text-slate-800 dark:text-slate-200 font-medium text-sm md:text-base [&>p+p]:mt-2">
+    <slot>¿Quieres consultar las tarifas para tu destino?</slot>
+  </div>
+  <a 
+    href={href} 
+    target="_blank" 
+    rel={rel} 
+    class="bg-primary hover:bg-primary-hover text-white text-sm font-bold px-5 py-2.5 rounded-lg shadow transition whitespace-nowrap text-center w-full sm:w-auto no-underline"
+  >
+    {text}
+  </a>
+</div>

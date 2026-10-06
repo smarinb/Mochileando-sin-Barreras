@@ -32,7 +32,7 @@ const schema = {
 ---
 
 <nav
-  aria-label="Breadcrumb"
+  aria-label="Ruta de navegación"
   class:list={[
     'text-sm text-muted',
     bar ? 'max-w-7xl mx-auto w-full px-3 lg:px-6 pt-4 [&>ol]:ml-2 rtl:[&>ol]:ml-0 rtl:[&>ol]:mr-2' : '',
@@ -49,7 +49,7 @@ const schema = {
           {href && index < items.length - 1 ? (
             <a
               href={href}
-              class="inline-flex items-center hover:text-primary hover:underline"
+              class="inline-flex items-center hover:text-link hover:underline"
               aria-label={icon ? text : undefined}
             >
               {icon ? <Icon name={icon} class="h-4 w-4" /> : text}

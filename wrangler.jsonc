@@ -9,5 +9,9 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page",
+    // Las URLs canónicas del sitio no llevan barra final (trailingSlash: false). Con el valor por defecto
+    // (auto-trailing-slash) Cloudflare redirigiría /post a /post/. Con este, /post/ pasa a /post (que es
+    // también como llegan las URLs antiguas de WordPress).
+    "html_handling": "drop-trailing-slash",
   },
 }

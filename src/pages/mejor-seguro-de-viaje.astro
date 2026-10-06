@@ -1,0 +1,517 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '~/layouts/PageLayout.astro';
+import ClusterLinks from '~/components/blog/ClusterLinks.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import { getPermalink } from '~/utils/permalinks';
+import { getClusterBySlug } from '~/data/clusters';
+import BotonAfiliado from '~/components/mdx/BotonAfiliado.astro';
+import CajaAviso from '~/components/mdx/CajaAviso.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import heroImage from '~/assets/images/mejor-seguro-de-viaje.webp';
+
+const cluster = getClusterBySlug('seguros-de-viaje');
+
+const breadcrumbs = [
+  { text: 'Inicio', href: getPermalink('/') },
+  { text: cluster?.label ?? 'Guías', href: getPermalink(cluster?.slug ?? '', 'category') },
+  { text: 'Mejor seguro de viaje' },
+];
+
+const metadata = {
+  title: 'Mejor seguro de viaje 2026: comparativa, ranking y descuentos',
+  description:
+    'Comparamos Heymondo, IATI, Chapka e Intermundial: coberturas, letra pequeña y descuentos reales. Elige el mejor seguro de viaje según tu viaje.',
+  canonical: '/mejor-seguro-de-viaje',
+};
+
+const heymondoUrl =
+  'https://heymondo.es/?utm_medium=Afiliado&utm_source=MOCHILEANDOSINBARRERAS&utm_campaign=PRINCIPAL&cod_descuento=MOCHILEANDOSINBARRERAS&ag_campaign=CLUSTER&agencia=a5108849b9020a8d726cf95f432afb343ac8';
+
+const faqs = [
+  {
+    q: '¿Tengo que adelantar dinero en el hospital si me pasa algo?',
+    a: 'No, siempre que contactes con la aseguradora antes de acudir al médico. IATI garantiza que no tendrás que adelantar dinero ni pagar franquicias. Chapka también funciona sin adelantos si gestionas la asistencia correctamente. En Heymondo, puedes abrir la incidencia desde su app y ellos se encargan del pago directo al hospital.',
+  },
+  {
+    q: '¿Me cubren si tengo una enfermedad crónica preexistente?',
+    a: 'Por norma general, los seguros solo cubren la urgencia inicial para estabilizarte. Sin embargo, Chapka (Cap Trip Plus) incluye hasta 10.000€ por agravamiento de enfermedades preexistentes. Intermundial, en algunas pólizas específicas, puede cubrir hasta 15.000€ en estos casos.',
+  },
+  {
+    q: 'Me voy a dar la vuelta al mundo (+90 días), ¿hay franquicias ocultas?',
+    a: 'Sí, es importante revisarlo. Heymondo Larga Estancia incluye una franquicia obligatoria de 100€, lo que significa que pagarás los primeros 100€ de cada incidencia. Si buscas un seguro sin franquicias para viajes largos, Chapka Cap Trotamundos es una de las mejores opciones.',
+  },
+  {
+    q: '¿Se puede conseguir un seguro más barato si viajo en grupo o en familia?',
+    a: 'Sí. Heymondo ofrece un 15% de descuento automático para familias (mínimo 3 personas) y descuentos del 5% al 15% para grupos grandes. Chapka también tiene tarifas reducidas en seguros anuales para varios viajeros. En IATI hay 15% para familias y grupos grandes, pero solo en pólizas anuales y solicitándolo antes de contratar: online solo se aplica el 5%.',
+  },
+  {
+    q: 'Voy a hacer trekking, buceo o deportes extremos, ¿qué seguro elijo?',
+    a: 'Debes fijarte en el límite de rescate, no solo en la cobertura médica. Intermundial Totalsports ofrece hasta 20.000€ en rescate y cubre buceo hasta 40 metros. IATI Mochilero es otra gran opción, con rescate incluido de hasta 15.000€ y sin franquicias.',
+  },
+  {
+    q: '¿Qué pasa si mi vuelo se retrasa o se cancela?',
+    a: 'Además de las coberturas estándar, Heymondo tiene una ventaja diferencial: si tu vuelo se retrasa más de 2 horas y media, puedes acceder a una sala VIP del aeropuerto o recibir una compensación de 50€ automáticamente. También incluye servicios para reclamar indemnizaciones a la aerolínea.',
+  },
+  {
+    q: '¿Cubre el seguro si viajo en autocaravana o camper?',
+    a: 'Sí, pero necesitas un seguro específico. IATI Camper está diseñado para viajes en furgoneta o autocaravana, incluyendo asistencia médica, robo en el interior, daños al vehículo, la camperización y los accesorios que hayas montado tú, e incluso cobertura para mascotas.',
+  },
+  {
+    q: '¿Cuál es el descuento real de IATI y cómo se aplica?',
+    a: 'Un 5% permanente todo el año, automático y sin códigos, al entrar desde el enlace de un colaborador oficial. Lo verás como precio tachado en su comparador. En campañas sube: hasta un 10% en los IATI Travel Days de verano y hasta un 15% en el Orange Friday de noviembre. Los descuentos del 15% para familias y grupos existen, pero se aplican a pólizas anuales y hay que pedirlos antes de contratar.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<Layout metadata={metadata}>
+  <Breadcrumbs bar items={breadcrumbs} />
+  <StructuredData slot="head" schema={faqSchema} />
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-4xl">
+    <h1 class="text-3xl md:text-4xl font-bold font-heading mb-6">
+      Mejor seguro de viaje 2026: comparativa real, ranking y descuentos
+    </h1>
+
+    <Image
+      src={heroImage}
+      alt="Mano sosteniendo un pasaporte español, tarjetas de embarque y un avión de juguete frente al mar, con una viajera con mochila de espaldas"
+      class="w-full h-auto rounded-xl mb-8"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 896px) 100vw, 896px"
+      loading="eager"
+    />
+
+    <div class="prose dark:prose-invert max-w-none">
+      <p>
+        Viajar sin seguro puede salir muy caro. Si estás organizando tu próximo viaje y no quieres arriesgarte a pagar
+        miles de euros por una urgencia médica, una cancelación o un problema con el equipaje, necesitas elegir bien.
+      </p>
+      <p>
+        Aquí tienes una comparativa real de los <strong>mejores seguros de viaje con descuento</strong>, basada en
+        experiencia viajando y analizando la letra pequeña de cada póliza. Hemos comparado Heymondo, IATI, Chapka e
+        Intermundial para ayudarte a saber qué seguro merece la pena en 2026 según tu tipo de viaje, sin listas
+        genéricas copiadas de lo que dicen las marcas.
+      </p>
+
+      <h2>⚡ Qué seguro elegir ahora mismo (respuesta rápida)</h2>
+      <p>
+        ✔ <strong>Mejor opción general:</strong> Heymondo (equilibrio + app + precio)
+      </p>
+      <p>
+        ✔ <strong>Alternativa más completa:</strong>
+        <a href="/descuento-iati">IATI</a> (sin franquicias, sin adelantar dinero y con un 5% de descuento permanente)
+      </p>
+      <p>
+        ✔ <strong>Para viajes largos o Working Holiday:</strong> Chapka (sin franquicias + alta cobertura)
+      </p>
+      <p>
+        ✔ <strong>Para EE.UU., Japón o destinos caros:</strong> Intermundial (hasta 10 millones de cobertura médica)
+      </p>
+      <p>
+        👉 Si no quieres complicarte: <strong>Heymondo es la opción más equilibrada para la mayoría de viajeros.</strong>
+      </p>
+
+      <BotonAfiliado href={heymondoUrl} text="🚀 Ver descuento Heymondo activo">
+        Comprueba precios en menos de 1 minuto y viaja con cobertura desde el primer día
+      </BotonAfiliado>
+
+      <hr class="my-8" />
+
+      <h2>🎯 Elige tu seguro según tu tipo de viaje</h2>
+      <p>No todos los viajes necesitan el mismo seguro. Aquí tienes la forma más rápida de elegir sin equivocarte:</p>
+
+      <h3>🌍 Viaje estándar (vacaciones, escapadas)</h3>
+      <p>
+        👉 <strong>Heymondo</strong> es la opción más equilibrada: buena cobertura, app fácil de usar y precio competitivo.
+      </p>
+      <p><a href="/descuento-heymondo">Ver descuento Heymondo →</a></p>
+
+      <h3>🌍 Viaje largo (+90 días)</h3>
+      <p>
+        👉 <strong>Chapka</strong> destaca por su cobertura alta sin franquicias. Ideal para vuelta al mundo o nómadas.
+      </p>
+      <p><a href="/chapka-vs-intermundial">Ver comparativa →</a></p>
+
+      <h3>🎒 Mochileros y aventura</h3>
+      <p>
+        👉 <strong>IATI Mochilero</strong> es un clásico: más de 60 deportes de aventura, rescate hasta 15.000€ y
+        1.500.000€ de cobertura médica.
+      </p>
+      <p><a href="/descuento-iati">Ver descuento IATI →</a></p>
+
+      <h3>👨‍👩‍👧 Viaje en familia</h3>
+      <p>
+        👉 <strong>Heymondo Familia</strong> es de lo mejor por precio, descuento automático y atención pediátrica.
+      </p>
+      <p><a href="/descuento-heymondo">Ver precios →</a></p>
+
+      <h3>🗽 EE.UU., Japón o destinos caros</h3>
+      <p>
+        👉 <strong>Intermundial</strong> gana en cobertura máxima (hasta 10 millones) y tranquilidad total. Si prefieres
+        el concepto de cobertura ilimitada, <strong>IATI Estrella</strong> es la alternativa.
+      </p>
+      <p><a href="/iati-vs-intermundial">Ver comparativa →</a></p>
+
+      <h3>🚐 Viaje en furgoneta o autocaravana</h3>
+      <p>
+        👉 <strong>IATI Camper</strong> es el único que asegura el vehículo y el viaje a la vez, y cubre la camperización
+        y los accesorios que hayas montado tú.
+      </p>
+      <p><a href="/descuento-iati">Ver seguro IATI para camper →</a></p>
+
+      <h3>🤔 ¿Sigues dudando?</h3>
+      <p>
+        👉 Más abajo tienes la tabla comparativa, el ranking completo y todas las comparativas cara a cara para ver todas
+        las opciones según tu caso.
+      </p>
+
+      <hr class="my-8" />
+
+      <h2>📊 Comparativa de seguros de viaje 2026 (rápida y clara)</h2>
+      <p>
+        Si quieres comparar en 1 minuto cuál te conviene más, aquí tienes las diferencias clave entre las mejores
+        aseguradoras:
+      </p>
+
+      <div class="overflow-x-auto not-prose my-6">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-gray-100 dark:bg-slate-800">
+              <th class="p-3">Característica</th>
+              <th class="p-3">Heymondo 🟢</th>
+              <th class="p-3">IATI 🟠</th>
+              <th class="p-3">Chapka 🔵</th>
+              <th class="p-3">Intermundial 🔵</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>🏥 Cobertura médica</strong></td>
+              <td class="p-3">Ilimitados en modalidad Premium</td>
+              <td class="p-3">Hasta ilimitada</td>
+              <td class="p-3">Hasta 2.5M€</td>
+              <td class="p-3">Hasta 10M€</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>💸 Franquicia</strong></td>
+              <td class="p-3">0€ (100€ en larga estancia)</td>
+              <td class="p-3">0€ siempre</td>
+              <td class="p-3">0€</td>
+              <td class="p-3">0€</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>✈️ Cancelación</strong></td>
+              <td class="p-3">Hasta 6.000€</td>
+              <td class="p-3">Hasta 6.000€</td>
+              <td class="p-3">Hasta 7.000€</td>
+              <td class="p-3">Hasta 12.000€</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>🏔️ Deportes</strong></td>
+              <td class="p-3">Incluidos</td>
+              <td class="p-3">+60 deportes · rescate 15.000€</td>
+              <td class="p-3">Buceo hasta 40m</td>
+              <td class="p-3">Pólizas específicas</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>🎒 Equipaje</strong></td>
+              <td class="p-3">Hasta 4.000€</td>
+              <td class="p-3">Hasta 4.000€</td>
+              <td class="p-3">Hasta 3.000€</td>
+              <td class="p-3">Hasta 3.200€</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>🦠 COVID</strong></td>
+              <td class="p-3">✔ Incluido</td>
+              <td class="p-3">✔ Incluido</td>
+              <td class="p-3">✔ Incluido</td>
+              <td class="p-3">✔ Incluido</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>💰 Precio</strong></td>
+              <td class="p-3">Desde 0,97€/día</td>
+              <td class="p-3">Muy competitivo</td>
+              <td class="p-3">Desde 5,60€</td>
+              <td class="p-3">Desde 1,53€/día</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>👤 Ideal para</strong></td>
+              <td class="p-3">Familias y comodidad</td>
+              <td class="p-3">Mochileros</td>
+              <td class="p-3">Viajes largos</td>
+              <td class="p-3">Cobertura máxima</td>
+            </tr>
+            <tr>
+              <td class="p-3"><strong>🔗 Descuento y análisis</strong></td>
+              <td class="p-3"><a href="/descuento-heymondo">Descuento Heymondo →</a></td>
+              <td class="p-3"><a href="/descuento-iati">Descuento IATI →</a></td>
+              <td class="p-3"><a href="/iati-vs-chapka">Análisis Chapka →</a></td>
+              <td class="p-3"><a href="/iati-vs-intermundial">Análisis Intermundial →</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>👉 Si ya tienes claro cuál es tu caso, puedes comprobar precios aquí:</p>
+      <BotonAfiliado href={heymondoUrl} text="🚀 Ver precios con descuento">
+        Tardarás menos de 1 minuto y verás el precio real para tu viaje
+      </BotonAfiliado>
+
+      <hr class="my-8" />
+
+      <h2>🏆 Ranking real de los mejores seguros de viaje en 2026</h2>
+      <p>Después de analizar coberturas, precios y letra pequeña, este es el ranking según el tipo de viaje:</p>
+
+      <h3>🥇 Mejor seguro de viaje (global): Heymondo</h3>
+      <p>
+        👉 Destaca por su equilibrio entre cobertura (hasta 5 millones), precio y facilidad de uso. Su app permite
+        gestionar todo desde el móvil: asistencia médica por chat o videollamada, incidencias y reembolsos.
+      </p>
+      <p>💡 Es la mejor opción para el 90% de viajeros, y especialmente si viajas en familia o valoras la tecnología.</p>
+      <p><a href="/descuento-heymondo">Ver descuento Heymondo →</a></p>
+
+      <h3>💸 Mejor calidad-precio: Chapka (Cap Trip Plus)</h3>
+      <p>
+        👉 Ofrece hasta 2.500.000€ de cobertura médica a un precio muy competitivo. Además, es de los pocos seguros que
+        cubren agravamiento de enfermedades preexistentes (hasta 10.000€).
+      </p>
+      <p><a href="/chapka-vs-intermundial">Ver comparativa →</a></p>
+
+      <h3>🎒 Mejor para mochileros: IATI Mochilero</h3>
+      <p>
+        👉 Un clásico que funciona. Más de 60 deportes de aventura incluidos, rescate hasta 15.000€ y 1.500.000€ de
+        cobertura médica, sin franquicias ni adelantar dinero.
+      </p>
+      <p><a href="/descuento-iati">Ver descuento IATI Mochilero →</a></p>
+
+      <h3>🌍 Mejor para viajes largos (+90 días): Chapka</h3>
+      <p>
+        👉 Su seguro Cap Trotamundos ofrece hasta 2.000.000€ sin franquicias. A diferencia de Heymondo, no tendrás que
+        pagar los primeros 100€ de cada incidencia.
+      </p>
+      <p><a href="/iati-vs-chapka">Ver comparativa →</a></p>
+
+      <h3>👨‍👩‍👧 Mejor para familias: Heymondo Familia</h3>
+      <p>
+        👉 Incluye atención pediátrica 24h y un 15% de descuento automático al viajar en grupo familiar. Ideal si viajas
+        con niños y quieres tranquilidad total.
+      </p>
+      <p><a href="/descuento-heymondo">Ver precios →</a></p>
+
+      <h3>🗽 Mejor para EE.UU. y destinos caros: Intermundial</h3>
+      <p>
+        👉 Ofrece hasta 10 millones de cobertura médica, lo que elimina cualquier riesgo económico en países con sanidad
+        cara. Además, la eSIM gratuita y la videoconsulta rapidísima le dan un punto premium interesante.
+      </p>
+      <p><a href="/iati-vs-intermundial">Ver comparativa →</a></p>
+
+      <h3>🕌 Mejor para destinos difíciles y voluntariados: IATI</h3>
+      <p>
+        👉 Es el punto donde IATI gana sin discusión. Hay destinos que otras aseguradoras directamente excluyen, y ahí es
+        de las pocas que responde.
+      </p>
+      <p>
+        💡 Lo comprobamos nosotros: para viajar a los campamentos de refugiados saharauis de Tinduf, en Argelia, nuestro
+        seguro habitual no daba cobertura. IATI nos confirmó por escrito que cubría el voluntariado, contratamos con
+        ellos y, cuando hubo que usarlo por un regreso anticipado, funcionó.
+      </p>
+      <p><a href="/descuento-iati">Leer nuestra experiencia y el descuento real →</a></p>
+
+      <p>👉 Si ya sabes cuál es tu caso, puedes comprobar precios aquí:</p>
+      <BotonAfiliado href={heymondoUrl} text="🚀 Ver precios con descuento" />
+
+      <hr class="my-8" />
+
+      <h2>🔍 Diferencias clave que debes conocer (la letra pequeña real)</h2>
+      <p>
+        Más allá de los números grandes, lo que realmente marca la diferencia entre un seguro y otro está en los
+        detalles. Esto es lo que casi nadie te cuenta:
+      </p>
+
+      <h3>🗽 Cobertura extrema: quién gana en destinos caros</h3>
+      <p>
+        Si viajas a Estados Unidos, Japón o cualquier destino con sanidad cara, <strong>Intermundial</strong> juega en
+        otra liga.
+      </p>
+      <p>
+        👉 Su seguro Totaltravel Premium alcanza hasta <strong>10.000.000€ de cobertura médica</strong> y hasta 12.000€
+        en cancelación.
+      </p>
+      <p>
+        💡 En la práctica, esto elimina cualquier riesgo económico real en caso de hospitalización grave. Los 10
+        millones son más un gatillo psicológico que una necesidad real en la mayoría de viajes, pero funcionan muy bien
+        si quieres máxima tranquilidad.
+      </p>
+      <p><a href="/iati-vs-intermundial">Ver comparativa →</a></p>
+
+      <h3>🩺 Enfermedades preexistentes: el detalle que casi todos ignoran</h3>
+      <p>
+        La mayoría de seguros <strong>no cubren enfermedades crónicas</strong>, más allá de una primera atención de
+        urgencia.
+      </p>
+      <p>
+        👉 Aquí <strong>Chapka (Cap Trip Plus)</strong> marca la diferencia: incluye hasta
+        <strong>10.000€ por agravamiento de enfermedades preexistentes</strong>.
+      </p>
+      <p>💡 Si tienes asma, diabetes o cualquier condición previa, este punto puede ser decisivo.</p>
+      <p><a href="/chapka-vs-intermundial">Ver comparativa →</a></p>
+
+      <h3>🌍 Viajes largos: la trampa de la franquicia</h3>
+      <p>Si vas a viajar más de 3 meses, hay un detalle que puede hacerte perder dinero sin darte cuenta.</p>
+      <p>
+        👉 <strong>Heymondo Larga Estancia</strong> incluye una <strong>franquicia obligatoria de 100€</strong>.
+      </p>
+      <p>Esto significa que pagarás de tu bolsillo los primeros 100€ de cada incidencia médica o de equipaje.</p>
+      <p>
+        👉 En cambio, <strong>Chapka Cap Trotamundos</strong> mantiene <strong>0€ de franquicia</strong> incluso en
+        viajes largos.
+      </p>
+      <p>💡 Si viajas muchos meses, esta diferencia puede suponer cientos de euros.</p>
+      <p><a href="/iati-vs-chapka">Ver comparativa →</a></p>
+
+      <h3>💳 ¿Tendrás que adelantar dinero?</h3>
+      <p>Este es uno de los mayores miedos al contratar un seguro.</p>
+      <p>
+        👉 <a href="/descuento-iati">IATI</a> destaca aquí: en todas sus pólizas principales
+        <strong>no tendrás que adelantar dinero ni pagar franquicias</strong>. Es la contrapartida de no ofrecer
+        descuento por franquicia como sí hace Heymondo.
+      </p>
+      <p>
+        👉 Chapka, Heymondo e Intermundial también funcionan sin adelantos en la mayoría de casos, siempre que contactes
+        con la aseguradora antes de acudir al médico.
+      </p>
+      <p>💡 Esto es clave: si gestionas bien la asistencia, no deberías pagar nada de tu bolsillo.</p>
+
+      <h3>💰 Los descuentos que prometen un 30% (y lo que se aplica de verdad)</h3>
+      <p>
+        Media internet promete descuentos del 30% en seguros de viaje. La realidad es más sobria y conviene saberla antes
+        de contratar.
+      </p>
+      <p>
+        👉 En <strong>IATI</strong> el descuento automático por enlace es del <strong>5%</strong>, y ese 5% es lo único
+        que se aplica en el proceso de compra online. Lo simulamos con 1, 3 y 10 viajeros y salió exactamente el mismo 5%
+        en los tres casos.
+      </p>
+      <p>
+        👉 El 15% de familias y grupos existe, pero está planteado para <strong>pólizas anuales</strong> y
+        <strong>hay que solicitarlo antes de contratar</strong>. Si compras directamente online, lo pierdes.
+      </p>
+      <p>
+        💡 En <strong>Heymondo</strong> el planteamiento es distinto: los descuentos de familia, grupo y franquicia sí se
+        acumulan solos en el cotizador.
+      </p>
+      <p><a href="/descuento-iati">Ver las simulaciones y cuánto se ahorra de verdad con IATI →</a></p>
+
+      <p>👉 Si quieres evitar sorpresas, revisa precios y coberturas aquí:</p>
+      <BotonAfiliado href={heymondoUrl} text="🚀 Ver seguros con descuento" />
+
+      <hr class="my-8" />
+
+      <h2>💬 ¿De verdad merece la pena pagar un seguro de viaje?</h2>
+      <p>
+        Sí. Y no porque «pueda pasar algo grave», sino porque en muchos destinos un problema menor ya cuesta muchísimo
+        dinero. Una visita médica, una noche de hospital o una cancelación pueden hacer que un viaje barato salga
+        carísimo.
+      </p>
+      <p>
+        Además, la mayoría de tarjetas bancarias cubren muy poco. En muchos casos, sus coberturas no pasan de unos pocos
+        miles de euros y no siempre incluyen lo importante.
+      </p>
+      <p>
+        Con un buen seguro de viaje, si pasa algo, llamas, te indican qué hacer y se encargan del pago directo al centro
+        médico en la mayoría de casos.
+      </p>
+
+      <hr class="my-8" />
+
+      <h2>❓ Preguntas frecuentes sobre seguros de viaje en 2026</h2>
+      <p>
+        Estas son las dudas más habituales antes de contratar un seguro de viaje (y lo que nadie te explica claramente):
+      </p>
+
+      {
+        faqs.map(({ q, a }) => (
+          <>
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </>
+        ))
+      }
+
+      <p>
+        👉 Más detalle sobre descuentos en <a href="/descuento-iati">IATI</a> y
+        <a href="/descuento-heymondo">Heymondo</a>.
+      </p>
+
+      <hr class="my-8" />
+
+      <h2>🚀 Empieza por aquí si quieres viajar sin pagar de más</h2>
+      <p>Si has llegado hasta aquí, ya tienes toda la información necesaria para elegir el mejor seguro de viaje en 2026.</p>
+      <p>Pero hay algo igual de importante que el seguro y que mucha gente pasa por alto:</p>
+      <p>
+        👉 cómo pagas en el extranjero<br />
+        👉 qué tarjeta usas para sacar dinero
+      </p>
+      <p>Porque puedes ahorrar cientos de euros… o perderlos sin darte cuenta en comisiones ocultas.</p>
+      <p>👉 Por eso te recomendamos combinar ambas cosas:</p>
+      <p>
+        ✔ elegir un buen seguro<br />
+        ✔ usar una tarjeta sin comisiones<br />
+        ✔ evitar errores típicos al pagar fuera
+      </p>
+
+      <p>👉 Si quieres ir a lo seguro sin complicarte:</p>
+      <BotonAfiliado href={heymondoUrl} text="🚀 Ver seguro Heymondo con descuento">
+        Comprueba precio en menos de 1 minuto y viaja con tranquilidad
+      </BotonAfiliado>
+
+      <CajaAviso tipo="info" titulo="💳 Muy importante: no pierdas dinero al pagar en el extranjero">
+        <p>
+          Tener un buen seguro está genial… pero si usas una tarjeta tradicional, puedes perder dinero en cada pago o
+          retirada.
+        </p>
+        <p>
+          👉 Aquí te explicamos cuál elegir según tu viaje:
+          <a href="/mejor-tarjeta-para-viajar">Ver la mejor tarjeta para viajar en 2026</a>
+        </p>
+        <p>
+          💡 En esa guía verás: qué tarjeta usar para evitar comisiones, cuál elegir según tu tipo de viaje y cómo
+          combinar varias para ahorrar más.
+        </p>
+      </CajaAviso>
+
+      <h3>📌 Comparativas que te pueden ayudar a decidir mejor</h3>
+      <ul>
+        <li>👉 <a href="/heymondo-o-iati">Heymondo vs IATI (la más popular)</a></li>
+        <li>👉 <a href="/heymondo-vs-chapka">Heymondo vs Chapka (comodidad vs viajes largos)</a></li>
+        <li>👉 <a href="/heymondo-vs-intermundial">Heymondo vs Intermundial (confort vs cobertura máxima)</a></li>
+        <li>👉 <a href="/iati-vs-chapka">IATI vs Chapka (viajes largos y mochileros)</a></li>
+        <li>👉 <a href="/iati-vs-intermundial">IATI vs Intermundial (tecnología vs cobertura)</a></li>
+        <li>👉 <a href="/chapka-vs-intermundial">Chapka vs Intermundial (viajes largos vs cobertura máxima)</a></li>
+      </ul>
+
+      <h3>📌 Guías completas para seguir investigando</h3>
+      <ul>
+        <li>👉 <a href="/descuento-heymondo">Ver descuento Heymondo actualizado</a></li>
+        <li>👉 <a href="/descuento-iati">Descuento IATI: el 5% real y la verdad sobre el 30%</a></li>
+      </ul>
+
+      <p>
+        Viajar bien no es solo cuestión de destino… sino de tomar buenas decisiones antes de salir. Un buen seguro te
+        protege cuando pasa algo. Una buena tarjeta evita que pierdas dinero en cada pago.
+      </p>
+      <p>👉 <strong>Y combinando ambas, viajas más tranquilo y gastas menos.</strong></p>
+    </div>
+  </section>
+  <ClusterLinks variant="pillar" cluster={cluster} />
+</Layout>

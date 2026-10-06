@@ -1,0 +1,116 @@
+---
+/**
+ * Home: "Últimas guías" organizadas por clúster (en vez de un único listado mezclado).
+ * Por cada clúster: H2 que enlaza a su categoría, enlace a la guía pilar y sus últimos posts.
+ * Añadir un clúster en src/data/clusters.ts hace que aparezca aquí automáticamente (si tiene posts).
+ */
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import { clusters } from '~/data/clusters';
+import { fetchPosts } from '~/utils/blog';
+import { findImage } from '~/utils/images';
+import { getBlogPermalink, getPermalink } from '~/utils/permalinks';
+
+export interface Props {
+  /** Nº de posts recientes por clúster. */
+  count?: number;
+}
+
+const { count = 3 } = Astro.props;
+
+const all = await fetchPosts();
+
+const blocks = await Promise.all(
+  clusters.map(async (cluster) => {
+    const posts = all.filter((p) => p.category?.title === cluster.category).slice(0, count);
+    const items = await Promise.all(
+      posts.map(async (p) => ({
+        title: p.title,
+        href: getPermalink(p.permalink, 'post'),
+        image: await findImage(p.image),
+      }))
+    );
+    return { cluster, items, total: all.filter((p) => p.category?.title === cluster.category).length };
+  })
+);
+---
+
+<section class="py-16 px-6 max-w-6xl mx-auto" aria-labelledby="ultimas-guias">
+  <div class="text-center mb-12">
+    <h2 id="ultimas-guias" class="text-3xl font-bold font-heading dark:text-white mb-4">
+      Nuestras últimas guías, por tema
+    </h2>
+    <p class="text-muted dark:text-slate-400 max-w-2xl mx-auto text-lg">
+      Reseñas y comparativas honestas, ordenadas para que encuentres rápido lo que necesitas antes de salir de viaje.
+    </p>
+  </div>
+
+  <div class="space-y-16">
+    {
+      blocks
+        .filter((b) => b.items.length)
+        .map(({ cluster, items, total }) => (
+          <div>
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
+              <div>
+                <h3 class="text-2xl font-bold font-heading dark:text-white flex items-center gap-2">
+                  <Icon name={cluster.icon} class="h-6 w-6 text-link" aria-hidden="true" />
+                  <a href={getPermalink(cluster.slug, 'category')} class="hover:text-link transition">
+                    {cluster.label}
+                  </a>
+                </h3>
+                {cluster.pillar && (
+                  <p class="text-sm text-muted dark:text-slate-400 mt-1">
+                    Empieza por{' '}
+                    <a href={cluster.pillar.href} class="font-semibold text-link hover:underline">
+                      {cluster.pillar.title}
+                    </a>
+                  </p>
+                )}
+              </div>
+              <a
+                href={getPermalink(cluster.slug, 'category')}
+                class="text-sm font-semibold text-link hover:underline whitespace-nowrap"
+              >
+                {total === 1 ? `Ver la guía de ${cluster.inline}` : `Ver las ${total} guías de ${cluster.inline}`} →
+              </a>
+            </div>
+
+            <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {items.map((item) => (
+                <li>
+                  <article class="h-full">
+                    <a href={item.href} class="group block">
+                      {item.image && (
+                        <div class="relative w-full aspect-video mb-3 overflow-hidden rounded-xl shadow-md">
+                          <Image
+                            src={item.image}
+                            alt=""
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            widths={[240, 480, 720]}
+                            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 360px"
+                            width={480}
+                            height={270}
+                            format="webp"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      )}
+                      <h4 class="text-lg font-bold leading-snug font-heading dark:text-slate-200 group-hover:text-link transition">
+                        {item.title}
+                      </h4>
+                    </a>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+    }
+  </div>
+
+  <p class="text-center mt-12">
+    <a href={getBlogPermalink()} class="font-semibold text-link hover:underline">Ver todos los artículos del blog →</a>
+  </p>
+</section>

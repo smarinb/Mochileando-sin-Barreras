@@ -64,6 +64,12 @@ const postCollection = defineCollection({
     tags: z.array(z.string()).optional(),
     author: z.string().optional(),
 
+    /**
+     * Preguntas frecuentes del post. Se generan como schema FAQPage (JSON-LD) en la ruta del post.
+     * Las preguntas y respuestas deben aparecer también visibles en el artículo.
+     */
+    faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
+
     metadata: metadataDefinition(),
   }),
 });

@@ -26,3 +26,9 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 
 .astro
+
+# copias de seguridad de los scripts de parche
+.backup-*/
+# estado local de wrangler dev y exportaciones privadas de Search Console
+.wrangler/
+*Performance-on-Search*.zip

@@ -1,0 +1,161 @@
+---
+/**
+ * Enlazado interno automático por clúster (hub & spoke).
+ *
+ * - variant="top":    píldora bajo el breadcrumb: "Parte de la guía: <pilar>" (cada spoke enlaza al pilar arriba).
+ * - variant="bottom": bloque final con el pilar, TODAS las guías hermanas agrupadas por tipo,
+ *                     el enlace a la categoría y los pilares de los otros clústeres.
+ * - variant="pillar": igual que "bottom" pero para páginas pilar (sin tarjeta del propio pilar).
+ */
+import { Icon } from 'astro-icon/components';
+import { clusters, getClusterByCategoryTitle } from '~/data/clusters';
+import type { Cluster } from '~/data/clusters';
+import { fetchPosts } from '~/utils/blog';
+import { getPermalink } from '~/utils/permalinks';
+
+export interface Props {
+  variant?: 'top' | 'bottom' | 'pillar';
+  /** Para posts: título de su categoría. */
+  categoryTitle?: string;
+  /** Para pillars: el clúster al que pertenece. */
+  cluster?: Cluster;
+  /** Slug del post actual (se excluye de las listas). */
+  currentSlug?: string;
+}
+
+const { variant = 'bottom', categoryTitle, cluster: clusterProp, currentSlug } = Astro.props;
+const cluster = clusterProp ?? getClusterByCategoryTitle(categoryTitle);
+
+const type = (slug: string) => {
+  if (/^descuento-/.test(slug)) return 'descuentos';
+  if (/-vs-|-o-/.test(slug)) return 'comparativas';
+  return 'resenas';
+};
+
+const groupMeta: Record<string, string> = {
+  resenas: 'Reseñas y opiniones',
+  comparativas: 'Comparativas cara a cara',
+  descuentos: 'Descuentos y ofertas',
+};
+
+let groups: Array<{ key: string; label: string; posts: Array<{ title: string; href: string }> }> = [];
+const isGrouped = !!cluster?.group; // destinos y temas: lista plana + «Prepara tu viaje»
+if (cluster && variant !== 'top') {
+  const all = await fetchPosts();
+  const siblings = all
+    .filter((p) => p.category?.title === cluster.category && p.slug !== currentSlug)
+    .sort((a, b) => a.title.localeCompare(b.title, 'es'));
+  if (isGrouped) {
+    groups.push({
+      key: 'guias',
+      label: `Más guías de ${cluster.label}`,
+      posts: siblings.map((p) => ({ title: p.title, href: getPermalink(p.permalink, 'post') })),
+    });
+  }
+  for (const key of isGrouped ? [] : ['descuentos', 'resenas', 'comparativas']) {
+    const posts = siblings
+      .filter((p) => type(p.slug) === key)
+      .map((p) => ({ title: p.title, href: getPermalink(p.permalink, 'post') }));
+    if (posts.length) groups.push({ key, label: groupMeta[key], posts });
+  }
+}
+
+const rank = (c: Cluster) => {
+  const i = cluster?.bridges?.indexOf(c.slug) ?? -1;
+  return i === -1 ? 99 : i;
+};
+const others = clusters
+  .filter((c) => c.slug !== cluster?.slug && c.pillar && !(isGrouped && c.group))
+  .sort((a, b) => rank(a) - rank(b));
+const categoryHref = cluster ? getPermalink(cluster.slug, 'category') : '';
+// Cuando el propio post es la pilar del clúster (p. ej. /que-ver-y-hacer-en-eslovenia) no se enlaza a sí mismo.
+const isPillarSelf = !!(currentSlug && cluster?.pillar && cluster.pillar.href === `/${currentSlug}`);
+---
+
+{
+  cluster && variant === 'top' && (
+    <div class="max-w-3xl mx-auto px-6 mt-4 not-prose">
+      <p class="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-slate-700 dark:text-slate-200">
+        <Icon name={cluster.icon} class="h-4 w-4 text-link" aria-hidden="true" />
+        <span>Guía de</span>
+        <a href={categoryHref} class="font-semibold text-link hover:underline">
+          {cluster.label}
+        </a>
+        {cluster.pillar && !isPillarSelf && (
+          <>
+            <span aria-hidden="true">·</span>
+            <a href={cluster.pillar.href} class="font-semibold text-link hover:underline">
+              {cluster.pillar.title}
+            </a>
+          </>
+        )}
+      </p>
+    </div>
+  )
+}
+
+{
+  cluster && variant !== 'top' && (
+    <aside
+      class="max-w-3xl mx-auto px-6 my-12 not-prose"
+      aria-labelledby={`cluster-${cluster.slug}`}
+    >
+      <div class="rounded-2xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900 p-6 md:p-8">
+        <h2 id={`cluster-${cluster.slug}`} class="text-2xl font-bold font-heading mb-4 dark:text-white">
+          Todo sobre {cluster.inline}
+        </h2>
+
+        {variant === 'bottom' && cluster.pillar && !isPillarSelf && (
+          <a
+            href={cluster.pillar.href}
+            class="block mb-6 rounded-xl border-l-4 border-primary bg-white dark:bg-slate-800 p-4 shadow-sm hover:shadow-md transition"
+          >
+            <span class="block text-xs font-semibold uppercase tracking-wide text-link">Guía principal</span>
+            <span class="block text-lg font-bold dark:text-white">{cluster.pillar.title}</span>
+            <span class="block text-sm text-slate-600 dark:text-slate-300">{cluster.pillar.cta} →</span>
+          </a>
+        )}
+
+        {groups.map((g) => (
+          <div class="mb-5">
+            <h3 class="text-base font-semibold mb-2 dark:text-slate-100">{g.label}</h3>
+            <ul class="grid gap-1.5 sm:grid-cols-2">
+              {g.posts.map((p) => (
+                <li>
+                  <a href={p.href} class="text-link hover:underline text-sm leading-snug">
+                    {p.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        <p class="mt-4 text-sm">
+          <a href={categoryHref} class="font-semibold text-link hover:underline">
+            Ver todos los artículos de {cluster.inline} →
+          </a>
+        </p>
+
+        {others.length > 0 && (
+        <div class="mt-6 pt-5 border-t border-gray-200 dark:border-slate-700">
+          <p class="text-sm font-semibold mb-2 dark:text-slate-100">{isGrouped ? 'Prepara tu viaje:' : 'Completa la preparación de tu viaje:'}</p>
+          <ul class="flex flex-wrap gap-2">
+            {others.map((o) => (
+              <li>
+                <a
+                  href={o.pillar!.href}
+                  class="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-slate-600 px-4 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:border-primary hover:text-link transition"
+                >
+                  <Icon name={o.icon} class="h-4 w-4" aria-hidden="true" />
+                  {o.pillar!.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        )}
+      </div>
+    </aside>
+  )
+}

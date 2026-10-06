@@ -1,0 +1,504 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '~/layouts/PageLayout.astro';
+import ClusterLinks from '~/components/blog/ClusterLinks.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import { getPermalink } from '~/utils/permalinks';
+import { getClusterBySlug } from '~/data/clusters';
+import BotonAfiliado from '~/components/mdx/BotonAfiliado.astro';
+import CajaAviso from '~/components/mdx/CajaAviso.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import heroImage from '~/assets/images/mejor-tarjeta-para-viajar.webp';
+
+const cluster = getClusterBySlug('tarjetas-para-viajar');
+
+const breadcrumbs = [
+  { text: 'Inicio', href: getPermalink('/') },
+  { text: cluster?.label ?? 'Guías', href: getPermalink(cluster?.slug ?? '', 'category') },
+  { text: 'Mejor tarjeta para viajar' },
+];
+
+const metadata = {
+  title: 'Mejor tarjeta para viajar 2026: evita comisiones y ahorra',
+  description:
+    'Descubre la mejor tarjeta para viajar en 2026. Compara N26, Revolut, Wise e imagin y evita comisiones al pagar o sacar dinero.',
+  canonical: '/mejor-tarjeta-para-viajar',
+};
+
+const n26Url = 'https://n26.com/r/sergiom9699';
+const revolutUrl = 'https://revolut.com/referral/?referral-code=sergio8or!FEB1-26-AR-CRY-CTRL&geo-redirect';
+const wiseUrl = 'https://wise.com/invite/dic/sergiom2055';
+const affRel = 'nofollow sponsored noopener noreferrer';
+
+const faqs = [
+  {
+    q: '¿Cuál es la mejor tarjeta para viajar en 2026?',
+    a: 'Depende de tu tipo de viaje, pero en general N26 es una de las mejores opciones por su equilibrio entre comisiones, facilidad de uso y fiabilidad.',
+  },
+  {
+    q: '¿Qué tarjeta no cobra comisiones en el extranjero?',
+    a: 'Tarjetas como N26, Revolut, Wise e imagin permiten pagar en el extranjero sin comisiones ocultas, aunque pueden tener condiciones específicas según el uso.',
+  },
+  {
+    q: '¿Es mejor N26, Revolut o Wise?',
+    a: 'No hay una única mejor opción. N26 es ideal para viajar sin complicaciones, Revolut para control desde la app y Wise para gestionar divisas.',
+  },
+  {
+    q: '¿Se puede pagar sin comisiones en el extranjero?',
+    a: 'Sí. Con tarjetas adecuadas puedes pagar en otras monedas sin comisión adicional, usando tipos de cambio reales o muy competitivos.',
+  },
+  {
+    q: '¿Cuánto cuesta sacar dinero en el extranjero?',
+    a: 'Depende de la tarjeta. Algunas permiten retiradas gratis o sin comisión propia, pero el cajero local puede aplicar una tasa.',
+  },
+  {
+    q: '¿Necesito tarjeta de crédito para viajar?',
+    a: 'Sí en muchos casos. Para alquilar coches o reservar hoteles, una tarjeta de crédito es muy recomendable.',
+  },
+  {
+    q: '¿Es seguro pagar con tarjeta en el extranjero?',
+    a: 'Sí. Además, muchas tarjetas permiten bloquearse desde la app o usar tarjetas virtuales, lo que aumenta la seguridad.',
+  },
+  {
+    q: '¿Cuántas tarjetas debería llevar de viaje?',
+    a: 'Lo ideal es llevar al menos dos tarjetas para evitar problemas si una falla o se bloquea.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<Layout metadata={metadata}>
+  <Breadcrumbs bar items={breadcrumbs} />
+  <StructuredData slot="head" schema={faqSchema} />
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-4xl">
+    <h1 class="text-3xl md:text-4xl font-bold font-heading mb-6">
+      La mejor tarjeta para viajar en 2026: evita comisiones y ahorra cientos de euros
+    </h1>
+
+    <Image
+      src={heroImage}
+      alt="Mano sosteniendo dos tarjetas de viaje, una turquesa y otra verde oscura Visa con un avión, sobre una cartera roja, con palmeras al fondo y un avión blanco a la derecha"
+      class="w-full h-auto rounded-xl mb-8"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 896px) 100vw, 896px"
+      loading="eager"
+    />
+
+    <div class="prose dark:prose-invert max-w-none">
+      <p>
+        Aterrizas en tu destino, vas al cajero del aeropuerto y sacas dinero para el taxi. Todo normal… hasta que miras
+        la app del banco y ves el golpe:
+        <strong>comisiones por cambio de divisa, comisión por cajero y un tipo de cambio inflado</strong>.
+      </p>
+      <p>
+        Si viajas, esto te está pasando aunque no lo veas. Los bancos tradicionales siguen escondiendo costes en cada
+        pago y cada retirada.
+      </p>
+      <p>
+        La buena noticia es que en 2026 ya no tienes por qué perder dinero. Existen tarjetas pensadas para viajar que
+        eliminan esas comisiones y te permiten
+        <strong>pagar, sacar dinero y moverte por el mundo sin regalar ni un euro</strong>.
+      </p>
+      <p>
+        Después de probarlas viajando por distintos países, en esta guía te contamos
+        <strong>cuál es la mejor tarjeta para viajar en 2026</strong> y, sobre todo,
+        <strong>cuál es la mejor para tu caso</strong>.
+      </p>
+
+      <h2>⚡ Qué tarjeta elegir ahora mismo (respuesta rápida)</h2>
+      <ul>
+        <li>🥇 <strong>Mejor opción general:</strong> N26 (equilibrio total para viajar)</li>
+        <li>📱 <strong>Mejor app y control del dinero:</strong> Revolut</li>
+        <li>💱 <strong>Mejor para cambiar divisas y cobrar en el extranjero:</strong> Wise</li>
+        <li>🚗 <strong>Mejor para alquilar coche (tarjeta de crédito):</strong> imagin</li>
+      </ul>
+      <p>
+        👉 <strong>Si no quieres complicarte:</strong> N26 suele ser la mejor opción para la mayoría de viajeros.
+      </p>
+
+      <BotonAfiliado href={n26Url} text="👉 Abrir cuenta N26">
+        Pagos sin comisiones en cualquier moneda, desde 0 € al mes.
+      </BotonAfiliado>
+      <BotonAfiliado href={revolutUrl} text="👉 Abrir cuenta Revolut">
+        La app más completa: multidivisa, ahorro e inversión.
+      </BotonAfiliado>
+      <BotonAfiliado href={wiseUrl} text="👉 Abrir cuenta Wise">
+        Tipo de cambio real y más de 40 divisas en una cuenta.
+      </BotonAfiliado>
+
+      <hr class="my-8" />
+
+      <h2>🧲 Comparativa rápida: las mejores tarjetas para viajar sin comisiones</h2>
+      <p>
+        Si quieres comparar en menos de 1 minuto cuál te conviene más, aquí tienes las diferencias clave entre las
+        mejores tarjetas para viajar en 2026:
+      </p>
+
+      <div class="overflow-x-auto not-prose my-6">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-gray-100 dark:bg-slate-800">
+              <th class="p-3">Característica</th>
+              <th class="p-3">N26</th>
+              <th class="p-3">Revolut</th>
+              <th class="p-3">Wise</th>
+              <th class="p-3">imagin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>Pagos en divisa</strong></td>
+              <td class="p-3">✔️ Sin comisión</td>
+              <td class="p-3">✔️ Sin comisión (⚠️ fin de semana)</td>
+              <td class="p-3">✔️ ~0,33%</td>
+              <td class="p-3">✔️ Sin comisión</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>Tipo de cambio</strong></td>
+              <td class="p-3">✔️ Mastercard</td>
+              <td class="p-3">✔️ Muy competitivo</td>
+              <td class="p-3">✔️ Real (Google)</td>
+              <td class="p-3">✔️ Mastercard</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>Sacar dinero</strong></td>
+              <td class="p-3">✔️ Ilimitado (Go)</td>
+              <td class="p-3">✔️ Límite mensual</td>
+              <td class="p-3">✔️ 200€ gratis</td>
+              <td class="p-3">✔️ Sin comisión propia</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>Multidivisa</strong></td>
+              <td class="p-3">❌ No</td>
+              <td class="p-3">✔️ Sí</td>
+              <td class="p-3">✔️ Sí</td>
+              <td class="p-3">❌ No</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>Tarjeta de crédito</strong></td>
+              <td class="p-3">❌ No</td>
+              <td class="p-3">❌ No</td>
+              <td class="p-3">❌ No</td>
+              <td class="p-3">✔️ Sí</td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-slate-700">
+              <td class="p-3"><strong>Cuota mensual</strong></td>
+              <td class="p-3">✔️ 0€ / 9,90€</td>
+              <td class="p-3">✔️ 0€ / planes</td>
+              <td class="p-3">✔️ 0€</td>
+              <td class="p-3">✔️ 0€</td>
+            </tr>
+            <tr>
+              <td class="p-3"><strong>Mejor para</strong></td>
+              <td class="p-3">Viajes largos</td>
+              <td class="p-3">Control y app</td>
+              <td class="p-3">Divisas y cobrar</td>
+              <td class="p-3">Crédito y gratis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        💡 <strong>Resumen rápido:</strong><br />
+        👉 Si quieres viajar sin complicarte → <strong>N26</strong><br />
+        👉 Si quieres control total desde la app → <strong>Revolut</strong><br />
+        👉 Si necesitas mover dinero entre países → <strong>Wise</strong><br />
+        👉 Si necesitas tarjeta de crédito gratis → <strong>imagin</strong>
+      </p>
+
+      <hr class="my-8" />
+
+      <h2>🏆 Ranking real de las mejores tarjetas para viajar en 2026</h2>
+      <p>
+        Después de analizarlas en viajes reales, comisiones, condiciones y letra pequeña, este es el ranking según el
+        tipo de uso:
+      </p>
+
+      <h3>🥇 Mejor tarjeta para viajar (equilibrio total): N26</h3>
+      <p>
+        👉 Destaca por su <strong>simplicidad, ausencia de comisiones y fiabilidad</strong>. Es la tarjeta que mejor
+        funciona en la mayoría de situaciones viajando.
+      </p>
+      <ul>
+        <li>✔️ Pagos en cualquier moneda sin comisiones</li>
+        <li>✔️ Sin recargos en fin de semana</li>
+        <li>✔️ Muy fácil de usar</li>
+      </ul>
+      <p>💡 <strong>Conclusión:</strong> es la mejor opción para el 90% de viajeros.</p>
+      <p>
+        👉 <a href={n26Url} target="_blank" rel={affRel}><strong>Abrir cuenta N26</strong></a> ·
+        <a href="/tarjeta-n26">Leer la reseña completa de N26</a>
+      </p>
+
+      <h3>📱 Mejor app y control del dinero: Revolut</h3>
+      <p>👉 Revolut es la tarjeta más completa a nivel de funcionalidades.</p>
+      <ul>
+        <li>✔️ Multidivisa</li>
+        <li>✔️ Control total desde la app</li>
+        <li>✔️ Funciones extra (ahorro, inversiones…)</li>
+      </ul>
+      <p>💡 <strong>Conclusión:</strong> ideal si quieres controlar cada detalle de tu dinero.</p>
+      <p>
+        👉 <a href={revolutUrl} target="_blank" rel={affRel}><strong>Ver Revolut</strong></a> ·
+        <a href="/tarjeta-revolut">Leer la reseña completa de Revolut</a>
+      </p>
+
+      <h3>💱 Mejor para cambiar divisas y dinero internacional: Wise</h3>
+      <p>👉 Wise está pensada para moverte entre monedas sin perder dinero.</p>
+      <ul>
+        <li>✔️ Tipo de cambio real (sin sobrecostes)</li>
+        <li>✔️ Cuenta multidivisa</li>
+        <li>✔️ Recibir dinero en otras monedas</li>
+      </ul>
+      <p>💡 <strong>Conclusión:</strong> imprescindible si trabajas online o viajas mucho entre países.</p>
+      <p>
+        👉 <a href={wiseUrl} target="_blank" rel={affRel}><strong>Abrir cuenta Wise</strong></a> ·
+        <a href="/tarjeta-wise">Leer la reseña completa de Wise</a>
+      </p>
+
+      <h3>🚗 Mejor para tarjeta de crédito gratis: imagin</h3>
+      <p>👉 imagin es una opción muy interesante como complemento.</p>
+      <ul>
+        <li>✔️ Tarjeta de crédito gratuita</li>
+        <li>✔️ Sin comisiones en pagos</li>
+        <li>✔️ Ideal para fianzas y alquiler de coche</li>
+      </ul>
+      <p>💡 <strong>Conclusión:</strong> no es la más completa, pero es clave en viajes.</p>
+      <p>👉 <a href="/tarjeta-imagin"><strong>Ver tarjeta imagin</strong></a></p>
+
+      <p>
+        💡 <strong>Recomendación real:</strong> la mejor estrategia no es elegir una sola. Muchos viajeros usan
+        <strong>N26 como base</strong> y combinan con <strong>Wise o imagin</strong> según necesidades.
+      </p>
+
+      <hr class="my-8" />
+
+      <h2>🎯 Elige la mejor tarjeta según tu tipo de viaje</h2>
+      <p>
+        No todos los viajes son iguales, y por eso <strong>no existe una única mejor tarjeta</strong>. Aquí tienes la
+        forma más rápida de elegir sin equivocarte 👇
+      </p>
+
+      <h3>🌍 Viaje estándar</h3>
+      <p><strong>(vacaciones, escapadas)</strong></p>
+      <p>👉 <strong>N26</strong> es la opción más equilibrada: fácil, sin comisiones y sin sorpresas.</p>
+      <p><a href={n26Url} target="_blank" rel={affRel}>👉 Abrir cuenta N26 →</a></p>
+
+      <h3>✈️ Viajes frecuentes</h3>
+      <p><strong>(varios viajes al año)</strong></p>
+      <p>👉 <strong>Revolut</strong> destaca por su app y control del dinero.</p>
+      <p><a href={revolutUrl} target="_blank" rel={affRel}>👉 Ver Revolut →</a></p>
+
+      <h3>💼 Nómadas digitales</h3>
+      <p><strong>(trabajar viajando)</strong></p>
+      <p>👉 <strong>Wise</strong> es clave para cobrar en distintas monedas y ahorrar en conversiones.</p>
+      <p><a href={wiseUrl} target="_blank" rel={affRel}>👉 Abrir cuenta Wise →</a></p>
+
+      <h3>🏧 Viajes con efectivo</h3>
+      <p><strong>(Latam, Asia…)</strong></p>
+      <p>👉 <strong>N26</strong> funciona mejor para retirar dinero sin complicaciones.</p>
+      <p><a href="/n26-vs-revolut">👉 Ver comparativa →</a></p>
+
+      <h3>🚗 Alquiler de coche</h3>
+      <p><strong>(fianzas y depósitos)</strong></p>
+      <p>👉 <strong>imagin</strong> es clave por su tarjeta de crédito gratuita.</p>
+      <p><a href="/tarjeta-imagin">👉 Ver imagin →</a></p>
+
+      <h3>💱 Cambio de divisa</h3>
+      <p><strong>(mover dinero entre países)</strong></p>
+      <p>👉 <strong>Wise</strong> ofrece el mejor tipo de cambio real.</p>
+      <p><a href="/revolut-vs-wise">👉 Ver comparativa →</a></p>
+
+      <p>
+        💡 <strong>Idea clave:</strong> no necesitas una sola tarjeta. La mejor estrategia es combinar:
+        <strong>N26 + Wise + imagin</strong> según el uso.
+      </p>
+
+      <hr class="my-8" />
+
+      <h2>⚠️ La letra pequeña que nadie te cuenta (y que te puede costar dinero)</h2>
+      <p>
+        Elegir una buena tarjeta es importante… pero <strong>saber cómo usarla correctamente lo es aún más</strong>.
+      </p>
+      <p>Estos son los errores más comunes que hacen que incluso con la mejor tarjeta acabes pagando de más 👇</p>
+
+      <h3>💸 1. Pagar en euros en el extranjero (el mayor error)</h3>
+      <p>Cuando pagas fuera de España, muchas veces el datáfono te pregunta:</p>
+      <ul>
+        <li>👉 Pagar en euros</li>
+        <li>👉 Pagar en moneda local</li>
+      </ul>
+      <p>
+        ❌ <strong>Error:</strong> elegir euros<br />
+        ✔️ <strong>Correcto:</strong> elegir siempre moneda local
+      </p>
+      <p>
+        💡 Si eliges euros, el comercio aplica su propio tipo de cambio (mucho peor), y puedes perder hasta un
+        <strong>5–7%</strong> sin darte cuenta.
+      </p>
+
+      <h3>🏧 2. Pensar que sacar dinero siempre es gratis</h3>
+      <p>Aunque tu tarjeta no cobre comisión:</p>
+      <ul>
+        <li>✔️ imagin y N26 → no cobran su parte</li>
+        <li>⚠️ Pero el cajero local puede cobrar una tasa</li>
+      </ul>
+      <p>💡 Esto es muy común en países como Tailandia, México o EE.UU.</p>
+
+      <h3>📅 3. No tener en cuenta el fin de semana (Revolut)</h3>
+      <p>Revolut aplica recargos en el cambio de divisa cuando el mercado está cerrado:</p>
+      <ul>
+        <li>✔️ Entre semana → cambio muy bueno</li>
+        <li>⚠️ Fin de semana → pequeño recargo</li>
+      </ul>
+      <p>👉 Si puedes, <strong>cambia dinero antes del fin de semana</strong>.</p>
+
+      <h3>💳 4. Viajar sin tarjeta de crédito</h3>
+      <p>Muchas empresas (alquiler de coches, hoteles…) exigen tarjeta de crédito:</p>
+      <ul>
+        <li>❌ Débito → puede no funcionar</li>
+        <li>✔️ Crédito → aceptado siempre</li>
+      </ul>
+      <p>💡 Aquí imagin marca la diferencia.</p>
+
+      <h3>🧠 5. Viajar con una sola tarjeta</h3>
+      <p>Este es un error clásico:</p>
+      <ul>
+        <li>✔️ Bloqueo de seguridad</li>
+        <li>✔️ Pérdida</li>
+        <li>✔️ Cajero que se traga la tarjeta</li>
+      </ul>
+      <p>👉 Si solo llevas una… te quedas vendido.</p>
+      <p>💡 <strong>Recomendación:</strong> lleva siempre al menos 2 tarjetas (idealmente 2–3).</p>
+
+      <p>
+        💡 <strong>Resumen clave:</strong> la mejor tarjeta no sirve de nada si cometes estos errores. Usarlas bien puede
+        marcar la diferencia entre ahorrar dinero… o perderlo sin darte cuenta.
+      </p>
+
+      <hr class="my-8" />
+
+      <h2>🌟 Ventajas reales de usar tarjetas sin comisiones al viajar</h2>
+      <p>
+        Si todavía dudas si merece la pena usar una tarjeta de este tipo, la diferencia no es pequeña… es enorme.
+      </p>
+      <p>Estas son las ventajas reales que vas a notar viajando 👇</p>
+
+      <h3>💸 Ahorro real de dinero</h3>
+      <p>Los bancos tradicionales pueden cobrar entre un <strong>2% y un 5%</strong> en cada pago en el extranjero.</p>
+      <p>👉 En un viaje de 1.000€, puedes perder fácilmente <strong>50€ o más</strong> sin darte cuenta.</p>
+
+      <h3>📱 Control total desde el móvil</h3>
+      <p>Puedes ver cada gasto en tiempo real, bloquear la tarjeta o activar/desactivar funciones.</p>
+      <p>👉 Todo desde la app, sin llamadas ni papeleo.</p>
+
+      <h3>🔒 Más seguridad viajando</h3>
+      <p>Puedes congelar la tarjeta al instante o usar tarjetas virtuales.</p>
+      <p>👉 Mucho más seguro que una tarjeta tradicional.</p>
+
+      <h3>🌍 Pagos sin fronteras</h3>
+      <p>Paga en cualquier país sin preocuparte por comisiones ocultas.</p>
+      <p>👉 Especialmente útil en viajes largos o varios destinos.</p>
+
+      <h3>⚡ Tipo de cambio más justo</h3>
+      <p>Algunas tarjetas usan el tipo real del mercado o el de Mastercard sin sobrecostes.</p>
+      <p>👉 Pagas lo que toca, no lo que decide el banco.</p>
+
+      <h3>🧠 Menos preocupaciones</h3>
+      <p>No tienes que calcular comisiones ni pensar cada vez que pagas.</p>
+      <p>👉 Viajas más tranquilo.</p>
+
+      <p>
+        💡 <strong>Conclusión:</strong> usar una tarjeta sin comisiones no es un “extra”… es algo básico si viajas. La
+        diferencia económica y de tranquilidad es enorme.
+      </p>
+
+      <hr class="my-8" />
+
+      <h2>❓ Preguntas frecuentes sobre tarjetas para viajar</h2>
+
+      {
+        faqs.map(({ q, a }) => (
+          <>
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </>
+        ))
+      }
+
+      <hr class="my-8" />
+
+      <h2>🚀 Entonces… ¿cuál es la mejor tarjeta para viajar?</h2>
+      <p>
+        Después de analizar todas las opciones, la conclusión es clara:
+        <strong>no existe una única mejor tarjeta universal</strong>, sino la mejor combinación según tu forma de viajar.
+      </p>
+      <p>
+        Si buscas algo sencillo, sin comisiones y que funcione en cualquier situación,
+        <strong>N26 es la mejor opción para la mayoría de viajeros</strong>.
+      </p>
+      <p>
+        Si quieres control total desde el móvil, gestionar varias divisas o exprimir cada euro al máximo,
+        <strong>Revolut y Wise pueden darte más juego</strong>.
+      </p>
+      <p>
+        Y si necesitas una tarjeta de crédito para alquilar coche o dejar fianzas,
+        <strong>imagin es el complemento perfecto</strong>.
+      </p>
+
+      <CajaAviso tipo="info">
+        💡 <strong>Recomendación real:</strong> la mejor estrategia es combinar tarjetas.<br />
+        👉 <strong>N26</strong> como base<br />
+        👉 <strong>Wise o Revolut</strong> para divisas<br />
+        👉 <strong>imagin</strong> para crédito
+      </CajaAviso>
+
+      <BotonAfiliado href={n26Url} text="💳 Abrir cuenta N26">
+        La tarjeta base para la mayoría de viajeros.
+      </BotonAfiliado>
+      <BotonAfiliado href={wiseUrl} text="💳 Abrir cuenta Wise">
+        Para cambiar divisas y cobrar en otras monedas.
+      </BotonAfiliado>
+      <BotonAfiliado href={revolutUrl} text="💳 Abrir cuenta Revolut">
+        Para tener todo el control desde una sola app.
+      </BotonAfiliado>
+
+      <h3>💳 Sigue comparando las mejores tarjetas para viajar</h3>
+      <ul>
+        <li>👉 <a href="/tarjeta-n26">N26 para viajar: opiniones y comisiones</a></li>
+        <li>👉 <a href="/tarjeta-revolut">Revolut para viajar: análisis completo</a></li>
+        <li>👉 <a href="/tarjeta-wise">Wise para viajar: análisis completo</a></li>
+        <li>👉 <a href="/tarjeta-imagin">imagin para viajar: qué tal funciona</a></li>
+      </ul>
+
+      <h4>⚔️ Comparativas clave</h4>
+      <ul>
+        <li>👉 <a href="/n26-vs-revolut">N26 vs Revolut</a></li>
+        <li>👉 <a href="/n26-vs-wise">N26 vs Wise</a></li>
+        <li>👉 <a href="/revolut-vs-wise">Revolut vs Wise</a></li>
+        <li>👉 <a href="/n26-vs-imagin">N26 vs imagin</a></li>
+        <li>👉 <a href="/revolut-vs-imagin">Revolut vs imagin</a></li>
+        <li>👉 <a href="/imagin-vs-wise">imagin vs Wise</a></li>
+      </ul>
+
+      <p>
+        🌍 <strong>Importante:</strong> ahorrar en comisiones está genial… pero no te protege. Si viajas, necesitas
+        también un buen seguro:
+      </p>
+      <p>
+        👉 <a href="/mejor-seguro-de-viaje"><strong>Mejor seguro de viaje en 2026</strong></a>
+      </p>
+    </div>
+  </section>
+  <ClusterLinks variant="pillar" cluster={cluster} />
+</Layout>

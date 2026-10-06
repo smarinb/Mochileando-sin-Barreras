@@ -1,0 +1,395 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { getPermalink } from '~/utils/permalinks';
+import { clusters } from '~/data/clusters';
+import historiaImg from '~/assets/images/historia-cris-sergio.webp';
+import crisImg from '~/assets/images/cris-viajera.webp';
+import sergioImg from '~/assets/images/sergio-viajero.webp';
+import libroImg from '~/assets/images/libro-quierete-sorda.webp';
+
+const SITE = 'https://mochileandosinbarreras.com';
+const LIBRO = 'https://mochileandosinbarreras.com/producto/libro-quierete-sorda/';
+const YOUTUBE = 'https://www.youtube.com/@Mochileandosinbarreras';
+const INSTAGRAM = 'https://www.instagram.com/mochileandosinbarreras/';
+
+const metadata = {
+  title: 'Acerca de: viajar siendo sordo y sin barreras, Cris y Sergio',
+  description:
+    'Cris (sorda) y Sergio viajan por libre desde hace años. Conoce nuestra historia, por qué contamos viajes accesibles y cómo te ayudamos a preparar el tuyo.',
+  canonical: '/acerca-de',
+};
+
+const breadcrumbs = [{ text: 'Inicio', href: getPermalink('/') }, { text: 'Acerca de' }];
+
+const barreras = [
+  {
+    icon: 'tabler:plane-departure',
+    title: 'Aeropuertos',
+    question: '¿Qué pasa si cambian la puerta de embarque? ¿Cómo te enteras de lo que dice el piloto dentro del avión?',
+    tip: 'Avisar de tu sordera al reservar y al facturar, y activar las notificaciones de la aerolínea, evita muchos sustos.',
+  },
+  {
+    icon: 'tabler:bed',
+    title: 'Hoteles',
+    question: '¿Cómo te comunicas con recepción? ¿Cómo oirías la alarma de incendios?',
+    tip: 'Preguntar antes de reservar por alarma visual o vibratoria y dejar claro cómo prefieres comunicarte marca la diferencia.',
+  },
+  {
+    icon: 'tabler:building-community',
+    title: 'Ocio y cultura',
+    question: '¿Puedes hacer una visita guiada en un museo? ¿Te enteras de algo en el cine o en un espectáculo?',
+    tip: 'Buscar visitas con subtítulos o apoyo escrito, y confirmar la accesibilidad antes de comprar la entrada, ahorra frustraciones.',
+  },
+];
+
+const guias = clusters.filter((c) => c.pillar);
+
+const faqs = [
+  {
+    q: '¿Quiénes están detrás de Mochileando sin Barreras?',
+    a: 'Cris y Sergio. Cris es abogada, hipoacúsica de ambos oídos y viajera desde hace años; Sergio es ingeniero informático de Madrid. Desde 2019 viven viajando y cuentan lo que aprenden por el camino.',
+  },
+  {
+    q: '¿De qué trata el blog?',
+    a: 'De viajar por libre con información útil y honesta: seguros de viaje, tarjetas sin comisiones, eSIM, alquiler de coches y guías de destinos, siempre con la mirada de una persona sorda y de quien viaja a su lado.',
+  },
+  {
+    q: '¿Cómo se financia el blog?',
+    a: 'Algunos enlaces son de afiliado: si contratas un servicio a través de ellos, recibimos una comisión sin que pagues nada más. Siempre los marcamos con rel="sponsored" y solo recomendamos lo que usaríamos nosotros.',
+  },
+  {
+    q: '¿Qué es Sordotravel?',
+    a: 'Es el proyecto que Cris ha creado junto a su socia Marian para organizar viajes pensados para toda la comunidad sorda.',
+  },
+  {
+    q: '¿Puedo colaborar con vosotros o proponeros un tema?',
+    a: 'Sí. Escríbenos desde la página de contacto con tu propuesta o tu duda y te respondemos en 2-3 días laborables.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'AboutPage',
+      '@id': `${SITE}/acerca-de#page`,
+      url: `${SITE}/acerca-de`,
+      name: metadata.title,
+      description: metadata.description,
+      about: { '@id': `${SITE}/#organization` },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${SITE}/#organization`,
+      name: 'Mochileando sin Barreras',
+      url: SITE,
+      sameAs: [YOUTUBE, INSTAGRAM],
+      founder: [{ '@id': `${SITE}/acerca-de#cris` }, { '@id': `${SITE}/acerca-de#sergio` }],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${SITE}/acerca-de#cris`,
+      name: 'Cristina',
+      jobTitle: 'Abogada y viajera',
+      url: `${SITE}/acerca-de`,
+      sameAs: [INSTAGRAM],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${SITE}/acerca-de#sergio`,
+      name: 'Sergio',
+      jobTitle: 'Ingeniero informático y viajero',
+      url: `${SITE}/acerca-de`,
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout metadata={metadata}>
+  <Breadcrumbs bar items={breadcrumbs} />
+  <StructuredData slot="head" schema={schema} />
+
+  <!-- HERO -->
+  <section class="px-4 py-14 sm:px-6 md:py-20 mx-auto max-w-6xl">
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <div>
+        <span class="text-accent-text font-bold uppercase tracking-wider text-sm">Acerca de nosotros</span>
+        <h1 class="font-heading mt-2 mb-5 text-4xl font-bold leading-tight md:text-5xl">
+          Viajar por libre siendo sordo: <span class="text-link">sí se puede</span>
+        </h1>
+        <p class="mb-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+          Somos <strong>Cris y Sergio</strong>. Cris es sorda, yo (Sergio) oigo, y desde 2019 vivimos viajando. Este blog existe para que
+          cualquier persona sorda o con dificultades auditivas pueda cumplir su sueño de viajar por libre, con la información que a
+          nosotros nos habría gustado tener.
+        </p>
+        <p class="mb-8 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+          Aquí encontrarás guías honestas, comparativas reales y todo lo que usamos para preparar un viaje sin sustos.
+        </p>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a href="#guias" class="btn bg-primary text-white hover:bg-primary-hover px-8 py-3 text-lg font-semibold shadow-lg">
+            Empieza por nuestras guías
+          </a>
+          <a
+            href={LIBRO}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn border-2 border-primary text-link hover:bg-primary/10 px-8 py-3 text-lg font-semibold"
+          >
+            <Icon name="tabler:book-2" class="mr-2 h-5 w-5" aria-hidden="true" />Leer el libro de Cris
+          </a>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-2xl shadow-xl">
+        <Image
+          src={historiaImg}
+          alt="Sergio y Cris sonriendo en una montaña con un lago verde y picos nevados al fondo"
+          widths={[480, 800, 1000]}
+          sizes="(max-width: 768px) 100vw, 560px"
+          class="h-auto w-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ EXISTE -->
+  <section class="bg-gray-50 px-4 py-16 sm:px-6 dark:bg-slate-900">
+    <div class="mx-auto max-w-5xl">
+      <div class="mb-10 max-w-3xl">
+        <h2 class="font-heading mb-4 text-3xl font-bold">¿Y si mañana te despertaras sin oír nada?</h2>
+        <p class="text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+          Hay <strong>más de 400 millones de personas sordas en el mundo</strong>. Y sí, los sordos también viajan, pero se encuentran con
+          barreras que casi nadie ve, porque la sordera es una discapacidad invisible. Esto es lo que nadie suele contarte antes de
+          salir:
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          barreras.map((b) => (
+            <div class="flex flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md dark:border-slate-700 dark:bg-slate-800">
+              <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-link">
+                <Icon name={b.icon} class="h-7 w-7" aria-hidden="true" />
+              </div>
+              <h3 class="mb-2 text-xl font-bold">{b.title}</h3>
+              <p class="mb-3 text-slate-700 dark:text-slate-300">{b.question}</p>
+              <p class="mt-auto text-sm text-muted">
+                <strong>Qué suele ayudar:</strong> {b.tip}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="mt-8 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+        Por eso contamos cada viaje pensando en ellas: qué preguntar antes de reservar, qué cubre de verdad un seguro, cómo tener
+        internet desde que aterrizas o qué esperar en el mostrador de un alquiler de coche. Si viajas con sordera o hipoacusia, empieza por nuestra <a href="/viajar-siendo-sordo" class="font-semibold text-link hover:underline">guía para viajar siendo sordo</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- QUIÉNES SOMOS -->
+  <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+    <h2 class="font-heading mb-10 text-3xl font-bold">Quiénes somos</h2>
+
+    <div class="grid gap-10 md:grid-cols-2">
+      <article class="flex flex-col">
+        <Image
+          src={crisImg}
+          alt="Cris sonriendo con gafas de sol y el pulgar hacia arriba bajo un cartel de carretera en árabe, en pleno desierto"
+          widths={[400, 700]}
+          sizes="(max-width: 768px) 100vw, 480px"
+          class="mb-5 aspect-[4/3] w-full rounded-2xl object-cover shadow-md"
+          loading="lazy"
+        />
+        <h3 class="mb-3 text-2xl font-bold">Cristina</h3>
+        <div class="space-y-3 leading-relaxed text-slate-700 dark:text-slate-300">
+          <p>
+            Soy hipoacúsica de ambos oídos y desde pequeña vivo entre dos mundos: el mío, donde veo voces difusas y encuentro paz en los
+            silencios, y el de los oyentes, al que me transporto cuando enciendo mis audífonos. Vivir en tierra de nadie no siempre es
+            fácil, pero nunca me sentí de menos.
+          </p>
+          <p>
+            Abogada de profesión y viajera de vocación. Superé mis miedos y empecé a viajar sola por Latinoamérica, Europa y África,
+            tirando de una patada las barreras que la sociedad nos impone. Mi intención es inspirarte para que tú también lo consigas.
+          </p>
+          <p>
+            En 2019 decidí cumplir un sueño: vivir viajando con mi compañero de vida. Juntos damos visibilidad a quienes viven con la
+            llamada «discapacidad invisible». Hoy, además, organizo viajes para la comunidad sorda con mi socia Marian en
+            <strong>Sordotravel</strong>.
+          </p>
+        </div>
+      </article>
+
+      <article class="flex flex-col">
+        <Image
+          src={sergioImg}
+          alt="Sergio sonriendo a cámara con el sudor del viaje, con vegetación y una estatua dorada al fondo"
+          widths={[400, 700]}
+          sizes="(max-width: 768px) 100vw, 480px"
+          class="mb-5 aspect-[4/3] w-full rounded-2xl object-cover shadow-md"
+          loading="lazy"
+        />
+        <h3 class="mb-3 text-2xl font-bold">Sergio</h3>
+        <div class="space-y-3 leading-relaxed text-slate-700 dark:text-slate-300">
+          <p>
+            Soy un ingeniero informático cualquiera de Madrid. Reconozco que hasta que conocí a Cris no fui consciente de todas las
+            dificultades que tienen las personas con deficiencia auditiva, y no solo en un viaje, sino en su día a día. Y eso que desde
+            pequeño he vivido de cerca la discapacidad visual de mi madre.
+          </p>
+          <p>
+            Como dice Cris, la sordera es la discapacidad invisible: «nuestro mundo» no está pensado para ellos y se hace poco para
+            corregirlo. Ella me ha contagiado sus ganas de comerse el mundo.
+          </p>
+          <p>
+            Compagino mi trabajo de informático con pequeños proyectos freelance, entre ellos esta web, con la idea de que algún día
+            crezcan y me permitan ser dueño de mi tiempo.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- QUÉ ENCONTRARÁS (guías por clúster: se actualiza solo desde clusters.ts) -->
+  <section id="guias" class="bg-gray-50 px-4 py-16 sm:px-6 dark:bg-slate-900">
+    <div class="mx-auto max-w-6xl">
+      <div class="mx-auto mb-10 max-w-3xl text-center">
+        <h2 class="font-heading mb-4 text-3xl font-bold">Lo que usamos para viajar (y te contamos con detalle)</h2>
+        <p class="text-lg text-slate-700 dark:text-slate-300">
+          Cada guía nace de una necesidad real en la carretera. Elige por dónde quieres empezar:
+        </p>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          guias.map((c) => (
+            <a
+              href={c.pillar!.href}
+              class="flex flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition hover:-translate-y-1 dark:border-slate-700 dark:bg-slate-800"
+            >
+              <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-link">
+                <Icon name={c.icon} class="h-7 w-7" aria-hidden="true" />
+              </div>
+              <h3 class="mb-2 text-lg font-bold">{c.label}</h3>
+              <p class="mb-4 text-sm text-muted">{c.pillar!.title}</p>
+              <span class="mt-auto text-sm font-semibold text-link">{c.pillar!.cta} →</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <p class="mt-8 text-center text-slate-700 dark:text-slate-300">
+        ¿Prefieres curiosear? Mira <a href="/blog" class="font-semibold text-link hover:underline">todos los artículos del blog</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- TRANSPARENCIA -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+    <h2 class="font-heading mb-4 text-3xl font-bold">Cómo trabajamos (y cómo se financia esto)</h2>
+    <div class="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+      <p>
+        Probamos, contratamos y usamos lo que recomendamos, y contamos también lo que no nos convence: la letra pequeña, los límites y
+        para quién <em>no</em> es cada opción.
+      </p>
+      <p>
+        Algunos de nuestros enlaces son de afiliado. Si contratas a través de ellos, recibimos una comisión <strong>sin coste extra para
+        ti</strong>, y es lo que nos permite seguir publicando. Los marcamos siempre como enlaces patrocinados y nunca nos hace
+        recomendar algo que no usaríamos nosotros.
+      </p>
+    </div>
+  </section>
+
+  <!-- LIBRO -->
+  <section class="px-4 pb-16 sm:px-6 mx-auto max-w-4xl">
+    <div class="rounded-3xl border border-gray-100 bg-white p-8 shadow-xl md:p-12 dark:border-slate-700 dark:bg-slate-800">
+      <div class="grid items-center gap-8 md:grid-cols-3">
+        <div class="text-center">
+          <Image
+            src={libroImg}
+            alt="Portada del libro «¡Quiérete Sorda!» de Cristina"
+            widths={[200, 400]}
+            sizes="200px"
+            class="mx-auto max-w-[200px] rounded-xl shadow-md"
+            loading="lazy"
+          />
+        </div>
+        <div class="space-y-4 md:col-span-2">
+          <h2 class="font-heading text-2xl font-bold md:text-3xl">«¡Quiérete Sorda!»: donde empezó todo</h2>
+          <p class="text-slate-700 dark:text-slate-300">
+            Es el relato personal de Cris enfrentándose al mundo, rompiendo barreras y encontrando su libertad viajando sola. Es la semilla de
+            este proyecto.
+          </p>
+          <a
+            href={LIBRO}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn inline-flex items-center gap-2 bg-primary px-8 py-3 font-bold text-white shadow-lg hover:bg-primary-hover"
+          >
+            <Icon name="tabler:book-2" class="h-5 w-5" aria-hidden="true" />Descubrir el libro
+            <span class="sr-only">(se abre en una pestaña nueva)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 px-4 py-16 sm:px-6 dark:bg-slate-900">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="font-heading mb-8 text-3xl font-bold">Preguntas frecuentes</h2>
+      <div class="space-y-6">
+        {
+          faqs.map(({ q, a }) => (
+            <div>
+              <h3 class="mb-1 text-lg font-bold">{q}</h3>
+              <p class="text-slate-700 dark:text-slate-300">{a}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE -->
+  <section class="px-4 py-16 sm:px-6 text-center mx-auto max-w-3xl">
+    <h2 class="font-heading mb-4 text-3xl font-bold">Sigue la ruta con nosotros</h2>
+    <p class="mb-8 text-lg text-slate-700 dark:text-slate-300">
+      Cuéntanos tu próximo viaje, tu duda o tu idea. Y si quieres ver cómo viajamos, nos encuentras en vídeo y en redes.
+    </p>
+    <div class="flex flex-col justify-center gap-3 sm:flex-row">
+      <a href="/contacto" class="btn bg-primary px-8 py-3 font-semibold text-white shadow-lg hover:bg-primary-hover">Escríbenos</a>
+      <a
+        href={YOUTUBE}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn border-2 border-primary px-6 py-3 font-semibold text-link hover:bg-primary/10"
+      >
+        <Icon name="tabler:brand-youtube" class="mr-2 h-5 w-5" aria-hidden="true" />YouTube
+        <span class="sr-only">(se abre en una pestaña nueva)</span>
+      </a>
+      <a
+        href={INSTAGRAM}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn border-2 border-primary px-6 py-3 font-semibold text-link hover:bg-primary/10"
+      >
+        <Icon name="tabler:brand-instagram" class="mr-2 h-5 w-5" aria-hidden="true" />Instagram
+        <span class="sr-only">(se abre en una pestaña nueva)</span>
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -1,34 +1,40 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Mochileando sin Barreras
+  # URL final de producción. Se usa para canonical, sitemap, robots.txt y Open Graph.
+  # En local no afecta: `npm run dev` sigue funcionando en localhost.
+  site: 'https://mochileandosinbarreras.com'
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  # ID de verificación de Google Search Console (etiqueta meta).
+  # El que había era el de la plantilla AstroWind, así que lo dejo vacío.
+  # Si verificas por etiqueta HTML, pega aquí SOLO el valor de `content`.
+  googleSiteVerificationId: ''
 
-# Default SEO metadata
+# SEO por defecto (se usa cuando una página no define el suyo)
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Mochileando sin Barreras
+    template: '%s'
+  description: Guías de viaje honestas, seguros y eSIM probados en ruta de Argentina a Alaska en camper, por una pareja que viaja sin barreras.
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
-    images:
-      - url: '~/assets/images/default.png'
-        width: 1200
-        height: 628
+    site_name: Mochileando sin Barreras
+    locale: es_ES
     type: website
+    images:
+      - url: '~/assets/images/og-default.jpg'
+        width: 1200
+        height: 630
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
+    # Sin @usuario de X/Twitter: no se emiten twitter:site ni twitter:creator.
+    # Cuando tengas uno añade `handle: '@tuusuario'` y `site: '@tuusuario'`.
     cardType: summary_large_image
 
 i18n:
-  language: en
+  language: es
   textDirection: ltr
 
 apps:

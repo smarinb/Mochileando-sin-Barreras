@@ -1,0 +1,126 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import { Image } from 'astro:assets';
+import { getPermalink } from '~/utils/permalinks';
+import { getClusterBySlug } from '~/data/clusters';
+
+const cluster = getClusterBySlug('vuelta-al-mundo-y-camper');
+
+// Portadas de los posts: /src/assets/images/<slug>.webp
+const covers = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.webp', { eager: true });
+const cover = (slug: string) => covers[`/src/assets/images/${slug}.webp`]?.default;
+
+const breadcrumbs = [
+  { text: 'Inicio', href: getPermalink('/') },
+  { text: cluster?.label ?? 'Vuelta al mundo', href: getPermalink(cluster?.slug ?? '', 'category') },
+  { text: 'Diario de la vuelta al mundo' },
+];
+
+const metadata = {
+  title: 'Diario de la vuelta al mundo: mes a mes y con presupuesto',
+  description:
+    'Nuestro diario de la vuelta al mundo sin billete de vuelta, mes a mes: qué hicimos, imprevistos, desglose de gastos y conclusiones de cada etapa.',
+  canonical: '/vuelta-al-mundo',
+};
+
+const meses = [
+  ['conclusiones-de-1-mes-de-viaje', 'Mes 1', 'Un mes después de despedirnos en Barajas: lo que hicimos y lo que nunca olvidaremos.'],
+  ['2-meses-viaje', 'Mes 2', 'Más de 60 días de viaje, con diario, imprevistos y desglose de gastos.'],
+  ['3-meses-viaje', 'Mes 3', 'Diario, presupuesto y conclusiones del tercer mes.'],
+  ['4-meses-viaje', 'Mes 4', 'Diario, presupuesto y conclusiones del cuarto mes.'],
+  ['5-meses-viaje', 'Mes 5', 'Diario, presupuesto y conclusiones del quinto mes.'],
+  ['6-meses-viaje', 'Mes 6', 'Medio año de viaje: diario, presupuesto y conclusiones.'],
+  ['7-meses-viaje', 'Mes 7', 'Diez días en España y comienza la aventura por el Sudeste Asiático.'],
+  ['8-meses-viaje', 'Mes 8', 'Diario, presupuesto y conclusiones del octavo mes.'],
+  ['9-meses-de-viaje', 'Mes 9', 'Más de 270 días por el mundo y salto a Oceanía.'],
+  ['vuelta-al-mundo-10-mes', 'Mes 10', 'Diario, presupuesto y conclusiones del décimo mes.'],
+  ['vuelta-al-mundo-11-meses-de-viaje-diario-presupuesto', 'Mes 11', 'Diario, presupuesto y conclusiones del undécimo mes.'],
+];
+
+const antes = [
+  ['como-vivir-viajando-por-el-mundo', 'Cómo dar la vuelta al mundo o vivir viajando', '7 viajeros cuentan cómo vencieron el miedo y se financiaron.'],
+  ['excedencia-vuelta-al-mundo', 'Cómo conseguir 2 años de excedencia', 'Qué es, quién puede pedirla y cómo hacerlo.'],
+  ['como-ahorrar-para-viajar', 'Cómo ahorrar 30.000 € en 14 meses', 'Nuestro plan de ahorro, paso a paso.'],
+  ['que-es-el-petsitting', 'Qué es el pet sitting', 'Viaja sin pagar alojamiento cuidando animales.'],
+  ['jornadas-grandes-viajes', 'Jornadas de los Grandes Viajes', 'El empujón para viajar sin billete de vuelta.'],
+];
+
+const camper = [
+  ['enviar-camper-latinoamerica', 'Enviar tu camper a Latinoamérica', 'Guía real de Amberes a Montevideo.'],
+  ['nueva-zelanda-en-coche-dormir-gratis', 'Nueva Zelanda en coche', 'Campings gratis para vehículos Non Self Contained.'],
+  ['descubre-el-bano-seco-ecologico-para-campers-de-boxio', 'Baño seco Boxio para camper', 'Ventajas, uso y accesorios.'],
+  ['cocina-camping-gas-camper', 'Cocina portátil para camper', 'La cocina Comgas con 2 quemadores y plancha.'],
+  ['victron-cerbo-gx-todo-lo-que-necesitas-saber', 'Victron Cerbo GX', 'Controla la energía solar de tu camper.'],
+];
+
+const grupos = [
+  { id: 'meses', titulo: '📓 El diario, mes a mes', intro: 'Once meses viajando sin billete de vuelta, con lo que hicimos y cuánto gastamos.', items: meses, orden: true },
+  { id: 'antes', titulo: '🧭 Antes de salir', intro: 'Cómo lo planificamos: trabajo, dinero y alojamiento.', items: antes },
+  { id: 'camper', titulo: '🚐 Camper', intro: 'Después de la mochila, nos fuimos en camper. Esto es lo que usamos.', items: camper },
+];
+---
+
+<Layout metadata={metadata}>
+  <Breadcrumbs bar items={breadcrumbs} />
+
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-5xl">
+    <h1 class="text-3xl md:text-4xl font-bold font-heading mb-4">Diario de la vuelta al mundo: mes a mes y con presupuesto</h1>
+    <p class="mb-4 max-w-3xl text-lg text-slate-700 dark:text-slate-300">
+      Lo dejamos todo para viajar sin billete de vuelta. Aquí tienes cada mes de nuestro viaje con el diario, los imprevistos, el desglose de
+      gastos y las conclusiones, además de cómo lo planificamos y el equipo de camper que usamos después.
+    </p>
+    <p class="mb-10 text-sm text-slate-700 dark:text-slate-300">
+      ¿Estás pensando en hacer algo parecido? Empieza por
+      <a href="/como-vivir-viajando-por-el-mundo" class="font-semibold text-link hover:underline">cómo dar la vuelta al mundo o vivir viajando</a>.
+    </p>
+
+    {
+      grupos.map((g) => (
+        <div class="mt-12" id={g.id}>
+          <h2 class="text-2xl md:text-3xl font-bold font-heading mb-1">{g.titulo}</h2>
+          <p class="text-muted dark:text-slate-400 mb-5">{g.intro}</p>
+          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {g.items.map(([slug, a, b]) => {
+              const img = cover(slug);
+              return (
+                <li>
+                  <a
+                    href={`/${slug}`}
+                    class="group flex h-full flex-col rounded-2xl border border-gray-100 bg-white shadow-md transition hover:-translate-y-1 dark:border-slate-700 dark:bg-slate-800"
+                  >
+                    {img && (
+                      <Image
+                        src={img}
+                        alt=""
+                        widths={[360, 720]}
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 340px"
+                        class="aspect-video w-full rounded-t-2xl object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    <div class="flex flex-1 flex-col p-5">
+                      <h3 class="mb-2 text-lg font-bold leading-snug group-hover:text-link">
+                        {g.orden ? `${a}` : a}
+                      </h3>
+                      <p class="text-sm text-slate-700 dark:text-slate-300">{b}</p>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))
+    }
+
+    <div class="prose dark:prose-invert max-w-none mt-14">
+      <h2>🧳 Prepara tu viaje largo</h2>
+      <p>
+        En un viaje largo lo que no se puede improvisar es el <a href="/mejor-seguro-de-viaje">seguro de viaje</a>, una
+        <a href="/mejor-tarjeta-para-viajar">tarjeta sin comisiones</a> y una <a href="/mejor-esim-para-viajar">eSIM</a> para tener datos en cada país.
+        Y si vas a recorrer carreteras, mira nuestra guía de <a href="/mejor-alquiler-de-coches">alquiler de coches</a>.
+      </p>
+    </div>
+  </section>
+</Layout>

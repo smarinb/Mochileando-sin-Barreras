@@ -1,0 +1,199 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import ClusterLinks from '~/components/blog/ClusterLinks.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import { Image } from 'astro:assets';
+import { getPermalink } from '~/utils/permalinks';
+import { getClusterBySlug } from '~/data/clusters';
+
+const cluster = getClusterBySlug('viajar-siendo-sordo');
+
+// Portadas de los posts: /src/assets/images/<slug>.webp
+const covers = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.webp', { eager: true });
+const cover = (slug: string) => covers[`/src/assets/images/${slug}.webp`]?.default;
+
+const breadcrumbs = [
+  { text: 'Inicio', href: getPermalink('/') },
+  { text: cluster?.label ?? 'Viaje sordo', href: getPermalink(cluster?.slug ?? '', 'category') },
+  { text: 'Guía para viajar siendo sordo' },
+];
+
+const metadata = {
+  title: 'Viajar siendo sordo: guía de accesibilidad y consejos',
+  description:
+    'Guía para viajar siendo sordo o con hipoacusia: asistencia en aeropuertos, audífonos e implantes, turismo accesible y experiencias de viajeros sordos.',
+  canonical: '/viajar-siendo-sordo',
+};
+
+const secciones = [
+  {
+    nombre: 'Antes de salir: lo imprescindible',
+    intro: 'Tres guías prácticas para preparar el viaje con audífonos, implantes o hipoacusia.',
+    items: [
+      { slug: 'asistencia-aeropuerto-discapacidad-auditiva', title: 'Cómo solicitar asistencia en el aeropuerto', text: 'Normativa europea, cómo pedirla y cómo reclamar si no se cumple.' },
+      { slug: 'audifonos-e-implantes-viajando', title: 'Qué llevar en el equipaje de mano con audífonos e implantes', text: 'Pilas, estuche hermético, pastillas de humedad y kit de limpieza.' },
+      { slug: 'agua-hipoacusia', title: 'A la playa con hipoacusia y audífonos', text: 'Cómo proteger los audífonos del agua y hacer snorkel con protectores auditivos.' },
+    ],
+  },
+  {
+    nombre: 'Turismo accesible: lugares y experiencias',
+    intro: 'Lo que hemos probado en primera persona, desde famtrips hasta teatro y festivales.',
+    items: [
+      { slug: 'famtrip-accesible-en-mallorca', title: 'Famtrip de turismo accesible en Mallorca', text: 'Espacios accesibles para sordos e hipoacúsicos y el I Foro de Turismo para todas las personas.' },
+      { slug: 'turismo-accesible-en-la-comunidad-valenciana-una-aventura-sin-barreras', title: 'Turismo accesible en la Comunidad Valenciana', text: 'Un famtrip con Predif y Tur4all por uno de los destinos más inclusivos de España.' },
+      { slug: 'teatro-accesible-personas-sordas', title: 'Teatro accesible para personas sordas', text: 'Mi experiencia con «La Patética» y cómo encontrar funciones adaptadas.' },
+      { slug: 'cooltural-fest-2023', title: 'Cooltural Fest, un festival de música accesible', text: 'Las medidas de accesibilidad del festival de Almería.' },
+      { slug: 'turismo-accesible-personas-sordas-moscu', title: 'Moscú accesible para personas sordas', text: 'Aeropuertos, trenes, metro, museos y teatro inclusivo.' },
+      { slug: 'accesibilidad-del-transiberiano-sordos', title: 'Accesibilidad del Transiberiano', text: 'Estaciones, trenes y consejos para viajar con discapacidad auditiva.' },
+    ],
+  },
+  {
+    nombre: 'Historias de viajeros sordos',
+    intro: 'Entrevistas con personas sordas que viajan, trabajan y rompen barreras.',
+    items: [
+      { slug: '9-viajeros-sordos-nos-cuentan-como-superan-barreras-viajando-por-el-mundo', title: '9 viajeros sordos nos cuentan cómo superan barreras', text: 'La mayor barrera que se han encontrado viajando y cómo la superaron.' },
+      { slug: 'deafinitely-wanderlust', title: 'Stacey, una viajera sorda sin billete de vuelta', text: 'Un año viajando con su pareja, ambos sordos, y su experiencia con el audismo.' },
+      { slug: 'entrevista-fani-turismo-accesible', title: 'Turismo accesible en España, por Fani', text: 'Qué es TUR4all y qué medidas de accesibilidad auditiva encontró.' },
+      { slug: 'entrevista-olga', title: 'Olga Babarro, guía de turismo en lengua de signos', text: 'La única guía oficial de turismo en lengua de signos en España.' },
+      { slug: 'entrevista-rocio-tato', title: 'Rocío Tato, actriz sorda y viajera', text: 'Más de 20 países recorridos y una carrera con Paco León.' },
+      { slug: 'eunate-arraiza', title: 'Eunate Arraiza, futbolista sorda del Athletic', text: 'Primera jugadora sorda en la primera división femenina.' },
+      { slug: 'familia-vazquez', title: 'Familia Vázquez TV', text: 'Los youtubers sordos más conocidos, sobre turismo accesible y teatro en lengua de signos.' },
+    ],
+  },
+  {
+    nombre: 'Sordomundo: comunidades sordas del mundo',
+    intro: 'Nuestro proyecto para visitar las comunidades sordas de los países que recorremos.',
+    items: [
+      { slug: 'sordomundo', title: 'Sordomundo: dar voz a las culturas sordas', text: 'Qué es el proyecto y cuáles son sus cuatro misiones.' },
+      { slug: 'sordomundo-uzbekistan', title: 'Sociedad Regional de Sordos de Tashkent', text: 'Visita en Uzbekistán y festival de fin de curso de una escuela de niños sordos.' },
+      { slug: 'sordos-astana', title: 'Sociedad de Sordos de Astana', text: 'Qué hace la asociación en Kazajistán y qué ayudas hay.' },
+      { slug: 'sordomundo-pattaya', title: 'Escuela de sordos de Pattaya', text: 'Voluntariado en Tailandia en la escuela y orfanato Sotpattana.' },
+      { slug: 'comunidad-sorda-siberia', title: 'Cómo fracasamos al visitar la comunidad sorda de Siberia', text: 'Nuestro intento fallido en Irkutsk y lo que aprendimos.' },
+      { slug: 'guia-lenguaje-mundo-sordo', title: 'Guía de lenguaje inclusivo en el mundo sordo', text: 'Qué significan comunidad sorda, cultura sorda, hipoacusia o lengua de signos.' },
+    ],
+  },
+];
+
+const consejos = [
+  '<strong>Pide asistencia con antelación.</strong> En la Unión Europea el aeropuerto y la aerolínea deben ofrecértela, siempre que la hayas solicitado previamente.',
+  '<strong>Lleva en el equipaje de mano</strong> pilas, estuche hermético, pastillas de humedad, caja de secado, piezas de repuesto y kit de limpieza.',
+  '<strong>Protege los audífonos del agua.</strong> Para el snorkel existen gafas de buceo con protectores auditivos.',
+  '<strong>Descarga un traductor que funcione sin conexión</strong> para comunicarte por escrito con el personal y con otros viajeros.',
+  '<strong>Vigila siempre los paneles</strong> de salidas y llegadas: en algunos trenes y estaciones no hay avisos visuales.',
+  '<strong>Antes de comprar entradas</strong> de teatro, conciertos o visitas, busca la oferta accesible y confirma las medidas para personas sordas.',
+];
+
+const faqs = [
+  {
+    q: '¿Cómo pido asistencia en el aeropuerto si soy sordo?',
+    a: 'Cuando compras un vuelo, tanto el aeropuerto como la aerolínea tienen el deber de ofrecer un servicio de asistencia a pasajeros con discapacidad, siempre que lo hayas solicitado previamente. En nuestra guía explicamos la normativa europea y cómo reclamar si se vulneran tus derechos.',
+  },
+  {
+    q: '¿Qué llevar en el equipaje de mano si viajo con audífonos o implantes?',
+    a: 'Conviene llevar en el equipaje de mano todo el material de mantenimiento: pilas, estuche hermético, pastillas de humedad, caja de secado o deshumidificador, piezas de repuesto y kit de limpieza, y no facturarlo.',
+  },
+  {
+    q: '¿Se puede ir a la playa con audífonos?',
+    a: 'Sí, pero con protección: los audífonos no deben mojarse. En nuestra guía contamos cómo cuidarlos en la playa y cómo hacer snorkel con gafas de buceo con protectores auditivos.',
+  },
+  {
+    q: '¿Qué es Sordomundo?',
+    a: 'Es nuestro proyecto para visitar las comunidades sordas de los lugares que recorremos en la vuelta al mundo, dar a conocer su cultura y apoyar proyectos solidarios para personas con pérdida auditiva.',
+  },
+  {
+    q: '¿Son accesibles los destinos para personas sordas?',
+    a: 'Depende mucho del lugar. En España hay iniciativas como Tur4all, Predif o el teatro accesible; en Moscú casi todas las estaciones de tren tienen taquillas especiales para personas con problemas auditivos, pero en el Transiberiano no encontramos medidas completas dentro de los trenes. Cuéntanos tu experiencia para ampliar la información.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+---
+
+<Layout metadata={metadata}>
+  <Breadcrumbs bar items={breadcrumbs} />
+  <StructuredData slot="head" schema={schema} />
+
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-5xl">
+    <h1 class="text-3xl md:text-4xl font-bold font-heading mb-6">Viajar siendo sordo: accesibilidad, consejos y experiencias reales</h1>
+
+    <div class="prose dark:prose-invert max-w-none">
+      <p>
+        <strong>Cris es sorda</strong> y viaja por libre desde hace años. Esta guía reúne todo lo que hemos aprendido sobre
+        <strong>viajar con sordera o hipoacusia</strong>: cómo pedir asistencia, qué llevar si usas audífonos o implantes, qué lugares son accesibles y las historias de
+        otros viajeros sordos.
+      </p>
+      <p>
+        Si no sabes por dónde empezar, estos son seis consejos que repetimos siempre:
+      </p>
+      <ul>
+        {consejos.map((c) => <li set:html={c} />)}
+      </ul>
+    </div>
+
+    {
+      secciones.map((s) => (
+        <div class="mt-12">
+          <h2 class="text-2xl md:text-3xl font-bold font-heading mb-1">{s.nombre}</h2>
+          <p class="text-muted dark:text-slate-400 mb-5">{s.intro}</p>
+          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {s.items.map((it) => {
+              const img = cover(it.slug);
+              return (
+                <li>
+                  <a
+                    href={`/${it.slug}`}
+                    class="group flex h-full flex-col rounded-2xl border border-gray-100 bg-white shadow-md transition hover:-translate-y-1 dark:border-slate-700 dark:bg-slate-800"
+                  >
+                    {img && (
+                      <Image
+                        src={img}
+                        alt=""
+                        widths={[360, 720]}
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 340px"
+                        class="aspect-video w-full rounded-t-2xl object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    <div class="flex flex-1 flex-col p-5">
+                      <h3 class="mb-2 text-lg font-bold leading-snug group-hover:text-link">{it.title}</h3>
+                      <p class="text-sm text-slate-700 dark:text-slate-300">{it.text}</p>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))
+    }
+
+    <div class="prose dark:prose-invert max-w-none mt-14">
+      <h2>🧳 Prepara el viaje</h2>
+      <p>
+        Lo que no conviene improvisar: un <a href="/mejor-seguro-de-viaje">seguro de viaje</a> con buenas coberturas, una
+        <a href="/mejor-esim-para-viajar">eSIM</a> para tener datos desde que aterrizas (clave si necesitas comunicarte por escrito) y una
+        <a href="/mejor-tarjeta-para-viajar">tarjeta sin comisiones</a>.
+      </p>
+      <p>
+        Y si quieres saber quiénes somos y por qué contamos los viajes así, lee <a href="/acerca-de">nuestra historia</a>.
+      </p>
+
+      <h2>❓ Preguntas frecuentes sobre viajar siendo sordo</h2>
+      {
+        faqs.map(({ q, a }) => (
+          <>
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </>
+        ))
+      }
+    </div>
+  </section>
+
+  <ClusterLinks variant="pillar" cluster={cluster} />
+</Layout>

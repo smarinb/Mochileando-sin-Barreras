@@ -1,0 +1,182 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import ClusterLinks from '~/components/blog/ClusterLinks.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import CajaAviso from '~/components/mdx/CajaAviso.astro';
+import BotonAfiliado from '~/components/mdx/BotonAfiliado.astro';
+import { Image } from 'astro:assets';
+import { getPermalink } from '~/utils/permalinks';
+import { getClusterBySlug } from '~/data/clusters';
+
+const cluster = getClusterBySlug('india');
+
+// Portadas de los posts: /src/assets/images/<slug>.webp
+const covers = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.webp', { eager: true });
+const cover = (slug: string) => covers[`/src/assets/images/${slug}.webp`]?.default;
+
+const breadcrumbs = [
+  { text: 'Inicio', href: getPermalink('/') },
+  { text: cluster?.label ?? 'India', href: getPermalink(cluster?.slug ?? '', 'category') },
+  { text: 'Guía de India' },
+];
+
+const metadata = {
+  title: 'Guía de India por libre: noreste, Rajastán y consejos',
+  description:
+    'Guía de India por libre: las siete hermanas del noreste, Meghalaya, Majuli, Kaziranga, Udaipur y el Triángulo de oro, con visado, transporte, apps e internet.',
+  canonical: '/guia-india',
+};
+
+const secciones = [
+  {
+    nombre: 'El noreste desconocido: las siete hermanas',
+    intro: 'La India menos turística, con tribus, selvas y permisos especiales.',
+    items: [
+      { slug: 'siete-hermanas', title: 'Guía de las siete hermanas de India', text: 'Regiones, visado, permisos, itinerarios de 2 a 4 semanas y presupuesto.' },
+      { slug: 'guwahati', title: 'Guwahati, la entrada a las siete hermanas', text: 'Qué ver y hacer en la puerta de entrada al noreste.' },
+      { slug: 'meghalaya', title: 'Meghalaya, el triángulo verde', text: 'Guía para viajar a la «Morada de las nubes».' },
+      { slug: 'tribus-matriarcales', title: 'Tribus matriarcales: la etnia Khasi', text: 'Una sociedad matriarcal en Meghalaya.' },
+      { slug: 'majuli', title: 'Majuli, el secreto mejor guardado de India', text: 'Qué ver y hacer en Majuli, en Assam.' },
+      { slug: 'kaziranga', title: 'Safari en Kaziranga', text: 'Ver rinocerontes indios en libertad en Assam.' },
+      { slug: 'arunachal-pradesh', title: 'Permiso para Arunachal Pradesh', text: 'Cómo conseguir el permiso para visitar esta región fronteriza.' },
+      { slug: 'tribu-apatani', title: 'Mujeres de cara tatuada: la tribu Apatani', text: 'Una tribu de Arunachal Pradesh a las puertas del Tíbet.' },
+      { slug: 'seguridad-india', title: '¿Es seguro viajar a las siete hermanas?', text: 'Seguridad en el noreste de India.' },
+    ],
+  },
+  {
+    nombre: 'Rajastán y el Triángulo de oro',
+    intro: 'La India clásica: ciudades palaciegas y el Taj Mahal.',
+    items: [
+      { slug: 'que-ver-y-hacer-en-udaipur', title: 'Top 10 qué ver y hacer en Udaipur', text: 'Lo imprescindible de Udaipur, en Rajastán.' },
+      { slug: 'festival-udaipur', title: 'Festivales de Udaipur', text: 'El Mewar, el Gangour y otras celebraciones de Rajastán.' },
+      { slug: 'guia-triangulo-de-oro', title: 'Guía del Triángulo de oro', text: 'Qué ver en el Triángulo de oro de la India.' },
+    ],
+  },
+  {
+    nombre: 'Prepara tu viaje a India',
+    intro: 'Lo práctico que más preguntas genera.',
+    items: [
+      { slug: 'visado-turista-india', title: 'Cómo tramitar el visado de turista', text: 'Requisitos y pasos para sacar el visado.' },
+      { slug: 'transporte-india', title: 'Transportes en India', text: 'Cómo moverse con presupuesto mochilero.' },
+      { slug: 'aplicaciones-india', title: '6 aplicaciones móviles imprescindibles', text: 'Las apps que nos salvaron la vida viajando por India.' },
+      { slug: 'internet-india', title: 'Tarjeta SIM con internet para India', text: 'Cómo conseguir datos móviles al llegar.' },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: '¿Necesito visado para viajar a India?',
+    a: 'Sí, los viajeros que van como turistas necesitan tramitar un visado. En nuestro artículo explicamos los requisitos y los pasos tal y como los hicimos nosotros; compruébalos siempre con fuentes oficiales porque pueden haber cambiado.',
+  },
+  {
+    q: '¿Hace falta un permiso especial para el noreste de India?',
+    a: 'Para algunas regiones del noreste, como Arunachal Pradesh, hay que tramitar un permiso para áreas protegidas. Explicamos cómo conseguirlo en nuestra guía de Arunachal Pradesh y en la de las siete hermanas.',
+  },
+  {
+    q: '¿Cómo me muevo por India con poco presupuesto?',
+    a: 'Nosotros nos movimos dos meses con presupuesto mochilero usando los transportes más baratos del país. En nuestro artículo de transportes detallamos las opciones.',
+  },
+  {
+    q: '¿Cómo tengo internet en India?',
+    a: 'Comprar una tarjeta SIM con internet en India es una opción práctica para tu teléfono móvil. Te contamos cómo conseguirla; si prefieres evitar trámites, compara también las eSIM para viajar.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+---
+
+<Layout metadata={metadata}>
+  <Breadcrumbs bar items={breadcrumbs} />
+  <StructuredData slot="head" schema={schema} />
+
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-5xl">
+    <h1 class="text-3xl md:text-4xl font-bold font-heading mb-6">Guía de India por libre: noreste, Rajastán y consejos prácticos</h1>
+
+    <div class="prose dark:prose-invert max-w-none">
+      <p>
+        Pasamos <strong>dos meses en India</strong> durante nuestra vuelta al mundo, con presupuesto mochilero y buscando la
+        <strong>India desconocida</strong>: el noreste, con sus tribus, selvas y permisos especiales, además de los clásicos de Rajastán. Esta guía reúne todo lo que escribimos, por zonas.
+      </p>
+    </div>
+
+    <CajaAviso tipo="alerta" titulo="Contenido de 2019">
+      <p>
+        Los visados, permisos, precios y condiciones de seguridad pueden haber cambiado desde que escribimos estos artículos. Consulta las recomendaciones del
+        <a href="https://www.exteriores.gob.es">Ministerio de Asuntos Exteriores</a> antes de viajar.
+      </p>
+    </CajaAviso>
+
+    {
+      secciones.map((s) => (
+        <div class="mt-12">
+          <h2 class="text-2xl md:text-3xl font-bold font-heading mb-1">{s.nombre}</h2>
+          <p class="text-muted dark:text-slate-400 mb-5">{s.intro}</p>
+          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {s.items.map((it) => {
+              const img = cover(it.slug);
+              return (
+                <li>
+                  <a
+                    href={`/${it.slug}`}
+                    class="group flex h-full flex-col rounded-2xl border border-gray-100 bg-white shadow-md transition hover:-translate-y-1 dark:border-slate-700 dark:bg-slate-800"
+                  >
+                    {img && (
+                      <Image
+                        src={img}
+                        alt=""
+                        widths={[360, 720]}
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 340px"
+                        class="aspect-video w-full rounded-t-2xl object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    <div class="flex flex-1 flex-col p-5">
+                      <h3 class="mb-2 text-lg font-bold leading-snug group-hover:text-link">{it.title}</h3>
+                      <p class="text-sm text-slate-700 dark:text-slate-300">{it.text}</p>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))
+    }
+
+    <div class="prose dark:prose-invert max-w-none mt-14">
+      <h2>🧳 Antes de salir</h2>
+      <ul>
+        <li>🛡️ <a href="/mejor-seguro-de-viaje">Seguro de viaje</a>: obligatorio en muchos casos y imprescindible en zonas remotas. Mira el <a href="/descuento-heymondo">descuento en Heymondo</a>.</li>
+        <li>📶 <a href="/mejor-esim-para-viajar">eSIM para viajar</a>: datos desde que aterrizas, sin buscar una tarjeta SIM local.</li>
+        <li>💳 <a href="/mejor-tarjeta-para-viajar">Tarjeta sin comisiones</a> para pagar y sacar dinero.</li>
+      </ul>
+    </div>
+
+    <BotonAfiliado
+      href="https://heymondo.es/?utm_medium=Afiliado&utm_source=MOCHILEANDOSINBARRERAS&utm_campaign=PRINCIPAL&cod_descuento=MOCHILEANDOSINBARRERAS"
+      text="Ver el seguro de Heymondo →"
+    >
+      <p>🛡️ Consulta coberturas y precio antes de contratar.</p>
+    </BotonAfiliado>
+
+    <div class="prose dark:prose-invert max-w-none mt-10">
+      <h2>❓ Preguntas frecuentes sobre viajar a India</h2>
+      {
+        faqs.map(({ q, a }) => (
+          <>
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </>
+        ))
+      }
+    </div>
+  </section>
+
+  <ClusterLinks variant="pillar" cluster={cluster} />
+</Layout>

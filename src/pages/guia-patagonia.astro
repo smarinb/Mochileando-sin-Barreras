@@ -1,0 +1,305 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import ClusterLinks from '~/components/blog/ClusterLinks.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import BotonAfiliado from '~/components/mdx/BotonAfiliado.astro';
+import { Image } from 'astro:assets';
+import { getPermalink } from '~/utils/permalinks';
+import { getClusterBySlug } from '~/data/clusters';
+import altares from '~/assets/images/los-altares-chubut.webp';
+import valdes from '~/assets/images/ver-ballenas-peninsula-valdes.webp';
+import madryn from '~/assets/images/nadar-lobos-marinos-puerto-madryn.webp';
+import deseado from '~/assets/images/isla-pinguino-en-puerto-deseado.webp';
+import calafate from '~/assets/images/navegacion-glaciares-el-calafate.webp';
+import puntaArenas from '~/assets/images/punta-arenas-cover.webp';
+import ballenasChile from '~/assets/images/ver-ballenas-chile-patagonia.webp';
+import capillas from '~/assets/images/capillas-de-marmol-chile.webp';
+import rafting from '~/assets/images/rafting-futaleufu.webp';
+
+const cluster = getClusterBySlug('patagonia');
+
+const breadcrumbs = [
+  { text: 'Inicio', href: getPermalink('/') },
+  { text: cluster?.label ?? 'Patagonia', href: getPermalink(cluster?.slug ?? '', 'category') },
+  { text: 'Guía de la Patagonia' },
+];
+
+const metadata = {
+  title: 'Guía de la Patagonia por libre: qué ver y excursiones',
+  description:
+    'Qué ver y hacer en la Patagonia argentina y chilena: ballenas, glaciares, Ruta 25, Carretera Austral y excursiones, con precios y consejos de nuestra ruta en camper.',
+  canonical: '/guia-patagonia',
+};
+
+const regiones = [
+  {
+    nombre: 'Chubut (Argentina)',
+    intro: 'Fauna marina y paisajes de estepa en la Ruta 25.',
+    items: [
+      {
+        href: '/ver-ballenas-peninsula-valdes',
+        img: valdes,
+        alt: 'Cola de una ballena saliendo del agua en Península Valdés',
+        title: 'Ver ballenas en Península Valdés',
+        text: 'Ballena franca austral desde Puerto Pirámides o gratis desde la playa de El Doradillo.',
+        dato: 'Temporada: junio a noviembre (lo mejor, septiembre y octubre).',
+      },
+      {
+        href: '/nadar-lobos-marinos-puerto-madryn',
+        img: madryn,
+        alt: 'Nadador con snorkel junto a lobos marinos en Puerto Madryn',
+        title: 'Nadar con lobos marinos en Puerto Madryn',
+        text: 'Snorkel con lobos marinos salvajes en la reserva de Punta Loma.',
+        dato: 'Mejor época: septiembre a abril. Unos 90–130 USD.',
+      },
+      {
+        href: '/que-ver-y-hacer-en-los-altares-chubut',
+        img: altares,
+        alt: 'Camper en Los Altares, en la Ruta 25 de Chubut',
+        title: 'Los Altares y la Ruta 25',
+        text: 'Formaciones rocosas, pinturas tehuelches, trekking y el famoso sándwich de la gasolinera.',
+        dato: 'Poca cobertura: reposta y descarga mapas antes.',
+      },
+    ],
+  },
+  {
+    nombre: 'Santa Cruz y el sur argentino',
+    intro: 'Pingüinos de penacho amarillo y glaciares.',
+    items: [
+      {
+        href: '/isla-pinguino-en-puerto-deseado',
+        img: deseado,
+        alt: 'Pingüino penacho amarillo en Isla Pingüino',
+        title: 'Isla Pingüino en Puerto Deseado',
+        text: 'Pingüinos de Magallanes y penacho amarillo, toninas y leones marinos.',
+        dato: 'Mejor época: octubre a marzo. Unos 70–120 USD.',
+      },
+      {
+        href: '/navegacion-glaciares-el-calafate',
+        img: calafate,
+        alt: 'Sergio y Cris con un témpano de hielo en el Lago Argentino',
+        title: 'Navegación por los glaciares de El Calafate',
+        text: 'Upsala y Spegazzini desde el Lago Argentino. La entrada al parque va aparte.',
+        dato: 'Jornada completa de unas 7–8 horas.',
+      },
+    ],
+  },
+  {
+    nombre: 'Patagonia chilena',
+    intro: 'Estrecho de Magallanes y Carretera Austral.',
+    items: [
+      {
+        href: '/que-ver-y-hacer-en-punta-arenas',
+        img: puntaArenas,
+        alt: 'Cris en bicicleta frente al cartel de Punta Arenas',
+        title: 'Qué ver y hacer en Punta Arenas',
+        text: 'Ruta en bici por el centro, la costanera, el cementerio y la Zona Franca.',
+        dato: 'Mejor época: noviembre a marzo.',
+      },
+      {
+        href: '/ver-ballenas-chile-patagonia',
+        img: ballenasChile,
+        alt: 'Ballena jorobada saltando en un fiordo de la Patagonia chilena',
+        title: 'Ver ballenas en la Patagonia chilena',
+        text: 'Ballena azul y otras especies en los fiordos de Aysén, cerca de Puerto Cisnes.',
+        dato: 'Mejor época: enero a abril.',
+      },
+      {
+        href: '/capillas-de-marmol-chile',
+        img: capillas,
+        alt: 'Sergio y Cris en una lancha dentro de las Capillas de Mármol',
+        title: 'Capillas de Mármol',
+        text: 'Cómo llegar desde Coyhaique o Chile Chico y cómo es el tour en lancha.',
+        dato: 'Unos 20.000–30.000 CLP por persona en lancha.',
+      },
+      {
+        href: '/rafting-futaleufu',
+        img: rafting,
+        alt: 'Balsa de rafting en un rápido del río Futaleufú',
+        title: 'Rafting en el río Futaleufú',
+        text: 'Rápidos clase III a V entre aguas turquesas. Sección Puente a Puente.',
+        dato: 'Temporada: noviembre a marzo. Unos 75.000 CLP.',
+      },
+    ],
+  },
+];
+
+const precios = [
+  ['Ballenas en Península Valdés (barco)', 'Entre 80 y 150 USD por persona'],
+  ['Nadar con lobos marinos (Puerto Madryn)', 'Entre 90 y 130 USD por persona'],
+  ['Isla Pingüino (Puerto Deseado)', 'Entre 70 y 120 USD por persona (10 % de descuento en efectivo, según la empresa)'],
+  ['Navegación «Todo Glaciares» (El Calafate)', '220.000 ARS por adulto, sin la entrada al parque'],
+  ['Capillas de Mármol (lancha)', 'Entre 20.000 y 30.000 CLP por persona'],
+  ['Rafting en Futaleufú (Puente a Puente)', '75.000 CLP por persona'],
+];
+
+const faqs = [
+  {
+    q: '¿Cuál es la mejor época para viajar a la Patagonia?',
+    a: 'Depende de lo que quieras hacer, pero el verano austral (de noviembre a marzo) reúne la mayoría de actividades: rafting en Futaleufú, Isla Pingüino, la navegación por los glaciares y Punta Arenas. Las ballenas de Península Valdés se ven de junio a noviembre y las de la Patagonia chilena, de enero a abril.',
+  },
+  {
+    q: '¿Es mejor recorrer la Patagonia en coche o en transporte público?',
+    a: 'En coche (o camper) tienes mucha más libertad: las distancias son enormes, el transporte público es limitado y muchos sitios, como Los Altares o las Capillas de Mármol, se disfrutan mejor con horarios flexibles.',
+  },
+  {
+    q: '¿Hay cobertura móvil en la Patagonia?',
+    a: 'En ciudades sí, pero en rutas como la Ruta 25 de Chubut o en la Carretera Austral la cobertura es escasa o irregular. Conviene descargar mapas sin conexión y llevar una eSIM por si necesitas datos al llegar.',
+  },
+  {
+    q: '¿Necesito seguro de viaje para la Patagonia?',
+    a: 'Es muy recomendable: son zonas remotas donde una asistencia médica puede ser cara o complicada, y varias de las actividades, como el rafting, implican riesgo.',
+  },
+  {
+    q: '¿Se puede combinar Argentina y Chile en un mismo viaje?',
+    a: 'Sí. Nosotros cruzamos desde Argentina por Chile Chico y tomamos la barcaza hacia Puerto Ibáñez para continuar por la Carretera Austral.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<Layout metadata={metadata}>
+  <Breadcrumbs bar items={breadcrumbs} />
+  <StructuredData slot="head" schema={schema} />
+
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 max-w-5xl">
+    <h1 class="text-3xl md:text-4xl font-bold font-heading mb-6">Patagonia por libre: rutas, excursiones y qué ver en Argentina y Chile</h1>
+
+    <div class="prose dark:prose-invert max-w-none">
+      <p>
+        Hemos recorrido la Patagonia en nuestro motorhome, de Chubut a Tierra del Fuego, cruzando varias veces entre Argentina y Chile. Esta
+        guía reúne <strong>lo que de verdad merece la pena</strong>, con precios, épocas y consejos reales de cada parada.
+      </p>
+      <p>
+        Aquí tienes el mapa de nuestras guías, organizadas por zona, y al final lo que necesitas para organizar el viaje: cuándo ir, cómo
+        moverte y qué llevar contratado.
+      </p>
+
+      <h2>📍 Qué ver y hacer en la Patagonia, por zonas</h2>
+    </div>
+
+    {
+      regiones.map((r) => (
+        <div class="mt-10">
+          <h3 class="text-2xl font-bold font-heading mb-1">{r.nombre}</h3>
+          <p class="text-muted dark:text-slate-400 mb-5">{r.intro}</p>
+          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {r.items.map((it) => (
+              <li>
+                <a
+                  href={it.href}
+                  class="group flex h-full flex-col rounded-2xl border border-gray-100 bg-white shadow-md transition hover:-translate-y-1 dark:border-slate-700 dark:bg-slate-800"
+                >
+                  <Image
+                    src={it.img}
+                    alt={it.alt}
+                    widths={[360, 720]}
+                    sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 340px"
+                    class="aspect-video w-full rounded-t-2xl object-cover"
+                    loading="lazy"
+                  />
+                  <div class="flex flex-1 flex-col p-5">
+                    <h4 class="mb-2 text-lg font-bold leading-snug group-hover:text-link">{it.title}</h4>
+                    <p class="mb-3 text-sm text-slate-700 dark:text-slate-300">{it.text}</p>
+                    <p class="mt-auto text-sm font-semibold text-link">{it.dato}</p>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    <div class="prose dark:prose-invert max-w-none mt-14">
+      <h2>🗓️ Cuándo ir a la Patagonia</h2>
+      <p>
+        El verano austral, <strong>de noviembre a marzo</strong>, es la época que reúne más actividades. Pero hay excepciones según lo que
+        te interese:
+      </p>
+      <ul>
+        <li>🐋 <strong>Ballenas en Península Valdés:</strong> de junio a noviembre (septiembre y octubre, lo mejor).</li>
+        <li>🦭 <strong>Lobos marinos en Puerto Madryn:</strong> de septiembre a abril.</li>
+        <li>🐧 <strong>Isla Pingüino:</strong> de octubre a marzo.</li>
+        <li>🐋 <strong>Ballenas en la Patagonia chilena:</strong> de enero a abril.</li>
+        <li>🚣 <strong>Rafting en Futaleufú:</strong> de noviembre a marzo.</li>
+      </ul>
+
+      <h2>💰 Cuánto cuestan las excursiones</h2>
+      <p>Precios orientativos de cuando las hicimos; cambian según la empresa y la temporada, así que confírmalos antes de reservar.</p>
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-100 dark:bg-slate-800">
+              <th class="p-3">Excursión</th>
+              <th class="p-3">Precio aproximado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              precios.map(([a, b], i) => (
+                <tr class={i % 2 ? 'border-b dark:border-slate-700 bg-gray-50 dark:bg-slate-900/50' : 'border-b dark:border-slate-700'}>
+                  <td class="p-3">
+                    <strong>{a}</strong>
+                  </td>
+                  <td class="p-3">{b}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <h2>🚗 Cómo moverte por la Patagonia</h2>
+      <p>
+        Las distancias son enormes y el transporte público, limitado. Por eso <strong>recorrerla en coche o camper</strong> es lo más cómodo:
+        puedes ajustar horarios al viento y a las mareas, y parar donde quieras. Si no viajas con vehículo propio, en nuestra guía de
+        <a href="/mejor-alquiler-de-coches">alquiler de coches</a> te explicamos cómo reservar sin sorpresas en la fianza ni en el mostrador.
+      </p>
+    </div>
+
+    <BotonAfiliado href="https://www.discovercars.com/es?a_aid=smarinb87" text="🔎 Comparar coches de alquiler en Argentina y Chile">
+      <p>🚗 Compara precios y condiciones de varias compañías antes de reservar tu coche.</p>
+    </BotonAfiliado>
+
+    <div class="prose dark:prose-invert max-w-none">
+      <h2>🧳 Antes de salir: lo que no deberías improvisar</h2>
+      <ul>
+        <li>
+          🛡️ <strong>Seguro de viaje:</strong> son zonas remotas y hay actividades de riesgo. Mira nuestra comparativa de
+          <a href="/mejor-seguro-de-viaje">seguros de viaje</a> y el <a href="/descuento-heymondo">descuento en Heymondo</a>.
+        </li>
+        <li>
+          📶 <strong>Internet:</strong> en la Ruta 25 y en la Carretera Austral la cobertura es escasa. Compara las
+          <a href="/mejor-esim-para-viajar">mejores eSIM para viajar</a>.
+        </li>
+        <li>
+          💳 <strong>Pagos:</strong> con una <a href="/mejor-tarjeta-para-viajar">tarjeta sin comisiones</a> evitas pagar de más por el cambio de moneda.
+        </li>
+        <li>🧥 <strong>Ropa:</strong> viento constante y cambios de clima en horas, incluso en verano: capas térmicas y cortavientos.</li>
+      </ul>
+
+      <h2>❓ Preguntas frecuentes sobre viajar a la Patagonia</h2>
+      {
+        faqs.map(({ q, a }) => (
+          <>
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </>
+        ))
+      }
+    </div>
+  </section>
+
+  <ClusterLinks variant="pillar" cluster={cluster} />
+</Layout>

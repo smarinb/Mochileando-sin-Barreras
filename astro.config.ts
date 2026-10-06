@@ -15,7 +15,7 @@ import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
 
-import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter';
+import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, affiliateLinksRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -30,7 +30,7 @@ export default defineConfig({
   // (works together with <ClientRouter />, which enables prefetch by default).
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport',
+    defaultStrategy: 'hover',
   },
 
   // Native Fonts API: self-hosts + subsets + preloads Inter and generates
@@ -49,7 +49,10 @@ export default defineConfig({
   ],
 
   integrations: [
-    sitemap(),
+    sitemap({
+      // Solo URLs indexables: sin /tag/* (noindex) ni páginas de paginación.
+      filter: (page) => !/\/tag\//.test(page) && !/\/(blog|category\/[^/]+)\/\d+\/?$/.test(page),
+    }),
     mdx(),
     icon({
       // Local SVG icons (used as <Icon name="file-name" />) live next to the other assets.
@@ -121,7 +124,7 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [readingTimeRemarkPlugin],
-      rehypePlugins: [responsiveTablesRehypePlugin],
+      rehypePlugins: [responsiveTablesRehypePlugin, affiliateLinksRehypePlugin],
     }),
     shikiConfig: {
       // Code blocks follow the site theme; see the `.astro-code` rules in tailwind.css.

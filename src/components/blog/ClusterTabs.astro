@@ -1,0 +1,43 @@
+---
+/**
+ * Navegación del blog por clúster (chips): Todos · Seguros · Tarjetas · eSIM (· Destinos…).
+ * Se usa en /blog y en las páginas de categoría para que el blog no sea un "cajón de sastre".
+ */
+import { clusters } from '~/data/clusters';
+import { getBlogPermalink, getPermalink } from '~/utils/permalinks';
+
+export interface Props {
+  /** Slug del clúster activo, o 'all' en el listado general. */
+  current?: string;
+}
+
+const { current = 'all' } = Astro.props;
+
+const items = [
+  { slug: 'all', label: 'Todos', href: getBlogPermalink() },
+  ...clusters.map((c) => ({ slug: c.slug, label: c.label, href: getPermalink(c.slug, 'category') })),
+];
+---
+
+<nav aria-label="Temas del blog" class="mb-10 not-prose">
+  <ul class="flex flex-wrap justify-center gap-2">
+    {
+      items.map((i) => (
+        <li>
+          <a
+            href={i.href}
+            aria-current={i.slug === current ? 'page' : undefined}
+            class:list={[
+              'inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-semibold transition',
+              i.slug === current
+                ? 'bg-primary border-primary text-white'
+                : 'border-gray-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:border-primary hover:text-link',
+            ]}
+          >
+            {i.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

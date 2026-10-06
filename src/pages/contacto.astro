@@ -1,0 +1,382 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '~/layouts/PageLayout.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+
+const EMAIL = 'equipo@mochileandosinbarreras.com';
+// FormSubmit reenvía cada mensaje a EMAIL. La primera vez que se envía el formulario
+// hay que pulsar el enlace de activación que llega a ese buzón.
+const FORM_ENDPOINT = `https://formsubmit.co/${EMAIL}`;
+const FORM_ENDPOINT_AJAX = `https://formsubmit.co/ajax/${EMAIL}`;
+const THANKS_URL = '/contacto?enviado=1';
+
+const metadata = {
+  title: 'Contacto',
+  description:
+    'Escríbenos a equipo@mochileandosinbarreras.com o usa el formulario de contacto. Dudas sobre viajes, colaboraciones y accesibilidad: te respondemos en 2-3 días laborables.',
+  canonical: '/contacto',
+};
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contacto | Mochileando sin Barreras',
+  url: metadata.canonical,
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Mochileando sin Barreras',
+    url: 'https://mochileandosinbarreras.com',
+    email: EMAIL,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: EMAIL,
+      availableLanguage: ['es'],
+    },
+  },
+};
+
+const topics = [
+  'Pregunta sobre un viaje o destino',
+  'Colaboración o publicidad',
+  'Accesibilidad y viaje sordo',
+  'Error o problema en la web',
+  'Otro motivo',
+];
+
+const inputClass =
+  'block w-full rounded-lg border border-slate-400 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary dark:border-slate-500 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-400';
+const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800 dark:text-slate-200';
+---
+
+<Layout metadata={metadata}>
+  <StructuredData slot="head" schema={schema} />
+
+  <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+    <header class="mb-10 max-w-2xl">
+      <h1 class="font-heading text-3xl font-bold md:text-4xl">Contacto</h1>
+      <p class="mt-4 text-lg text-slate-700 dark:text-slate-300">
+        ¿Tienes una duda sobre un destino, quieres proponernos una colaboración o has encontrado algo que no funciona? Escríbenos
+        como prefieras. Respondemos normalmente en 2-3 días laborables.
+      </p>
+    </header>
+
+    <div class="grid gap-10 lg:grid-cols-5">
+      <!-- Formulario -->
+      <div class="lg:col-span-3">
+        <h2 class="mb-6 font-heading text-2xl font-bold">Envíanos un mensaje</h2>
+
+        <div
+          id="form-status"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          tabindex="-1"
+          class="mb-6 hidden rounded-lg border-l-4 p-4 text-base focus:outline-none"
+        >
+        </div>
+
+        <form
+          id="contact-form"
+          action={FORM_ENDPOINT}
+          method="POST"
+          data-endpoint={FORM_ENDPOINT_AJAX}
+          class="space-y-6"
+        >
+          <p class="text-sm text-slate-700 dark:text-slate-300">Los campos marcados con <span aria-hidden="true">*</span> son obligatorios.</p>
+
+          <div>
+            <label for="nombre" class={labelClass}>Nombre <span aria-hidden="true">*</span></label>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              required
+              autocomplete="name"
+              maxlength="100"
+              placeholder="Tu nombre"
+              class={inputClass}
+              aria-describedby="nombre-error"
+            />
+            <p id="nombre-error" class="mt-1.5 hidden text-sm font-medium text-red-700 dark:text-red-400"></p>
+          </div>
+
+          <div>
+            <label for="email" class={labelClass}>Correo electrónico <span aria-hidden="true">*</span></label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              maxlength="150"
+              placeholder="tucorreo@ejemplo.com"
+              class={inputClass}
+              aria-describedby="email-ayuda email-error"
+            />
+            <p id="email-ayuda" class="mt-1.5 text-sm text-slate-600 dark:text-slate-400">
+              Solo lo usaremos para responderte.
+            </p>
+            <p id="email-error" class="mt-1.5 hidden text-sm font-medium text-red-700 dark:text-red-400"></p>
+          </div>
+
+          <div>
+            <label for="asunto" class={labelClass}>Motivo de tu mensaje <span aria-hidden="true">*</span></label>
+            <select id="asunto" name="asunto" required class={inputClass}>
+              {topics.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </div>
+
+          <div>
+            <label for="mensaje" class={labelClass}>Mensaje <span aria-hidden="true">*</span></label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              required
+              rows="6"
+              minlength="10"
+              maxlength="3000"
+              placeholder="Cuéntanos en qué podemos ayudarte"
+              class={inputClass}
+              aria-describedby="mensaje-error"></textarea>
+            <p id="mensaje-error" class="mt-1.5 hidden text-sm font-medium text-red-700 dark:text-red-400"></p>
+          </div>
+
+          <div>
+            <div class="flex items-start gap-3">
+              <input
+                id="privacidad"
+                name="privacidad"
+                type="checkbox"
+                required
+                value="Acepta la política de privacidad"
+                class="mt-1 h-5 w-5 shrink-0 rounded border-slate-400 text-primary focus:ring-2 focus:ring-primary"
+                aria-describedby="privacidad-error"
+              />
+              <label for="privacidad" class="text-sm text-slate-700 dark:text-slate-300">
+                He leído y acepto la <a href="/privacidad" class="font-semibold text-primary underline">política de privacidad</a>.
+                Usaremos tus datos únicamente para responder a tu mensaje. <span aria-hidden="true">*</span>
+              </label>
+            </div>
+            <p id="privacidad-error" class="mt-1.5 hidden text-sm font-medium text-red-700 dark:text-red-400"></p>
+          </div>
+
+          <!-- Antispam: campo trampa oculto para personas, que los bots rellenan -->
+          <div class="sr-only" aria-hidden="true">
+            <label for="_honey">No rellenes este campo</label>
+            <input id="_honey" type="text" name="_honey" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde mochileandosinbarreras.com" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={THANKS_URL} />
+
+          <button
+            id="submit-btn"
+            type="submit"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-bold text-white shadow transition hover:bg-[var(--aw-color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+          >
+            <Icon name="tabler:send" class="h-5 w-5" aria-hidden="true" />
+            <span id="submit-label">Enviar mensaje</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Otras vías -->
+      <aside class="space-y-6 lg:col-span-2" aria-labelledby="otras-vias">
+        <h2 id="otras-vias" class="font-heading text-2xl font-bold">Otras formas de contacto</h2>
+
+        <div class="not-prose rounded-r-xl border-l-4 border-[#36A09F] bg-teal-50 p-5 dark:bg-slate-800">
+          <div class="flex items-center gap-2">
+            <Icon name="tabler:mail" class="h-6 w-6 text-primary" aria-hidden="true" />
+            <h3 class="text-lg font-bold">Correo electrónico</h3>
+          </div>
+          <p class="mt-2 text-slate-800 dark:text-slate-200">
+            Escríbenos directamente a
+            <a href={`mailto:${EMAIL}`} class="break-all font-semibold text-primary underline">{EMAIL}</a>
+          </p>
+          <div class="mt-4 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+            <a
+              href={`mailto:${EMAIL}?subject=Contacto%20desde%20la%20web`}
+              class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white no-underline shadow transition hover:bg-[var(--aw-color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              <Icon name="tabler:mail-forward" class="h-5 w-5" aria-hidden="true" />
+              Abrir mi app de correo
+            </a>
+            <button
+              type="button"
+              id="copy-email"
+              data-email={EMAIL}
+              class="inline-flex items-center justify-center gap-2 rounded-lg border border-primary px-5 py-2.5 text-sm font-bold text-primary transition hover:bg-teal-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:hover:bg-slate-700"
+            >
+              <Icon name="tabler:copy" class="h-5 w-5" aria-hidden="true" />
+              <span id="copy-label">Copiar correo</span>
+            </button>
+          </div>
+          <p id="copy-status" class="sr-only" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 p-5 dark:border-slate-700">
+          <div class="flex items-center gap-2">
+            <Icon name="tabler:clock" class="h-6 w-6 text-primary" aria-hidden="true" />
+            <h3 class="text-lg font-bold">Tiempo de respuesta</h3>
+          </div>
+          <p class="mt-2 text-slate-700 dark:text-slate-300">
+            Contestamos en 2-3 días laborables. Si estamos de ruta sin buena conexión, puede tardar un poco más.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 p-5 dark:border-slate-700">
+          <div class="flex items-center gap-2">
+            <Icon name="tabler:accessible" class="h-6 w-6 text-primary" aria-hidden="true" />
+            <h3 class="text-lg font-bold">Comunicación accesible</h3>
+          </div>
+          <p class="mt-2 text-slate-700 dark:text-slate-300">
+            Preferimos la comunicación escrita, por lo que el correo y este formulario son las vías más rápidas y accesibles.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 p-5 dark:border-slate-700">
+          <h3 class="text-lg font-bold">Síguenos en redes</h3>
+          <ul class="mt-3 flex flex-wrap gap-3">
+            <li>
+              <a
+                href="https://www.instagram.com/mochileandosinbarreras/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-slate-600 dark:hover:bg-slate-800"
+              >
+                <Icon name="tabler:brand-instagram" class="h-5 w-5" aria-hidden="true" />
+                Instagram<span class="sr-only"> (se abre en una pestaña nueva)</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.youtube.com/@Mochileandosinbarreras"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-slate-600 dark:hover:bg-slate-800"
+              >
+                <Icon name="tabler:brand-youtube" class="h-5 w-5" aria-hidden="true" />
+                YouTube<span class="sr-only"> (se abre en una pestaña nueva)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status') as HTMLElement | null;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+  const submitLabel = document.getElementById('submit-label');
+
+  const OK = ['border-green-700', 'bg-green-50', 'text-green-900', 'dark:bg-green-950', 'dark:text-green-100'];
+  const KO = ['border-red-700', 'bg-red-50', 'text-red-900', 'dark:bg-red-950', 'dark:text-red-100'];
+
+  function showStatus(kind: 'ok' | 'error', html: string) {
+    if (!status) return;
+    status.classList.remove('hidden', ...OK, ...KO);
+    status.classList.add(...(kind === 'ok' ? OK : KO));
+    status.innerHTML = html;
+    status.focus();
+    status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Mensaje de vuelta tras el envío sin JavaScript (redirección de FormSubmit)
+  if (new URLSearchParams(location.search).get('enviado') === '1') {
+    showStatus('ok', '<strong>¡Mensaje enviado!</strong> Gracias por escribirnos, te responderemos lo antes posible.');
+  }
+
+  const messages: Record<string, string> = {
+    nombre: 'Escribe tu nombre.',
+    email: 'Escribe un correo electrónico válido, por ejemplo nombre@ejemplo.com.',
+    mensaje: 'Escribe un mensaje de al menos 10 caracteres.',
+    privacidad: 'Debes aceptar la política de privacidad para poder enviar el mensaje.',
+  };
+
+  function validate(): boolean {
+    if (!form) return false;
+    let firstInvalid: HTMLElement | null = null;
+    for (const id of Object.keys(messages)) {
+      const field = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+      const error = document.getElementById(`${id}-error`);
+      if (!field || !error) continue;
+      const valid = field.checkValidity();
+      field.setAttribute('aria-invalid', String(!valid));
+      error.textContent = valid ? '' : messages[id];
+      error.classList.toggle('hidden', valid);
+      if (!valid && !firstInvalid) firstInvalid = field;
+    }
+    (firstInvalid as HTMLElement | null)?.focus();
+    return !firstInvalid;
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!validate() || !submitBtn || !submitLabel) return;
+
+    submitBtn.disabled = true;
+    submitBtn.setAttribute('aria-busy', 'true');
+    submitLabel.textContent = 'Enviando…';
+
+    try {
+      const data = new FormData(form);
+      // Campo trampa relleno = bot: fingimos éxito sin enviar nada
+      if (data.get('_honey')) {
+        form.reset();
+        showStatus('ok', '<strong>¡Mensaje enviado!</strong>');
+        return;
+      }
+      const response = await fetch(form.dataset.endpoint as string, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: data,
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success === 'false') throw new Error('send failed');
+      form.reset();
+      showStatus('ok', '<strong>¡Mensaje enviado!</strong> Gracias por escribirnos, te responderemos lo antes posible.');
+    } catch {
+      showStatus(
+        'error',
+        '<strong>No hemos podido enviar el mensaje.</strong> Inténtalo de nuevo en unos minutos o escríbenos directamente a <a class="font-semibold underline" href="mailto:equipo@mochileandosinbarreras.com">equipo@mochileandosinbarreras.com</a>.'
+      );
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.removeAttribute('aria-busy');
+      submitLabel.textContent = 'Enviar mensaje';
+    }
+  });
+
+  // Quitar el error de un campo en cuanto vuelve a ser válido
+  form?.addEventListener('input', (event) => {
+    const field = event.target as HTMLInputElement;
+    const error = document.getElementById(`${field.id}-error`);
+    if (error && field.checkValidity()) {
+      error.classList.add('hidden');
+      error.textContent = '';
+      field.setAttribute('aria-invalid', 'false');
+    }
+  });
+
+  // Botón de copiar correo
+  const copyBtn = document.getElementById('copy-email') as HTMLButtonElement | null;
+  const copyLabel = document.getElementById('copy-label');
+  const copyStatus = document.getElementById('copy-status');
+  copyBtn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(copyBtn.dataset.email as string);
+      if (copyLabel) copyLabel.textContent = '¡Copiado!';
+      if (copyStatus) copyStatus.textContent = 'Correo copiado al portapapeles';
+      setTimeout(() => {
+        if (copyLabel) copyLabel.textContent = 'Copiar correo';
+      }, 2500);
+    } catch {
+      if (copyStatus) copyStatus.textContent = 'No se pudo copiar. Selecciona el correo manualmente.';
+    }
+  });
+</script>

@@ -1,0 +1,57 @@
+---
+// Índice de contenidos de un artículo.
+//
+// Se genera en el BUILD (HTML real, sin JavaScript), a partir de los encabezados que
+// Astro ya extrae del MDX. La ruta del post los deja en `Astro.locals.headings`
+// (ver src/pages/[...blog]/index.astro). Así funciona con <ClientRouter />, los
+// enlaces son visibles para Google y no hay parpadeo al cargar.
+//
+// Uso en un MDX: <Indice />
+const headings = (Astro.locals.headings ?? []).filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  headings.length > 0 && (
+    <nav
+      aria-labelledby="indice-titulo"
+      class="not-prose my-10 rounded-2xl border border-[#e5eef0] bg-[#f8fcfd] p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800/60 md:p-8"
+    >
+      <div class="mb-4 flex items-center gap-3">
+        <svg
+          class="h-6 w-6 text-[#36A09F]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+        <p id="indice-titulo" class="m-0 text-xl font-bold text-gray-900 dark:text-slate-100">
+          Índice de contenidos
+        </p>
+      </div>
+      <ul class="m-0 flex list-none flex-col gap-2 p-0">
+        {headings.map((h) => (
+          <li>
+            {h.depth === 2 ? (
+              <a
+                href={`#${h.slug}`}
+                class="mt-2 block text-[16px] font-semibold leading-tight text-gray-800 transition-colors hover:text-[#D87068] dark:text-slate-200"
+              >
+                {h.text}
+              </a>
+            ) : (
+              <a
+                href={`#${h.slug}`}
+                class="relative ml-5 block text-[14px] leading-tight text-gray-600 transition-colors before:absolute before:-left-4 before:text-[#A5CFD2] before:content-['•'] hover:text-[#36A09F] dark:text-slate-400 dark:hover:text-[#61B4BA]"
+              >
+                {h.text}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
