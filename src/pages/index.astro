@@ -9,6 +9,7 @@ import patagoniaImg from '~/assets/images/navegacion-glaciares-el-calafate.webp'
 import esloveniaImg from '~/assets/images/que-ver-y-hacer-en-eslovenia.webp';
 import siberiaImg from '~/assets/images/guia-siberia.webp';
 import { Icon } from 'astro-icon/components';
+import StructuredData from '~/components/common/StructuredData.astro';
 
 // Hero (LCP): AVIF (calidad 45, indistinguible bajo el degradado) con WebP de reserva.
 // En teléfonos (<= 640px) se ve el 37% central de la foto: se sirve un recorte vertical, no la imagen completa.
@@ -54,6 +55,32 @@ const destinosHome = [
   },
 ];
 
+const SITE_URL = 'https://mochileandosinbarreras.com';
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': SITE_URL + '/#organization',
+    name: 'Mochileando sin Barreras',
+    url: SITE_URL,
+    description: 'Blog de viajes por libre de Cris, viajera sorda, y Sergio: guías de destinos, seguros, eSIM, tarjetas y alquiler de coches.',
+    sameAs: ['https://www.youtube.com/@Mochileandosinbarreras', 'https://www.instagram.com/mochileandosinbarreras/'],
+    founder: [
+      { '@type': 'Person', name: 'Cristina', url: SITE_URL + '/acerca-de' },
+      { '@type': 'Person', name: 'Sergio', url: SITE_URL + '/acerca-de' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': SITE_URL + '/#website',
+    name: 'Mochileando sin Barreras',
+    url: SITE_URL,
+    inLanguage: 'es',
+    publisher: { '@id': SITE_URL + '/#organization' },
+  },
+];
+
 const metadata = {
   title: 'Mochileando sin Barreras — Seguros, eSIMs y guías de viaje reales',
   ignoreTitleTemplate: true,
@@ -61,6 +88,7 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData slot="head" schema={schema} />
   <!-- HERO PRINCIPAL -->
   <section class="relative flex items-center justify-center min-h-[70vh] md:min-h-[85vh] overflow-hidden">
     <div class="absolute inset-0 z-0">
@@ -180,6 +208,73 @@ const metadata = {
         </a>
         <a href="/category/alquiler-de-coches" class="mt-3 text-center text-sm font-semibold text-link hover:underline">Ver todas las guías de alquiler →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- SEGUROS QUE USAMOS (las dos páginas que más convierten: reseñas y comparativa) -->
+  <section class="bg-gray-50 px-6 py-16 dark:bg-slate-900" aria-labelledby="seguros-home">
+    <div class="mx-auto max-w-5xl">
+      <div class="mb-10 text-center">
+        <h2 id="seguros-home" class="mb-4 font-heading text-3xl font-bold dark:text-white">Los seguros que usamos nosotros: Heymondo o IATI</h2>
+        <p class="mx-auto max-w-2xl text-lg text-muted dark:text-slate-400">
+          Cotizamos el mismo viaje 31 veces en las dos aseguradoras. Esto es lo que descubrimos, sin maquillar.
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2">
+        <article class="flex flex-col rounded-2xl border border-primary bg-white p-8 shadow-lg ring-1 ring-primary/20 dark:bg-slate-800">
+          <p class="mb-2 text-sm font-bold uppercase tracking-wider text-[#14605f] dark:text-link">Nuestro seguro por defecto</p>
+          <h3 class="mb-4 text-2xl font-bold dark:text-white">Heymondo</h3>
+          <ul class="mb-6 space-y-2 text-slate-700 dark:text-slate-300">
+            <li class="flex items-start gap-2"><Icon name="tabler:circle-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" /><span>Chat médico y videoconsulta 24 h por escrito: ideal si no puedes llamar por teléfono</span></li>
+            <li class="flex items-start gap-2"><Icon name="tabler:circle-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" /><span>Descuentos de familia y grupo que se acumulan solos</span></li>
+            <li class="flex items-start gap-2"><Icon name="tabler:circle-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" /><span>Larga estancia para vueltas al mundo, desde unos 631,90 € al año</span></li>
+            <li class="flex items-start gap-2"><Icon name="tabler:circle-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" /><span>5% de descuento automático desde nuestro enlace, sin códigos</span></li>
+          </ul>
+          <a
+            href="https://heymondo.es/?utm_medium=Afiliado&utm_source=MOCHILEANDOSINBARRERAS&utm_campaign=PRINCIPAL&cod_descuento=MOCHILEANDOSINBARRERAS&ag_campaign=HOME&agencia=a5108849b9020a8d726cf95f432afb343ac8"
+            target="_blank"
+            rel="nofollow sponsored noopener"
+            class="btn mt-auto bg-primary py-3 text-center font-bold text-white hover:bg-primary-hover"
+          >
+            Ver mi precio en Heymondo<span class="sr-only"> (se abre en una pestaña nueva)</span>
+          </a>
+          <p class="mt-3 flex justify-center gap-4 text-sm font-semibold">
+            <a href="/heymondo-opiniones" class="text-[#14605f] hover:underline dark:text-link">Nuestra opinión</a>
+            <a href="/descuento-heymondo" class="text-[#14605f] hover:underline dark:text-link">Descuento</a>
+          </p>
+        </article>
+
+        <article class="flex flex-col rounded-2xl border border-gray-200 bg-white p-8 shadow-lg dark:border-slate-700 dark:bg-slate-800">
+          <p class="mb-2 text-sm font-bold uppercase tracking-wider text-[#8a3c35] dark:text-accent-text">Para destinos raros y furgoneta</p>
+          <h3 class="mb-4 text-2xl font-bold dark:text-white">IATI Seguros</h3>
+          <ul class="mb-6 space-y-2 text-slate-700 dark:text-slate-300">
+            <li class="flex items-start gap-2"><Icon name="tabler:circle-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" /><span>Nos cubrió un voluntariado en Argelia que otra aseguradora rechazó</span></li>
+            <li class="flex items-start gap-2"><Icon name="tabler:circle-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" /><span>IATI Camper: el único seguro para furgoneta de los dos</span></li>
+            <li class="flex items-start gap-2"><Icon name="tabler:circle-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" /><span>Sin franquicia ni adelantar dinero en sus pólizas principales</span></li>
+            <li class="flex items-start gap-2"><Icon name="tabler:circle-check" class="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" /><span>5% permanente y hasta 15% en el Orange Friday</span></li>
+          </ul>
+          <a
+            href="https://www.iatiseguros.com/?r=46316725090598"
+            target="_blank"
+            rel="nofollow sponsored noopener"
+            class="btn mt-auto border-2 border-primary bg-transparent py-3 text-center font-bold text-[#14605f] hover:bg-primary/10 dark:text-link"
+          >
+            Calcular mi precio en IATI<span class="sr-only"> (se abre en una pestaña nueva)</span>
+          </a>
+          <p class="mt-3 flex justify-center gap-4 text-sm font-semibold">
+            <a href="/iati-seguros-opiniones" class="text-[#14605f] hover:underline dark:text-link">Nuestra opinión</a>
+            <a href="/descuento-iati" class="text-[#14605f] hover:underline dark:text-link">Descuento</a>
+          </p>
+        </article>
+      </div>
+
+      <p class="mt-8 text-center">
+        <a href="/heymondo-o-iati" class="font-semibold text-[#14605f] hover:underline dark:text-link">Comparativa completa: Heymondo o IATI, con 31 simulaciones de precio →</a>
+      </p>
+      <p class="mt-3 text-center text-xs text-slate-600 dark:text-slate-400">
+        Enlaces de afiliado: si contratas desde ellos recibimos una comisión sin coste extra para ti. <a href="/acerca-de#como-trabajamos" class="underline">Cómo trabajamos</a>.
+      </p>
     </div>
   </section>
 

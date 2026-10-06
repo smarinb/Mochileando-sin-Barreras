@@ -11,7 +11,7 @@ const clasesBase = colores[tipo] || colores.info;
 ---
 
 <div class={`border-l-4 p-6 my-8 rounded-r-lg shadow-sm ${clasesBase}`}>
-  {titulo && <h4 class="font-bold text-xl mb-2 mt-0">{titulo}</h4>}
+  {titulo && <p class="font-bold text-xl mb-2 mt-0">{titulo}</p>}
   <div class="prose-p:mt-0 prose-p:mb-2 last:mb-0">
     <slot /> <!-- Aquí es donde se inyectará el texto que escribas en el artículo -->
   </div>

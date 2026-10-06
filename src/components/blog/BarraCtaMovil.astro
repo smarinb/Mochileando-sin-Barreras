@@ -1,0 +1,65 @@
+---
+/**
+ * Barra inferior (solo móvil) para los posts de seguros: dos botones de afiliado discretos que aparecen
+ * al hacer scroll y se pueden cerrar (se recuerda en sessionStorage). Reserva su propio espacio para no tapar contenido.
+ */
+import { afiliados } from '~/data/afiliados';
+const seguros = afiliados.filter((a) => a.cluster === 'seguros-de-viaje');
+---
+
+<div
+  id="barra-cta-movil"
+  role="region"
+  aria-label="Seguros que recomendamos"
+  hidden
+  class="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200 bg-white/95 px-3 py-2 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur dark:border-slate-700 dark:bg-slate-900/95 xl:hidden"
+>
+  <div class="mx-auto flex max-w-xl items-center gap-2">
+    {
+      seguros.map((a) => (
+        <a
+          href={a.href}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          class="flex-1 rounded-lg bg-primary px-3 py-2.5 text-center text-sm font-bold text-white no-underline hover:bg-primary-hover"
+        >
+          {a.name}: 5% dto.<span class="sr-only"> (se abre en una pestaña nueva)</span>
+        </a>
+      ))
+    }
+    <button
+      type="button"
+      id="barra-cta-cerrar"
+      class="rounded-lg p-2 text-slate-600 hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-slate-800"
+      aria-label="Cerrar la barra de seguros"
+    >
+      <span aria-hidden="true" class="block text-xl leading-none">×</span>
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var bar = document.getElementById('barra-cta-movil');
+    if (!bar) return;
+    var closed = false;
+    try { closed = sessionStorage.getItem('msb-barra-cta') === '1'; } catch (e) {}
+    if (closed) return;
+    var shown = false;
+    function onScroll() {
+      var y = window.scrollY || document.documentElement.scrollTop;
+      if (!shown && y > 900) {
+        bar.hidden = false;
+        shown = true;
+        document.body.style.paddingBottom = '3.5rem';
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    document.getElementById('barra-cta-cerrar').addEventListener('click', function () {
+      bar.hidden = true;
+      document.body.style.paddingBottom = '';
+      window.removeEventListener('scroll', onScroll);
+      try { sessionStorage.setItem('msb-barra-cta', '1'); } catch (e) {}
+    });
+  })();
+</script>

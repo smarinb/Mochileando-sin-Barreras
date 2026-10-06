@@ -78,13 +78,13 @@ const isPillarSelf = !!(currentSlug && cluster?.pillar && cluster.pillar.href ==
       <p class="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-slate-700 dark:text-slate-200">
         <Icon name={cluster.icon} class="h-4 w-4 text-link" aria-hidden="true" />
         <span>Guía de</span>
-        <a href={categoryHref} class="font-semibold text-link hover:underline">
+        <a href={categoryHref} class="font-semibold text-[#14605f] dark:text-link hover:underline">
           {cluster.label}
         </a>
         {cluster.pillar && !isPillarSelf && (
           <>
             <span aria-hidden="true">·</span>
-            <a href={cluster.pillar.href} class="font-semibold text-link hover:underline">
+            <a href={cluster.pillar.href} class="font-semibold text-[#14605f] dark:text-link hover:underline">
               {cluster.pillar.title}
             </a>
           </>
@@ -132,7 +132,7 @@ const isPillarSelf = !!(currentSlug && cluster?.pillar && cluster.pillar.href ==
         ))}
 
         <p class="mt-4 text-sm">
-          <a href={categoryHref} class="font-semibold text-link hover:underline">
+          <a href={categoryHref} class="font-semibold text-[#14605f] dark:text-link hover:underline">
             Ver todos los artículos de {cluster.inline} →
           </a>
         </p>

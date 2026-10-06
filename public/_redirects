@@ -63,3 +63,6 @@
 /contacto2                                  /contacto                     301
 /politica                                   /privacidad                   301
 /youtube                                    https://www.youtube.com/@Mochileandosinbarreras  301
+
+# Enlaces antiguos de WordPress a las reseñas de seguros.
+/seguro-de-viaje-heymondo    /heymondo-opiniones    301

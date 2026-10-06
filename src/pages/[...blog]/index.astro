@@ -75,8 +75,16 @@ const articleSchema = {
   description: post.excerpt,
   datePublished: post.publishDate.toISOString(),
   dateModified: (post.updateDate ?? post.publishDate).toISOString(),
-  ...(post.author ? { author: { '@type': 'Person', name: post.author } } : {}),
-  publisher: { '@type': 'Organization', name: SITE?.name },
+  // Autoría real (E-E-A-T): las dos personas detrás del proyecto, con su página de presentación.
+  author: post.author
+    ? { '@type': 'Person', name: post.author, url: new URL('/acerca-de', Astro.site).toString() }
+    : [
+        { '@type': 'Person', name: 'Cristina', url: new URL('/acerca-de', Astro.site).toString() },
+        { '@type': 'Person', name: 'Sergio', url: new URL('/acerca-de', Astro.site).toString() },
+      ],
+  publisher: { '@type': 'Organization', name: SITE?.name, url: Astro.site?.toString() },
+  inLanguage: 'es',
+  isAccessibleForFree: true,
   ...(imageUrl ? { image: imageUrl.startsWith('http') ? imageUrl : new URL(imageUrl, Astro.site).toString() } : {}),
   ...(post.category ? { articleSection: post.category.title } : {}),
   ...(post.tags?.length ? { keywords: post.tags.map((tag) => tag.title).join(', ') } : {}),

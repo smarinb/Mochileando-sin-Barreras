@@ -14,10 +14,11 @@ export const headerData = {
       text: 'Seguros',
       links: [
         { text: 'Mejor seguro de viaje 2026', href: getPermalink('/mejor-seguro-de-viaje') },
+        { text: 'Opiniones Heymondo', href: getPermalink('/heymondo-opiniones') },
+        { text: 'Opiniones IATI', href: getPermalink('/iati-seguros-opiniones') },
+        { text: 'Heymondo o IATI', href: getPermalink('/heymondo-o-iati') },
         { text: 'Descuento Heymondo', href: getPermalink('/descuento-heymondo') },
         { text: 'Descuento IATI', href: getPermalink('/descuento-iati') },
-        { text: 'Heymondo o IATI', href: getPermalink('/heymondo-o-iati') },
-        { text: 'IATI vs Chapka', href: getPermalink('/iati-vs-chapka') },
         { text: 'Todas las guías de seguros →', href: getPermalink('seguros-de-viaje', 'category') },
       ],
     },

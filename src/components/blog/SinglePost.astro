@@ -1,12 +1,17 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { Image as AstroImage } from 'astro:assets';
 
 import Image from '~/components/common/Image.astro';
 import PostTags from '~/components/blog/Tags.astro';
 import SocialShare from '~/components/common/SocialShare.astro';
+import SidebarAfiliados from '~/components/blog/SidebarAfiliados.astro';
+import BarraCtaMovil from '~/components/blog/BarraCtaMovil.astro';
+import autoresImg from '~/assets/images/historia-cris-sergio.webp';
 
 import { getPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
+import { getClusterByCategoryTitle } from '~/data/clusters';
 
 import type { Post } from '~/types';
 
@@ -16,99 +21,126 @@ export interface Props {
 }
 
 const { post, url } = Astro.props;
+
+// Posts de los clústeres comerciales (seguros, tarjetas, eSIM, alquiler): llevan barra lateral y aviso de afiliación.
+const cluster = getClusterByCategoryTitle(post.category?.title);
+const isMoney = !!cluster && !cluster.group;
+const isSeguros = cluster?.slug === 'seguros-de-viaje';
+const wasUpdated = !!post.updateDate && post.updateDate.getTime() !== post.publishDate.getTime();
+const autores = post.author ?? 'Cris y Sergio';
 ---
 
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
-  <article>
-    <header>
-      <div class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
-        <p>
-          <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-          <time datetime={post.publishDate.toISOString()} class="inline-block"
-            >{getFormattedDate(post.publishDate)}</time
-          >
-          {
-            post.updateDate && post.updateDate.getTime() !== post.publishDate.getTime() && (
-              <>
-                {' '}
-                ·{' '}
-                <span class="inline-block">
-                  Actualizado el <time datetime={post.updateDate.toISOString()}>{getFormattedDate(post.updateDate)}</time>
-                </span>
-              </>
-            )
-          }
-          {
-            post.author && (
-              <>
-                {' '}
-                · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-                <span class="inline-block">{post.author}</span>
-              </>
-            )
-          }
-          {
-            post.category && (
-              <>
-                {' '}
-                ·{' '}
-                <a class="hover:underline inline-block" href={getPermalink(post.category.slug, 'category')}>
-                  {post.category.title}
-                </a>
-              </>
-            )
-          }
-          {
-            post.readingTime && (
-              <>
-                &nbsp;· <span>{post.readingTime}</span> min de lectura
-              </>
-            )
-          }
+  <div class:list={[isMoney && 'xl:mx-auto xl:grid xl:max-w-[74rem] xl:grid-cols-[minmax(0,1fr)_19rem] xl:gap-8 xl:px-6']}>
+    <article>
+      <header>
+        <div class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
+          <p>
+            <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" aria-hidden="true" />
+            <time datetime={post.publishDate.toISOString()} class="inline-block">{getFormattedDate(post.publishDate)}</time>
+            {
+              post.category && (
+                <>
+                  {' '}
+                  ·{' '}
+                  <a class="hover:underline inline-block" href={getPermalink(post.category.slug, 'category')}>
+                    {post.category.title}
+                  </a>
+                </>
+              )
+            }
+            {
+              post.readingTime && (
+                <>
+                  &nbsp;· <span>{post.readingTime}</span> min de lectura
+                </>
+              )
+            }
+          </p>
+        </div>
+
+        <h1 class="px-4 sm:px-6 max-w-3xl mx-auto text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading">
+          {post.title}
+        </h1>
+        <p class="max-w-3xl mx-auto mt-4 mb-6 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-pretty">
+          {post.excerpt}
         </p>
+
+        <div class="max-w-3xl mx-auto mb-6 flex items-center gap-3 px-4 sm:px-6">
+          <span class="block h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/30" aria-hidden="true">
+            <AstroImage
+              src={autoresImg}
+              alt=""
+              width={96}
+              height={96}
+              densities={[1, 2]}
+              class="h-full w-full origin-[50%_66%] scale-[2.3] object-cover"
+              loading="eager"
+            />
+          </span>
+          <p class="text-sm leading-snug text-slate-700 dark:text-slate-300">
+            Por <a href="/acerca-de" class="font-semibold text-[#14605f] hover:underline dark:text-link">{autores}</a>, viajeros desde 2019
+            <br />
+            {
+              wasUpdated ? (
+                <>
+                  Actualizado el <time datetime={post.updateDate!.toISOString()}>{getFormattedDate(post.updateDate!)}</time>
+                </>
+              ) : (
+                <>Publicado el <time datetime={post.publishDate.toISOString()}>{getFormattedDate(post.publishDate)}</time></>
+              )
+            }
+          </p>
+        </div>
+
+        {
+          isMoney && (
+            <p class="max-w-3xl mx-auto mb-6 rounded-lg border-l-4 border-accent bg-[#FDF2F0] px-4 py-3 text-sm text-[#5c2924] dark:bg-slate-800 dark:text-slate-200 sm:mx-auto">
+              <strong>Transparencia:</strong> este artículo incluye enlaces de afiliado. Si contratas desde ellos recibimos una comisión sin coste extra para ti.
+              Solo recomendamos lo que usaríamos nosotros. <a href="/acerca-de#como-trabajamos" class="font-semibold underline">Cómo trabajamos</a>.
+            </p>
+          )
+        }
+
+        {
+          post.image ? (
+            <Image
+              src={post.image}
+              class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+              widths={[480, 800, 1200]}
+              sizes="(max-width: 900px) 100vw, 900px"
+              alt={post.imageAlt || ''}
+              width={900}
+              height={506}
+              format="webp"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          ) : (
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+              <div class="border-t dark:border-slate-700" />
+            </div>
+          )
+        }
+      </header>
+      <div
+        class="mx-auto px-6 sm:px-6 max-w-3xl prose lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-link prose-img:rounded-md prose-img:shadow-lg mt-8 prose-headings:scroll-mt-[80px] prose-li:my-0"
+      >
+        <slot />
       </div>
-
-      <h1
-        class="px-4 sm:px-6 max-w-3xl mx-auto text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading"
-      >
-        {post.title}
-      </h1>
-      <p
-        class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-pretty"
-      >
-        {post.excerpt}
+      <div class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row">
+        <PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
+        <SocialShare url={url} text={post.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" />
+      </div>
+      <p class="mx-auto mt-6 max-w-3xl px-6 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:px-6">
+        Algunos enlaces de este sitio son de afiliado (por ejemplo, de seguros, eSIM, alquiler de coches o actividades). Si compras a través de ellos
+        recibimos una comisión sin coste adicional para ti; así podemos seguir publicando.
+        <a href="/acerca-de#como-trabajamos" class="underline">Más información</a>.
       </p>
+    </article>
 
-      {
-        post.image ? (
-          <Image
-            src={post.image}
-            class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-            widths={[480, 800, 1200]}
-            sizes="(max-width: 900px) 100vw, 900px"
-            alt={post.imageAlt || ''}
-            width={900}
-            height={506}
-            format="webp"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-        ) : (
-          <div class="max-w-3xl mx-auto px-4 sm:px-6">
-            <div class="border-t dark:border-slate-700" />
-          </div>
-        )
-      }
-    </header>
-    <div
-      class="mx-auto px-6 sm:px-6 max-w-3xl prose lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-link prose-img:rounded-md prose-img:shadow-lg mt-8 prose-headings:scroll-mt-[80px] prose-li:my-0"
-    >
-      <slot />
-    </div>
-    <div class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row">
-      <PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
-      <SocialShare url={url} text={post.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" />
-    </div>
-  </article>
+    {isMoney && <SidebarAfiliados cluster={cluster?.slug} />}
+  </div>
+  {isSeguros && <BarraCtaMovil />}
 </section>
