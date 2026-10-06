@@ -67,3 +67,21 @@
 # Tienda WooCommerce retirada: el libro de Cris se vende en Amazon.
 /producto/libro-quierete-sorda  https://a.co/d/0j4iAifK  301
 /tienda                         https://a.co/d/0j4iAifK  301
+
+# Resto de URLs del sitemap de WordPress sin equivalente directo (auditoría del sitemap).
+/tarjetas-para-viajar         /mejor-tarjeta-para-viajar            301
+/black-friday-heymondo        /descuento-heymondo                   301
+/entradas-nueva-zelanda       /nueva-zelanda-en-coche-dormir-gratis 301
+/entradas-turquia             /destinos                             301
+/tienda-mochileros            /material-acampada-mochileros         301
+/categoria-producto/libros    https://a.co/d/0j4iAifK               301
+/carrito                      /                                     301
+/finalizar-compra             /                                     301
+/mi-cuenta                    /                                     301
+/error-404                    /                                     301
+/blog-masonry                 /blog                                 301
+/blog-masonry-sidebar         /blog                                 301
+/blog-grid-style-1            /blog                                 301
+/blog-grid-style-2            /blog                                 301
+/blog-right-sidebar           /blog                                 301
+/blog-sidebar-left-7          /blog                                 301
