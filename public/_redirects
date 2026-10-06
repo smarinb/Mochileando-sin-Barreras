@@ -64,5 +64,6 @@
 /politica                                   /privacidad                   301
 /youtube                                    https://www.youtube.com/@Mochileandosinbarreras  301
 
-# Enlaces antiguos de WordPress a las reseñas de seguros.
-/seguro-de-viaje-heymondo    /heymondo-opiniones    301
+# Tienda WooCommerce retirada: el libro de Cris se vende en Amazon.
+/producto/libro-quierete-sorda  https://a.co/d/0j4iAifK  301
+/tienda                         https://a.co/d/0j4iAifK  301
