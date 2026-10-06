@@ -10,7 +10,7 @@ const FORM_ENDPOINT = `https://formsubmit.co/${EMAIL}`;
 const FORM_ENDPOINT_AJAX = `https://formsubmit.co/ajax/${EMAIL}`;
 const THANKS_URL = '/contacto?enviado=1';
 // Captcha Cloudflare Turnstile (ver functions/api/contacto.ts). Sin clave, el formulario envía directo a FormSubmit con la trampa antispam.
-const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAFPg7ef6ShLMQQFA';
 const ENDPOINT = TURNSTILE_SITE_KEY ? '/api/contacto' : FORM_ENDPOINT_AJAX;
 
 const metadata = {
