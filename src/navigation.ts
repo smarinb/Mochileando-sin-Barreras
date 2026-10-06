@@ -88,7 +88,7 @@ export const headerData = {
     {
       text: 'Libro de Cris',
       icon: 'tabler:book-2',
-      href: 'https://mochileandosinbarreras.com/producto/libro-quierete-sorda/',
+      href: 'https://a.co/d/0j4iAifK',
       target: '_blank',
     },
   ],
@@ -123,7 +123,7 @@ export const footerData = {
       title: 'El Proyecto',
       links: [
         { text: 'Acerca de nosotros', href: getPermalink('/acerca-de') },
-        { text: 'El Libro', href: 'https://mochileandosinbarreras.com/producto/libro-quierete-sorda/' },
+        { text: 'El Libro', href: 'https://a.co/d/0j4iAifK' },
         { text: 'Blog', href: getBlogPermalink() },
         { text: 'Trabajemos juntos', href: getPermalink('/trabajemos') },
         { text: 'Contacto', href: getPermalink('/contacto') },
