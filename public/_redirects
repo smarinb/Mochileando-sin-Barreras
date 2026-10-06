@@ -17,11 +17,8 @@
 
 # Categorías jerárquicas de WordPress -> categoría/pilar equivalente (sin tráfico propio, pero con enlaces entrantes).
 /category/destinos/argentina               /guia-patagonia  301
-/category/destinos/argentina/*             /guia-patagonia  301
 /category/destinos/chile                   /guia-patagonia  301
-/category/destinos/chile/*                 /guia-patagonia  301
 /category/destinos                         /destinos        301
-/category/destinos/*                       /destinos        301
 /category/turismo-accesible                /category/viajar-siendo-sordo  301
 /category/accesibilidad                    /category/viajar-siendo-sordo  301
 
@@ -84,3 +81,71 @@
 /blog-grid-style-2            /blog                                 301
 /blog-right-sidebar           /blog                                 301
 /blog-sidebar-left-7          /blog                                 301
+
+# Variantes con barra final: las URLs antiguas de WordPress terminan en / y Cloudflare Pages no cruza /x con /x/.
+/mejor-seguro-de-viaje-2026/ /mejor-seguro-de-viaje 301
+/seguros-de-viaje-con-descuento/ /mejor-seguro-de-viaje 301
+/que-by-hacer-en-los-altares-chubut/ /que-ver-y-hacer-en-los-altares-chubut 301
+/home/ / 301
+/entradas-rusia/ /guia-siberia 301
+/entrevistas/ /viajar-siendo-sordo 301
+/colabora/ /contacto 301
+/vuelta-al-mundo-con-mochila-y-proyecto-inclusivo/ /acerca-de 301
+/category/destinos/argentina/ /guia-patagonia 301
+/category/destinos/chile/ /guia-patagonia 301
+/category/destinos/ /destinos 301
+/category/turismo-accesible/ /category/viajar-siendo-sordo 301
+/category/accesibilidad/ /category/viajar-siendo-sordo 301
+/sitemap_index.xml/ /sitemap-index.xml 301
+/feed/ /rss.xml 301
+/entradas-kazajistan/ /guia-kazajistan 301
+/posts-kazajistan/ /guia-kazajistan 301
+/kazajistan/ /guia-kazajistan 301
+/entradas-uzbekistan/ /guia-uzbekistan 301
+/posts-uzbekistan/ /guia-uzbekistan 301
+/uzbekistan/ /guia-uzbekistan 301
+/entradas-india/ /guia-india 301
+/posts-india/ /guia-india 301
+/itinerario-kazajistan/ /que-ver-kazajistan 301
+/itinerario-uzbekistan/ /uzbekistan-que-ver 301
+/samarcanda/ /que-ver-en-samarcanda 301
+/tribu-apatani-2/ /tribus-matriarcales 301
+/libano/ /guia-completa-viajar-libano 301
+/entradas-libano/ /guia-completa-viajar-libano 301
+/tailandia/ /viajar-a-tailandia 301
+/posts-tailandia/ /viajar-a-tailandia 301
+/depilacion-en-la-calle/ /viajar-a-tailandia 301
+/siberia/ /guia-siberia 301
+/asia/ /destinos 301
+/consejos-de-viaje/ /category/vuelta-al-mundo-y-camper 301
+/derechos-viajeros/ /asistencia-aeropuerto-discapacidad-auditiva 301
+/blog-de-viajes-accesibles-para-sordos/ /viajar-siendo-sordo 301
+/regalo/ /viajar-siendo-sordo 301
+/viajes-alternativos-y-accesibles-por-el-mundo/ / 301
+/recursos/ / 301
+/acerca-de14/ /acerca-de 301
+/contacto2/ /contacto 301
+/politica/ /privacidad 301
+/youtube/ https://www.youtube.com/@Mochileandosinbarreras 301
+/producto/libro-quierete-sorda/ https://a.co/d/0j4iAifK 301
+/tienda/ https://a.co/d/0j4iAifK 301
+/tarjetas-para-viajar/ /mejor-tarjeta-para-viajar 301
+/entradas-nueva-zelanda/ /nueva-zelanda-en-coche-dormir-gratis 301
+/entradas-turquia/ /destinos 301
+/tienda-mochileros/ /material-acampada-mochileros 301
+/categoria-producto/libros/ https://a.co/d/0j4iAifK 301
+/carrito/ / 301
+/finalizar-compra/ / 301
+/mi-cuenta/ / 301
+/error-404/ / 301
+/blog-masonry/ /blog 301
+/blog-masonry-sidebar/ /blog 301
+/blog-grid-style-1/ /blog 301
+/blog-grid-style-2/ /blog 301
+/blog-right-sidebar/ /blog 301
+/blog-sidebar-left-7/ /blog 301
+
+# Reglas con comodín: deben ir AL FINAL (Cloudflare Pages cuenta como dinámicas todas las reglas posteriores a la primera con * y solo admite 100).
+/category/destinos/argentina/*             /guia-patagonia  301
+/category/destinos/chile/*                 /guia-patagonia  301
+/category/destinos/*                       /destinos        301
