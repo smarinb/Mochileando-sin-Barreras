@@ -72,7 +72,7 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: null # or "G-XXXXXXXXXX"
+      id: "G-Z35G79DLWN" # solo se carga si el usuario acepta la analítica (CookieConsent.astro)
 
 ui:
   theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

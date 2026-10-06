@@ -21,9 +21,11 @@ Esta política explica cómo se tratan los datos personales de quienes visitan h
 
 **Comunicaciones por correo electrónico y formulario de contacto.** El formulario usa Cloudflare Turnstile, un captcha para evitar el spam que analiza señales técnicas del navegador (por ejemplo la IP) solo para distinguir personas de bots; es una medida de seguridad necesaria (interés legítimo, art. 6.1.f RGPD). Si nos escribes por correo o a través del [formulario de contacto](/contacto), trataremos tu nombre, tu dirección de correo y el contenido de tu mensaje para responderte. La base jurídica es tu consentimiento al contactarnos (art. 6.1.a RGPD) o la aplicación de medidas a petición tuya.
 
+**Analítica web.** Si aceptas la categoría «Analítica» en el banner de cookies, usamos Google Analytics 4 (Google Ireland Limited, con posible transferencia a Google LLC en EE. UU. amparada en el Marco de Privacidad de Datos UE-EE. UU.) para obtener estadísticas agregadas de uso del sitio, mediante identificadores de cookies. La base jurídica es tu consentimiento (art. 6.1.a RGPD), que puedes retirar en cualquier momento desde «Configurar cookies» en el pie de página.
+
 **Contenido de terceros.** Si aceptas el contenido de terceros en el banner de cookies, tu navegador se conecta con YouTube, Google Maps o Amazon para mostrarte vídeos, mapas y productos, y esos terceros pueden tratar datos como tu dirección IP o identificadores de cookies bajo sus propias políticas. La base jurídica es tu consentimiento (art. 6.1.a RGPD), que puedes retirar en cualquier momento desde «Configurar cookies» en el pie de página.
 
-Actualmente este sitio **no dispone de comentarios, boletín ni tienda propia**, y **no utiliza herramientas de analítica ni de publicidad propias**. Si se incorporan en el futuro, actualizaremos esta política y pediremos tu consentimiento antes de empezar a tratar esos datos.
+Actualmente este sitio **no dispone de comentarios, boletín ni tienda propia**, y **no utiliza herramientas de publicidad propias**. Si se incorporan otras herramientas en el futuro, actualizaremos esta política y pediremos tu consentimiento antes de empezar a tratar esos datos.
 
 ## 3. Plazo de conservación
 

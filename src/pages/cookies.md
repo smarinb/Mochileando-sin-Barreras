@@ -12,7 +12,7 @@ Las cookies son pequeños archivos que un sitio web guarda en tu dispositivo cua
 
 ## 2. Qué usa este sitio
 
-Este sitio **no instala cookies de analítica, de publicidad ni de seguimiento propias**. Usa el siguiente almacenamiento técnico, **estrictamente necesario** para ofrecer funciones que tú solicitas, por lo que no requiere tu consentimiento:
+Este sitio **no instala cookies de publicidad ni de seguimiento propias**. Usa el siguiente almacenamiento técnico, **estrictamente necesario** para ofrecer funciones que tú solicitas, por lo que no requiere tu consentimiento:
 
 | Nombre | Tipo | Finalidad | Duración |
 | ------ | ---- | --------- | -------- |
@@ -34,13 +34,24 @@ Algunos artículos incluyen contenido de terceros que **puede instalar cookies o
 
 Puedes **cambiar o retirar tu consentimiento en cualquier momento** desde el enlace «Configurar cookies» del pie de página. La retirada no afecta a lo ya tratado antes de retirarla.
 
-## 4. Cookies de terceros al hacer clic en enlaces
+## 4. Analítica (requiere tu consentimiento)
+
+Si aceptas la categoría «Analítica», usamos **Google Analytics 4** (Google Ireland Limited / Google LLC) para medir de forma agregada cuántas personas visitan el sitio, qué páginas leen y desde dónde llegan, y así mejorar los contenidos. No se carga hasta que lo aceptas.
+
+| Nombre | Tipo | Finalidad | Duración |
+| ------ | ---- | --------- | -------- |
+| `_ga` | Cookie de tercero | Distinguir visitantes de forma anónima | 2 años |
+| `_ga_Z35G79DLWN` | Cookie de tercero | Mantener el estado de la sesión | 2 años |
+
+Puedes retirar tu consentimiento desde «Configurar cookies» en el pie de página. Más información en la [política de Google](https://policies.google.com/technologies/cookies?hl=es).
+
+## 5. Cookies de terceros al hacer clic en enlaces
 
 Este sitio contiene enlaces de afiliación y enlaces a páginas externas (proveedores de seguros, eSIM, redes de afiliación como TradeDoubler, YouTube, Instagram, etc.). Cuando haces clic en uno de ellos, **sales de este sitio** y la página de destino puede instalar sus propias cookies, por ejemplo para registrar que llegaste desde aquí y acreditar la comisión de afiliación.
 
 Esas cookies las controlan esos terceros, no nosotros. Consulta su política de cookies para saber qué instalan y cómo rechazarlas.
 
-## 5. Cómo gestionar o eliminar cookies
+## 6. Cómo gestionar o eliminar cookies
 
 Puedes permitir, bloquear o eliminar cookies y datos de sitios desde la configuración de tu navegador:
 
@@ -51,8 +62,8 @@ Puedes permitir, bloquear o eliminar cookies y datos de sitios desde la configur
 
 Si borras el almacenamiento local, el sitio simplemente volverá a usar el tema por defecto de tu dispositivo.
 
-## 6. Cambios en esta política
+## 7. Cambios en esta política
 
-Si en el futuro incorporamos herramientas de analítica, publicidad u otras que usen cookies no necesarias, te lo informaremos y pediremos tu consentimiento antes de activarlas, y actualizaremos esta política.
+Si en el futuro incorporamos otras herramientas que usen cookies no necesarias, te lo informaremos y pediremos tu consentimiento antes de activarlas, y actualizaremos esta política.
 
 Para más información sobre cómo tratamos tus datos, consulta la [Política de privacidad](/privacidad).
