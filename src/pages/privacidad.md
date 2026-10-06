@@ -37,7 +37,7 @@ No cedemos tus datos a terceros salvo obligación legal. Para prestar el servici
 
 - **Alojamiento web y red de distribución (CDN):** Cloudflare, Inc. (EE. UU.), adherida al Marco de Privacidad de Datos UE-EE. UU.
 - **Correo electrónico:** **[RELLENAR: proveedor de correo, por ejemplo Google Workspace o el que uses]**
-- **Envío del formulario de contacto:** una función alojada en Cloudflare comprueba el captcha (Cloudflare Turnstile) y envía el mensaje a nuestro correo mediante Resend (Resend, Inc., EE. UU.), servicio de envío de correo electrónico.
+- **Envío del formulario de contacto:** una función alojada en Cloudflare comprueba el captcha (Cloudflare Turnstile) y reenvía el mensaje a FormSubmit (formsubmit.co), servicio que lo entrega a nuestro correo.
 
 Si alguno de estos proveedores está fuera del Espacio Económico Europeo, la transferencia se ampara en las garantías previstas por el RGPD (por ejemplo, cláusulas contractuales tipo o decisión de adecuación).
 

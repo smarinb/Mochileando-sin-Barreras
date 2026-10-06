@@ -1,16 +1,14 @@
 /**
  * Cloudflare Pages Function: recibe el formulario de /contacto, comprueba el token de Cloudflare Turnstile
- * (captcha invisible) y solo entonces envía el mensaje por correo con la API de Resend.
- * El dominio debe estar verificado en Resend para poder enviar desde FROM.
+ * (captcha invisible) y solo entonces reenvía el mensaje a FormSubmit, que lo entrega por correo.
+ * Así los bots no pueden saltarse el captcha escribiendo directamente a FormSubmit.
  *
  * Variables de entorno (Pages → Settings → Variables and Secrets):
  *   TURNSTILE_SECRET  clave secreta del widget de Turnstile (obligatoria)
- *   RESEND_API_KEY    API key de Resend (obligatoria)
- *   DRY_RUN           (solo pruebas) si existe, no se envía nada
+ *   DRY_RUN           (solo pruebas) si existe, no se reenvía nada
  */
 interface Env {
   TURNSTILE_SECRET?: string;
-  RESEND_API_KEY?: string;
   DRY_RUN?: string;
 }
 interface Ctx {
@@ -18,14 +16,12 @@ interface Ctx {
   env: Env;
 }
 
-const TO = 'equipo@mochileandosinbarreras.com';
-const FROM = 'Mochileando sin Barreras <contacto@mochileandosinbarreras.com>';
+const EMAIL = 'equipo@mochileandosinbarreras.com';
+const SITE = 'https://mochileandosinbarreras.com';
 const FIELDS = ['nombre', 'email', 'asunto', 'mensaje'] as const;
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
-
-const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
 
 export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> => {
   const wantsJson = (request.headers.get('Accept') || '').includes('application/json');
@@ -54,30 +50,27 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
     .catch(() => ({ success: false }));
   if (!check.success) return done(false, 403);
 
-  const v: Record<string, string> = {};
+  const out = new FormData();
   for (const f of FIELDS) {
-    const value = String(data.get(f) || '').trim().slice(0, f === 'mensaje' ? 5000 : 200);
-    if (!value) return done(false);
-    v[f] = value;
+    const v = String(data.get(f) || '').trim().slice(0, f === 'mensaje' ? 5000 : 200);
+    if (!v) return done(false);
+    out.set(f, v);
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) return done(false);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(out.get('email')))) return done(false);
+  out.set('_subject', 'Nuevo mensaje desde mochileandosinbarreras.com');
+  out.set('_template', 'table');
+  out.set('_captcha', 'false');
+  out.set('_replyto', String(out.get('email')));
 
   if (env.DRY_RUN) return done(true);
-  if (!env.RESEND_API_KEY) return done(false, 500);
 
-  const res = await fetch('https://api.resend.com/emails', {
+  const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
     method: 'POST',
-    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: FROM,
-      to: [TO],
-      reply_to: v.email,
-      subject: `Contacto web: ${v.asunto} (${v.nombre})`.slice(0, 200),
-      text: `Nombre: ${v.nombre}\nEmail: ${v.email}\nAsunto: ${v.asunto}\n\n${v.mensaje}`,
-      html: `<p><strong>Nombre:</strong> ${esc(v.nombre)}<br><strong>Email:</strong> ${esc(v.email)}<br><strong>Asunto:</strong> ${esc(v.asunto)}</p><p>${esc(v.mensaje)}</p>`,
-    }),
+    headers: { Accept: 'application/json', Origin: SITE, Referer: `${SITE}/contacto` },
+    body: out,
   }).catch(() => null);
-  return done(!!res && res.ok, 502);
+  const body = res ? ((await res.json().catch(() => ({}))) as { success?: string | boolean }) : {};
+  return done(!!res && res.ok && body.success !== 'false' && body.success !== false, 502);
 };
 
 export const onRequest = async ({ request, env }: Ctx): Promise<Response> =>
