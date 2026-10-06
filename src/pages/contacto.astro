@@ -353,13 +353,14 @@ const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800 dark:text-
         body: data,
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok || result.success === 'false') throw new Error('send failed');
+      if (!response.ok || result.success === 'false' || result.success === false) throw new Error(result.reason || 'send failed');
       form.reset();
       showStatus('ok', '<strong>¡Mensaje enviado!</strong> Gracias por escribirnos, te responderemos lo antes posible.');
-    } catch {
+    } catch (err) {
+      console.error('contacto:', (err as Error).message);
       showStatus(
         'error',
-        '<strong>No hemos podido enviar el mensaje.</strong> Inténtalo de nuevo en unos minutos o escríbenos directamente a <a class="font-semibold underline" href="mailto:equipo@mochileandosinbarreras.com">equipo@mochileandosinbarreras.com</a>.'
+        '<strong>No hemos podido enviar el mensaje.</strong> Inténtalo de nuevo en unos minutos o escríbenos directamente a <a class="font-semibold underline" href="mailto:equipo@mochileandosinbarreras.com">equipo@mochileandosinbarreras.com</a>.<br><small>Código técnico: ' + ((err as Error).message || 'desconocido').replace(/[<>&]/g, '') + '</small>'
       );
     } finally {
       (window as any).turnstile?.reset();
