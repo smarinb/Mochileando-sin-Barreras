@@ -71,7 +71,7 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
   }).catch(() => null);
   const body = res ? ((await res.json().catch(() => ({}))) as { success?: string | boolean; message?: string }) : {};
   const ok = !!res && res.ok && body.success !== 'false' && body.success !== false;
-  return done(ok, 502, ok ? '' : 'formsubmit:' + (res ? res.status : 'red') + ':' + String(body.message || '').slice(0, 120));
+  return done(ok, ok ? 200 : 502, ok ? '' : 'formsubmit:' + (res ? res.status : 'red') + ':' + String(body.message || '').slice(0, 120));
 };
 
 export const onRequest = async ({ request, env }: Ctx): Promise<Response> =>
