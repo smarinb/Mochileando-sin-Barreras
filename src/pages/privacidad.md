@@ -4,7 +4,7 @@ description: 'Cómo trata Mochileando sin Barreras tus datos personales y cómo 
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Última actualización: 2 de octubre de 2026_
+_Última actualización: 6 de octubre de 2026_
 
 Esta política explica cómo se tratan los datos personales de quienes visitan https://mochileandosinbarreras.com, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).
 
@@ -21,7 +21,9 @@ Esta política explica cómo se tratan los datos personales de quienes visitan h
 
 **Comunicaciones por correo electrónico y formulario de contacto.** Si nos escribes por correo o a través del [formulario de contacto](/contacto), trataremos tu nombre, tu dirección de correo y el contenido de tu mensaje para responderte. La base jurídica es tu consentimiento al contactarnos (art. 6.1.a RGPD) o la aplicación de medidas a petición tuya.
 
-Actualmente este sitio **no dispone de comentarios, boletín ni tienda propia**, y **no utiliza herramientas de analítica ni de publicidad**. Si se incorporan en el futuro, actualizaremos esta política antes de empezar a tratar esos datos.
+**Contenido de terceros.** Si aceptas el contenido de terceros en el banner de cookies, tu navegador se conecta con YouTube, Google Maps o Amazon para mostrarte vídeos, mapas y productos, y esos terceros pueden tratar datos como tu dirección IP o identificadores de cookies bajo sus propias políticas. La base jurídica es tu consentimiento (art. 6.1.a RGPD), que puedes retirar en cualquier momento desde «Configurar cookies» en el pie de página.
+
+Actualmente este sitio **no dispone de comentarios, boletín ni tienda propia**, y **no utiliza herramientas de analítica ni de publicidad propias**. Si se incorporan en el futuro, actualizaremos esta política y pediremos tu consentimiento antes de empezar a tratar esos datos.
 
 ## 3. Plazo de conservación
 
@@ -31,7 +33,7 @@ Los datos de navegación se conservan durante el plazo que establezca el proveed
 
 No cedemos tus datos a terceros salvo obligación legal. Para prestar el servicio intervienen proveedores que actúan como encargados del tratamiento:
 
-- **Alojamiento web:** **[RELLENAR: proveedor de hosting, por ejemplo Cloudflare, Netlify o Vercel]**
+- **Alojamiento web y red de distribución (CDN):** Cloudflare, Inc. (EE. UU.), adherida al Marco de Privacidad de Datos UE-EE. UU.
 - **Correo electrónico:** **[RELLENAR: proveedor de correo, por ejemplo Google Workspace o el que uses]**
 - **Envío del formulario de contacto:** FormSubmit (formsubmit.co), servicio que reenvía los mensajes del formulario a nuestro correo.
 

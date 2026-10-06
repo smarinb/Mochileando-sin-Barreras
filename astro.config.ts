@@ -15,7 +15,7 @@ import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
 
-import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, affiliateLinksRehypePlugin } from './src/utils/frontmatter';
+import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, affiliateLinksRehypePlugin, consentEmbedsRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -55,7 +55,10 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Solo URLs indexables: sin /tag/* (noindex) ni páginas de paginación.
-      filter: (page) => !/\/tag\//.test(page) && !/\/(blog|category\/[^/]+)\/\d+\/?$/.test(page),
+      filter: (page) =>
+        !/\/(aviso-legal|privacidad|cookies)\/?$/.test(page) &&
+        !/\/tag\//.test(page) &&
+        !/\/(blog|category\/[^/]+)\/\d+\/?$/.test(page),
     }),
     mdx(),
     icon({
@@ -128,7 +131,7 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [readingTimeRemarkPlugin],
-      rehypePlugins: [responsiveTablesRehypePlugin, affiliateLinksRehypePlugin],
+      rehypePlugins: [responsiveTablesRehypePlugin, affiliateLinksRehypePlugin, consentEmbedsRehypePlugin],
     }),
     shikiConfig: {
       // Code blocks follow the site theme; see the `.astro-code` rules in tailwind.css.

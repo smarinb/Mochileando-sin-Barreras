@@ -67,3 +67,51 @@ export const affiliateLinksRehypePlugin: RehypePlugin = () => {
     walk(tree);
   };
 };
+
+const THIRD_PARTY_EMBEDS: Record<string, string> = {
+  'www.youtube.com': 'YouTube',
+  'www.youtube-nocookie.com': 'YouTube',
+  'www.google.com': 'Google Maps',
+  'maps.google.com': 'Google Maps',
+  'rcm-eu.amazon-adsystem.com': 'Amazon',
+};
+
+/**
+ * Los iframes de terceros (YouTube, Google Maps, widgets de Amazon) instalan cookies, así que no pueden cargarse antes del consentimiento.
+ * Aquí `src` pasa a `data-consent-src` y `CookieConsent.astro` lo restaura al aceptar (o muestra un enlace alternativo).
+ */
+export const consentEmbedsRehypePlugin: RehypePlugin = () => {
+  return function (tree) {
+    const walk = (node: any) => {
+      const isJsx = node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement';
+      if (isJsx && node.name === 'iframe' && Array.isArray(node.attributes)) {
+        const src = node.attributes.find((a: any) => a.name === 'src');
+        if (src && typeof src.value === 'string') {
+          try {
+            const label = THIRD_PARTY_EMBEDS[new URL(src.value).hostname];
+            if (label) {
+              src.name = 'data-consent-src';
+              node.attributes.push({ type: 'mdxJsxAttribute', name: 'data-consent-label', value: label });
+              node.attributes = node.attributes.filter((a: any) => a.name !== 'loading');
+            }
+          } catch {
+            /* URL no válida: se deja tal cual */
+          }
+        }
+      } else if (node.type === 'element' && node.tagName === 'iframe' && typeof node.properties?.src === 'string') {
+        try {
+          const label = THIRD_PARTY_EMBEDS[new URL(node.properties.src).hostname];
+          if (label) {
+            node.properties.dataConsentSrc = node.properties.src;
+            node.properties.dataConsentLabel = label;
+            delete node.properties.src;
+          }
+        } catch {
+          /* URL no válida */
+        }
+      }
+      node.children?.forEach(walk);
+    };
+    walk(tree);
+  };
+};

@@ -1,0 +1,200 @@
+---
+/**
+ * Banner de consentimiento (LSSI art. 22.2 + guía de la AEPD): «Aceptar» y «Rechazar» con el mismo peso,
+ * configuración por categorías y opción de cambiar la decisión desde el pie («Configurar cookies»).
+ * Hasta que el usuario acepta, los iframes de terceros (YouTube, Maps, Amazon) no cargan: ver consentEmbedsRehypePlugin.
+ */
+---
+
+<div
+  id="cookie-banner"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="cookie-title"
+  aria-describedby="cookie-desc"
+  hidden
+  class="fixed inset-x-0 bottom-0 z-[60] border-t border-gray-200 bg-white p-4 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] dark:border-slate-700 dark:bg-slate-900 sm:inset-x-auto sm:bottom-4 sm:left-4 sm:max-w-md sm:rounded-2xl sm:border"
+>
+  <h2 id="cookie-title" class="text-base font-bold text-slate-900 dark:text-white">Tu privacidad</h2>
+  <p id="cookie-desc" class="mt-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+    Usamos almacenamiento técnico necesario y, si lo permites, cargamos contenido de terceros (vídeos de YouTube, mapas de Google y productos de Amazon),
+    que pueden instalar cookies. Más información en la <a href="/cookies" class="font-semibold underline">política de cookies</a>.
+  </p>
+
+  <div id="cookie-options" hidden class="mt-3 space-y-3 rounded-lg bg-slate-50 p-3 text-sm dark:bg-slate-800">
+    <label class="flex items-start gap-3">
+      <input type="checkbox" checked disabled class="mt-1 h-4 w-4" />
+      <span><strong>Necesarias</strong> — recordar tema claro/oscuro y tu elección. Siempre activas.</span>
+    </label>
+    <label class="flex items-start gap-3">
+      <input type="checkbox" id="cookie-third" class="mt-1 h-4 w-4" />
+      <span><strong>Contenido de terceros</strong> — YouTube, Google Maps y widgets de Amazon.</span>
+    </label>
+    <label id="cookie-analytics-row" hidden class="flex items-start gap-3">
+      <input type="checkbox" id="cookie-analytics" class="mt-1 h-4 w-4" />
+      <span><strong>Analítica</strong> — medir visitas de forma agregada.</span>
+    </label>
+  </div>
+
+  <div class="mt-4 flex flex-wrap gap-2">
+    <button type="button" id="cookie-accept" class="btn flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-hover">Aceptar todo</button>
+    <button type="button" id="cookie-reject" class="btn flex-1 rounded-lg border-2 border-primary bg-transparent px-4 py-2.5 text-sm font-bold text-[#14605f] hover:bg-primary/10 dark:text-link">Rechazar</button>
+    <button type="button" id="cookie-config" aria-expanded="false" aria-controls="cookie-options" class="w-full rounded-lg px-4 py-2 text-sm font-semibold underline">Configurar</button>
+    <button type="button" id="cookie-save" hidden class="btn w-full rounded-lg border-2 border-primary bg-transparent px-4 py-2.5 text-sm font-bold text-[#14605f] hover:bg-primary/10 dark:text-link">Guardar mi elección</button>
+  </div>
+</div>
+
+<script>
+  const KEY = 'msb-consent-v1';
+  const MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000; // la AEPD recomienda renovar el consentimiento como máximo cada 24 meses
+
+  type Consent = { third: boolean; analytics: boolean; ts: number };
+
+  const read = (): Consent | null => {
+    try {
+      const v = JSON.parse(localStorage.getItem(KEY) || 'null');
+      return v && typeof v.ts === 'number' && Date.now() - v.ts < MAX_AGE_MS ? v : null;
+    } catch {
+      return null;
+    }
+  };
+  const write = (c: Consent) => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(c));
+    } catch {
+      /* sin almacenamiento: se vuelve a preguntar en cada visita */
+    }
+  };
+
+  const amazonLink = (src: string) => {
+    try {
+      const u = new URL(src);
+      const asin = (u.searchParams.get('asins') || '').split(',')[0];
+      const tag = u.searchParams.get('t') || '';
+      return asin ? `https://www.amazon.es/dp/${asin}${tag ? `?tag=${encodeURIComponent(tag)}` : ''}` : '';
+    } catch {
+      return '';
+    }
+  };
+
+  const embeds = () => Array.from(document.querySelectorAll<HTMLIFrameElement>('iframe[data-consent-src]'));
+
+  const applyEmbeds = (allowed: boolean) => {
+    for (const f of embeds()) {
+      const holder = f.previousElementSibling?.classList.contains('consent-placeholder') ? f.previousElementSibling : null;
+      if (allowed) {
+        holder?.remove();
+        f.hidden = false;
+        if (!f.getAttribute('src')) f.setAttribute('src', f.dataset.consentSrc || '');
+      } else if (!holder) {
+        f.hidden = true;
+        const label = f.dataset.consentLabel || 'contenido externo';
+        const box = document.createElement('div');
+        box.className =
+          'consent-placeholder flex h-full w-full flex-col items-center justify-center gap-2 bg-slate-100 p-3 text-center text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-300';
+        if (label === 'Amazon') {
+          box.className += ' ' + (f.className || '');
+          const href = amazonLink(f.dataset.consentSrc || '');
+          box.innerHTML = href
+            ? `<a href="${href}" target="_blank" rel="nofollow sponsored noopener" class="font-bold underline">Ver en Amazon<span class="sr-only"> (se abre en una pestaña nueva)</span></a>`
+            : '<span>Producto de Amazon</span>';
+        } else {
+          box.innerHTML = `<p>Este contenido de <strong>${label}</strong> puede instalar cookies.</p><button type="button" class="consent-load rounded-lg bg-[#36A09F] px-3 py-1.5 font-bold text-[#0b2e2d]">Aceptar y ver</button><a class="underline" href="${f.dataset.consentSrc}" target="_blank" rel="noopener noreferrer">Abrir en ${label}<span class="sr-only"> (pestaña nueva)</span></a>`;
+        }
+        f.before(box);
+      }
+    }
+  };
+
+  const loadAnalytics = () => {
+    const el = document.getElementById('ga-init') as HTMLElement | null;
+    const id = el?.dataset.id;
+    if (!id || (window as any).__gaLoaded) return;
+    (window as any).__gaLoaded = true;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+    document.head.appendChild(s);
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).gtag = function () {
+      (window as any).dataLayer.push(arguments);
+    };
+    (window as any).gtag('js', new Date());
+    (window as any).gtag('config', id);
+  };
+
+  const apply = (c: Consent | null) => {
+    applyEmbeds(!!c?.third);
+    if (c?.analytics) loadAnalytics();
+  };
+
+  const init = () => {
+    const banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+    const options = document.getElementById('cookie-options')!;
+    const third = document.getElementById('cookie-third') as HTMLInputElement;
+    const analytics = document.getElementById('cookie-analytics') as HTMLInputElement;
+    const cfg = document.getElementById('cookie-config') as HTMLButtonElement;
+    const save = document.getElementById('cookie-save')!;
+    const hasGA = !!document.getElementById('ga-init')?.dataset.id;
+    document.getElementById('cookie-analytics-row')!.hidden = !hasGA;
+
+    const show = () => {
+      const c = read();
+      third.checked = !!c?.third;
+      analytics.checked = !!c?.analytics;
+      banner.hidden = false;
+    };
+    const decide = (c: Omit<Consent, 'ts'>) => {
+      const full = { ...c, ts: Date.now() };
+      write(full);
+      banner.hidden = true;
+      apply(full);
+    };
+
+    if (!banner.dataset.bound) {
+      banner.dataset.bound = '1';
+      document.getElementById('cookie-accept')!.addEventListener('click', () => decide({ third: true, analytics: hasGA }));
+      document.getElementById('cookie-reject')!.addEventListener('click', () => decide({ third: false, analytics: false }));
+      cfg.addEventListener('click', () => {
+        const open = options.hidden;
+        options.hidden = !open;
+        save.hidden = !open;
+        cfg.setAttribute('aria-expanded', String(open));
+      });
+      save.addEventListener('click', () => decide({ third: third.checked, analytics: analytics.checked }));
+    }
+
+    const c = read();
+    apply(c);
+    if (!c) show();
+  };
+
+
+  if (!(window as any).__consentBound) {
+    (window as any).__consentBound = true;
+    document.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      const banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      if (t.closest('[data-cookie-settings], a[href="#configurar-cookies"]')) {
+        e.preventDefault();
+        document.getElementById('cookie-options')!.hidden = false;
+        document.getElementById('cookie-save')!.hidden = false;
+        document.getElementById('cookie-config')!.setAttribute('aria-expanded', 'true');
+        (document.getElementById('cookie-third') as HTMLInputElement).checked = !!read()?.third;
+        (document.getElementById('cookie-analytics') as HTMLInputElement).checked = !!read()?.analytics;
+        banner.hidden = false;
+        (document.getElementById('cookie-accept') as HTMLElement).focus();
+      } else if (t.closest('.consent-load')) {
+        const full = { third: true, analytics: read()?.analytics ?? false, ts: Date.now() };
+        write(full);
+        banner.hidden = true;
+        apply(full);
+      }
+    });
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

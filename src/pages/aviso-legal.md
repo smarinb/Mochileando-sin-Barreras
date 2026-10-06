@@ -4,7 +4,7 @@ description: 'Datos del titular, condiciones de uso, política de enlaces de afi
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Última actualización: 2 de octubre de 2026_
+_Última actualización: 6 de octubre de 2026_
 
 ## 1. Datos identificativos del titular
 
@@ -33,7 +33,7 @@ Precios, descuentos, coberturas y condiciones **los fija cada proveedor y pueden
 
 Algunos enlaces de este sitio son **enlaces de afiliación**. Si contratas un servicio a través de ellos, el proveedor puede pagarnos una comisión, normalmente sin coste adicional para ti. En ocasiones, estos enlaces dan acceso a descuentos para los lectores.
 
-Esas comisiones ayudan a financiar el proyecto. Los enlaces de afiliación se marcan técnicamente con los atributos `sponsored` y `nofollow`, y en las páginas donde aparecen indicamos que contienen enlaces de este tipo.
+Esas comisiones ayudan a financiar el proyecto. Como afiliados de Amazon, obtenemos ingresos por las compras adscritas que cumplen los requisitos aplicables. Los enlaces de afiliación se marcan técnicamente con los atributos `sponsored` y `nofollow`, y en las páginas donde aparecen indicamos que contienen enlaces de este tipo.
 
 ## 5. Propiedad intelectual e industrial
 

@@ -135,6 +135,7 @@ export const footerData = {
         { text: 'Aviso Legal', href: getPermalink('/aviso-legal') },
         { text: 'Privacidad', href: getPermalink('/privacidad') },
         { text: 'Cookies', href: getPermalink('/cookies') },
+        { text: 'Configurar cookies', href: '#configurar-cookies' },
       ],
     },
   ],
