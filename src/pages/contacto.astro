@@ -352,8 +352,16 @@ const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800 dark:text-
         headers: { Accept: 'application/json' },
         body: data,
       });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || result.success === 'false' || result.success === false) throw new Error(result.reason || 'send failed');
+      const raw = await response.text();
+      let result: { success?: unknown; reason?: string } = {};
+      try {
+        result = JSON.parse(raw);
+      } catch {
+        /* respuesta no JSON */
+      }
+      if (!response.ok || result.success === 'false' || result.success === false) {
+        throw new Error(result.reason || 'http-' + response.status + ':' + raw.replace(/\s+/g, ' ').slice(0, 80));
+      }
       form.reset();
       showStatus('ok', '<strong>¡Mensaje enviado!</strong> Gracias por escribirnos, te responderemos lo antes posible.');
     } catch (err) {
