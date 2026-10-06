@@ -83,17 +83,16 @@ export const headerData = {
       text: 'Acerca de',
       links: [
         { text: 'Quiénes somos', href: getPermalink('/acerca-de') },
-        { text: 'Contacto', href: getPermalink('/contacto') },
+        { text: 'Libro de Cris', href: 'https://a.co/d/0j4iAifK' },
         { text: 'Trabajemos juntos', href: getPermalink('/trabajemos') },
       ],
     },
   ],
   actions: [
     {
-      text: 'Libro de Cris',
-      icon: 'tabler:book-2',
-      href: 'https://a.co/d/0j4iAifK',
-      target: '_blank',
+      text: 'Contacto',
+      icon: 'tabler:mail',
+      href: getPermalink('/contacto'),
     },
   ],
 };
