@@ -368,7 +368,7 @@ const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800 dark:text-
       console.error('contacto:', (err as Error).message);
       showStatus(
         'error',
-        '<strong>No hemos podido enviar el mensaje.</strong> Inténtalo de nuevo en unos minutos o escríbenos directamente a <a class="font-semibold underline" href="mailto:equipo@mochileandosinbarreras.com">equipo@mochileandosinbarreras.com</a>.<br><small>Código técnico: ' + ((err as Error).message || 'desconocido').replace(/[<>&]/g, '') + '</small>'
+        '<strong>No hemos podido enviar el mensaje.</strong> Inténtalo de nuevo en unos minutos o escríbenos directamente a <a class="font-semibold underline" href="mailto:equipo@mochileandosinbarreras.com">equipo@mochileandosinbarreras.com</a>.'
       );
     } finally {
       (window as any).turnstile?.reset();
