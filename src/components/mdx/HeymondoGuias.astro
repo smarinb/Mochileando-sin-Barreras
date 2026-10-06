@@ -1,0 +1,43 @@
+---
+/**
+ * Bloque «Todo sobre Heymondo»: malla de enlaces entre las guías del clúster, con la página de descuento en primer lugar.
+ * Uso en MDX: <HeymondoGuias actual="/heymondo-es-fiable" />  (la guía actual no se muestra).
+ */
+export interface Props {
+  actual?: string;
+}
+const { actual } = Astro.props;
+
+const guias = [
+  { href: '/descuento-heymondo', titulo: 'Descuento Heymondo', texto: '5% automático, campañas del 15% y cómo llegar al 45%.', destacada: true },
+  { href: '/heymondo-opiniones', titulo: 'Opiniones de Heymondo', texto: 'Planes 2026, pros, contras y nuestra experiencia con la app.' },
+  { href: '/heymondo-es-fiable', titulo: '¿Heymondo es fiable?', texto: 'Quién está detrás y cómo evitar webs falsas.' },
+  { href: '/seguro-cancelacion-heymondo', titulo: 'Seguro de cancelación', texto: 'Las causas cubiertas y cuándo contratarlo.' },
+  { href: '/heymondo-anual-o-larga-estancia', titulo: 'Anual o larga estancia', texto: 'Qué póliza elegir según cuánto viajes.' },
+  { href: '/vuelo-retrasado-heymondo', titulo: 'AirHelp y Salas VIP', texto: 'Qué cubren si se retrasa tu vuelo.' },
+  { href: '/heymondo-o-iati', titulo: 'Heymondo o IATI', texto: 'Comparativa con 31 simulaciones de precio.' },
+  { href: '/black-friday-heymondo', titulo: 'Black Friday Heymondo', texto: 'Cómo se acumulan los descuentos de campaña.' },
+].filter((g) => g.href !== actual);
+---
+
+<nav class="not-prose my-10 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800" aria-labelledby="heymondo-guias-titulo">
+  <h2 id="heymondo-guias-titulo" class="mb-4 text-lg font-bold text-slate-900 dark:text-white">Todo sobre Heymondo, en un solo sitio</h2>
+  <ul class="grid gap-3 sm:grid-cols-2">
+    {
+      guias.map((g) => (
+        <li>
+          <a
+            href={g.href}
+            class:list={[
+              'block h-full rounded-xl border p-3 no-underline transition hover:shadow-md',
+              g.destacada ? 'border-primary bg-teal-50 dark:bg-slate-900' : 'border-gray-200 dark:border-slate-700',
+            ]}
+          >
+            <span class="block font-semibold text-[#14605f] dark:text-link">{g.titulo}</span>
+            <span class="mt-1 block text-sm text-slate-700 dark:text-slate-300">{g.texto}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
