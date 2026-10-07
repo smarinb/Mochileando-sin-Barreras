@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,6 +19,28 @@ import astrowind from './vendor/integration';
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, affiliateLinksRehypePlugin, consentEmbedsRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/**
+ * Fecha de última modificación de cada post para <lastmod> en el sitemap.
+ * Se toma de `updateDate` (o `publishDate`) del frontmatter: es explícita y no depende de git ni de la fecha de compilación.
+ * El slug del post es el nombre del archivo (permalink '/%slug%').
+ */
+const lastmodBySlug = new Map<string, string>();
+const postsDir = path.join(__dirname, 'src', 'data', 'post');
+if (fs.existsSync(postsDir)) {
+  for (const file of fs.readdirSync(postsDir)) {
+    if (!/\.mdx?$/.test(file)) continue;
+    const head = fs.readFileSync(path.join(postsDir, file), 'utf8').split(/^---\s*$/m)[1] ?? '';
+    const fields = new Map<string, string>();
+    for (const line of head.split(/\r?\n/)) {
+      const m = line.match(/^(\w+):\s*["']?([^"']+?)["']?\s*$/);
+      if (m) fields.set(m[1], m[2]);
+    }
+    const raw = fields.get('updateDate') ?? fields.get('publishDate');
+    const date = raw ? new Date(raw) : undefined;
+    if (date && !Number.isNaN(date.getTime())) lastmodBySlug.set(file.replace(/\.mdx?$/, ''), date.toISOString());
+  }
+}
 
 const hasExternalScripts = false;
 const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroIntegration)[] = []) =>
@@ -59,6 +82,13 @@ export default defineConfig({
         !/\/(aviso-legal|privacidad|cookies)\/?$/.test(page) &&
         !/\/tag\//.test(page) &&
         !/\/(blog|category\/[^/]+)\/\d+\/?$/.test(page),
+      // <lastmod> solo en los posts, con su fecha real de actualización.
+      serialize: (item) => {
+        const slug = new URL(item.url).pathname.replace(/^\/|\/$/g, '');
+        const lastmod = lastmodBySlug.get(slug);
+        if (lastmod) item.lastmod = lastmod;
+        return item;
+      },
     }),
     mdx(),
     icon({
