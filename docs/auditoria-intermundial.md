@@ -23,5 +23,8 @@ Totaltravel mini (300.000 € · Europa), Totaltravel (5.000.000 €, desde 1,53
 ## Piezas nuevas
 `intermundial-opiniones`, `descuento-intermundial` (SINBARRERAS 10 %, InterDays 12/15/17 %, no acumulables, 20 % renovación), `intermundial-grand-tour-365`, `intermundial-go-cancellation`.
 
-## Candidatas (siguiente oleada)
-Totaltravel mini/Total/Premium (qué plan elegir), Totaltravel annual (familiar, 20 %), Aquasports/buceo, Wintersports/esquí, Totalsports/trekking, go|study, go|schengen. Sin experiencia propia con Intermundial: confirmar con el titular si se ha usado. Verificar con Intermundial: cobertura de preexistentes en Totaltravel, contratación con el viaje iniciado, admisión de chat escrito en telemedicina.
+## Piezas nuevas (oleada 2)
+`intermundial-totaltravel-mini-o-premium`, `intermundial-totaltravel-annual` (60 vs 90 días), `seguro-buceo-intermundial-aquasports` (40 m / 75 m, cámara hiperbárica 10.000 €), `intermundial-totalsports` (5.000 m, 30 m, rescate 15.000–20.000 €).
+
+## Pendiente
+Wintersports (esquí), go|study, go|schengen. Verificar con Intermundial: preexistentes en Totaltravel, contratación con viaje iniciado, telemedicina por chat escrito, límites exactos por plan (mini/Total/Premium) más allá de cabecera.
