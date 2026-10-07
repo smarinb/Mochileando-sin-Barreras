@@ -116,6 +116,9 @@ Revolut Business, cripto, inversiones, préstamos, ahorros y fondos monetarios, 
 - **Honestidad por encima de la conversión:** se recomienda cada plan solo con las cuentas hechas; se avisa de los costes de cancelación y de las exclusiones del seguro.
 - **Sin precios inventados:** no se cita el precio de los pases VIP ni de las eSIM salvo los mínimos oficiales (desde 3,99 €/1 GB).
 
+- **Oleada 2 hecha (8 oct 2026):** `cuentas-revolut`, `revolut-premium-opiniones`, `revolut-metal-opiniones`, `revolut-ultra-opiniones`, `revolut-opiniones` (con la multa de 3,5 M€ del Banco de Lituania de abril de 2025, fuentes enlazadas), `como-solicitar-tarjeta-revolut` (cajeros de Madrid y Barcelona, tarjeta de crédito revolving) y **`revolut-latinoamerica`**, nueva por petición del usuario: audiencia latinoamericana (Revolut México como banco propio, viajar por la región, eSIM, ruta larga y envíos desde España a México, Chile, Brasil, R. Dominicana y Costa Rica, con la comparativa de Revolut marcada como propia). Los otros países de la región quedan como «no confirmado».
+- **Pendiente transversal (propuesta):** una guía de **tarjeta para viajar por Latinoamérica** que compare N26, Revolut y Wise para quien viaja desde Europa o vive en la región.
+
 ## 6. Preguntas abiertas
 1. ¿Mantenemos el plan **Estándar con 200 €** de cajero? Se deduce de los múltiplos oficiales, pero la web no lo dice con esas palabras.
 2. ¿Quieres la guía de **transferencias a Latinoamérica** (D) o la dejamos fuera?
