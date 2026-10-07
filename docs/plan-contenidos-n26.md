@@ -105,7 +105,17 @@ Inversión, cripto, préstamos, descubierto, N26 Business, ahorro y tipos de int
 4. **Oleada 4 (residentes):** extranjeros/NIE y estudiantes.
 5. Medir en Search Console a las 4-6 semanas y decidir qué ampliar.
 
-## 6. Preguntas abiertas (necesarias antes de empezar)
+## 6. Decisiones tomadas (7 oct 2026)
+- **Enlace:** se usa el de «Invita a un amigo» (`n26.com/r/sergiom9699`). Se declara como enlace de invitación y que puede haber recompensa, sin cifras ni promesas. Regla: **nunca anunciar bonos ni recompensas** que no estén en la web oficial.
+- **Smart** entra en todas las comparativas.
+- **Sin precios de eSIM ni de pase de sala VIP** (no figuran en la web de N26).
+- **Honestidad por encima de la conversión:** se recomienda Go solo cuando sale a cuenta (punto de equilibrio ≈ 580 € al mes en retiradas fuera de la zona euro), se avisa de las exclusiones del seguro (preexistentes) y de que la garantía de depósitos es alemana.
+- **Oleada 1 hecha:** `tarjeta-n26`, `n26-vs-revolut`, `n26-vs-wise` y `n26-vs-imagin` corregidos y con metadatos nuevos para CTR.
+
+## 7. Preguntas abiertas
+(Pendiente: corpus oficial de Revolut, Wise e imagin para curar lo que decimos de ellos; la comparación de Revolut sobre «recargo de fin de semana» y los límites de Wise (200 €) se han dejado como estaban, sin verificar.)
+
+## (antiguo) Preguntas abiertas
 1. **El enlace `n26.com/r/sergiom9699`: ¿es el programa «Invita a un amigo» o tienes un contrato de afiliación?** Cambia lo que podemos prometer al lector (no afirmar ninguna recompensa ni bono sin confirmarlo) y si debemos etiquetar como «código de invitación».
 2. ¿Tienes **precios de la eSIM y del pase de sala VIP** (capturas de la app)? Sin ellos no los citamos.
 3. ¿Confirmas que quieres **Smart** como parte de la comparativa aunque no sea tu plan recomendado?
