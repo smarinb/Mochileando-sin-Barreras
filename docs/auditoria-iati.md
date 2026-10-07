@@ -11,6 +11,8 @@ Fuente: corpus oficial `www.iatiseguros.com/` (local, ignorado en git).
 ## Hallazgos nuevos usados
 - Estrella: ilimitado fuera de Europa, Europa 1.000.000 €; búsqueda y salvamento solo con Aventura Premium. Estándar Europa 300.000 €. Mochilero no válido >70 años, sin crucero.
 
-## Pendiente (siguientes piezas)
-Anulación Premium, Camper, AirHelp, teléfono/contacto/reembolso (+ vías por escrito, intérprete 300 €), Escapadas/Familia (máx. 93 días), Grandes Viajeros, surf, EE. UU., Cuba, Orange Friday.
-Verificar columnas de las tablas comparativas (se infieren del orden de las fichas).
+## Piezas nuevas (oleada 1)
+`que-seguro-iati-elegir`, `iati-anulacion-premium` (carencia 7 días si pasan >24 h, no cruceros, preexistencias 30 días), `iati-telefono-contacto` (teléfonos, ARAG/AXA, reembolsos, vías por escrito, intérprete 300 €), `iati-escapadas` (Europa 100.000 €, España 50.000 €, mascotas, equipaje en coche/camper), `iati-familia` (93 días, no ya iniciado, cuidador, pediatría), `iati-camper` (268/380 €, 50.000 € médicos).
+
+## Pendiente
+AirHelp, Grandes Viajeros, surf, EE. UU., Cuba, Orange Friday. Confirmar con IATI: uso del +34 673 885 576 (ARAG) y aceptación del correo como aviso de siniestro.
