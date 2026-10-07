@@ -45,10 +45,10 @@ export const afiliados: Afiliado[] = [
     key: 'intermundial',
     cluster: 'seguros-de-viaje',
     name: 'Intermundial',
-    benefit: '10% de descuento desde nuestro enlace (cupón SINBARRERAS), con hasta 10 millones de cobertura médica y eSIM incluida.',
+    benefit: '10% de descuento desde nuestro enlace (cupón SINBARRERAS), con hasta 10 millones de cobertura médica (plan Premium), sala VIP y eSIM incluidas.',
     cta: 'Ver mi precio',
     href: INTERMUNDIAL_URL,
-    review: { href: '/iati-vs-intermundial', text: 'Comparativa con IATI' },
+    review: { href: '/intermundial-opiniones', text: 'Opiniones de Intermundial' },
     mobileDiscount: '10% dto.',
   },
   {

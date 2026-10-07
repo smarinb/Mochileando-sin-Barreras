@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: '¿Me cubren si tengo una enfermedad crónica preexistente?',
-    a: 'Por norma general, los seguros solo cubren la urgencia inicial para estabilizarte. Sin embargo, Chapka (Cap Trip Plus) incluye hasta 10.000€ por agravamiento de enfermedades preexistentes. Intermundial, en algunas pólizas específicas, puede cubrir hasta 15.000€ en estos casos.',
+    a: 'Por norma general, los seguros solo cubren la urgencia inicial para estabilizarte. Sin embargo, Chapka (Cap Trip Plus) incluye hasta 10.000€ por agravamiento de enfermedades preexistentes. Intermundial solo cubre la urgencia vital inicial en Totaltravel, aunque su seguro para estudiantes (go | study) y su cancelación premium sí incluyen preexistencias.',
   },
   {
     q: 'Me voy a dar la vuelta al mundo (+90 días), ¿hay franquicias ocultas?',
@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     q: 'Voy a hacer trekking, buceo o deportes extremos, ¿qué seguro elijo?',
-    a: 'Debes fijarte en el límite de rescate, no solo en la cobertura médica. Intermundial Totalsports ofrece hasta 20.000€ en rescate y cubre buceo hasta 40 metros. IATI Mochilero es otra gran opción, con rescate incluido de hasta 15.000€ y sin franquicias.',
+    a: 'Debes fijarte en el límite de rescate, no solo en la cobertura médica. Intermundial Totalsports ofrece hasta 20.000€ en rescate, más de 100 deportes hasta 5.000 m de altitud y 30 m de profundidad; para buceo en serio, su Aquasports llega a 40 m (ampliable a 75). Hasta el Totaltravel básico incluye rescate de 15.000€ en decenas de actividades. IATI Mochilero es otra gran opción, con rescate incluido de hasta 15.000€ y sin franquicias.',
   },
   {
     q: '¿Qué pasa si mi vuelo se retrasa o se cancela?',
@@ -115,7 +115,7 @@ const faqSchema = {
         ✔ <strong>Para viajes largos o Working Holiday:</strong> Chapka (sin franquicias + alta cobertura)
       </p>
       <p>
-        ✔ <strong>Para EE.UU., Japón o destinos caros:</strong> Intermundial (hasta 10 millones de cobertura médica)
+        ✔ <strong>Para EE.UU., Japón o destinos caros:</strong> Intermundial Premium (10 millones de cobertura médica) o IATI Estrella (ilimitada)
       </p>
       <p>
         👉 Si no quieres complicarte: <strong>Heymondo es la opción más equilibrada para la mayoría de viajeros.</strong>
@@ -157,7 +157,7 @@ const faqSchema = {
 
       <h3>🗽 EE.UU., Japón o destinos caros</h3>
       <p>
-        👉 <strong>Intermundial</strong> gana en cobertura máxima (hasta 10 millones) y tranquilidad total. Si prefieres
+        👉 <strong>Intermundial Totaltravel Premium</strong> alcanza los 10 millones de cobertura médica (5 millones en el Totaltravel normal). Si prefieres
         el concepto de cobertura ilimitada, <strong>IATI Estrella</strong> es la alternativa.
       </p>
       <p><a href="/iati-vs-intermundial">Ver comparativa →</a></p>
@@ -200,7 +200,7 @@ const faqSchema = {
               <td class="p-3">Ilimitados en modalidad Premium</td>
               <td class="p-3">Hasta ilimitada</td>
               <td class="p-3">Hasta 2.5M€</td>
-              <td class="p-3">Hasta 10M€</td>
+              <td class="p-3">Hasta 10M€ (Premium)</td>
             </tr>
             <tr class="border-b border-gray-200 dark:border-slate-700">
               <td class="p-3"><strong>💸 Franquicia</strong></td>
@@ -221,7 +221,7 @@ const faqSchema = {
               <td class="p-3">Incluidos</td>
               <td class="p-3">+60 deportes · rescate 15.000€</td>
               <td class="p-3">Buceo hasta 40m</td>
-              <td class="p-3">Pólizas específicas</td>
+              <td class="p-3">Rescate 15.000€ en Totaltravel; pólizas específicas</td>
             </tr>
             <tr class="border-b border-gray-200 dark:border-slate-700">
               <td class="p-3"><strong>🎒 Equipaje</strong></td>
@@ -310,8 +310,8 @@ const faqSchema = {
 
       <h3>🗽 Mejor para EE.UU. y destinos caros: Intermundial</h3>
       <p>
-        👉 Ofrece hasta 10 millones de cobertura médica, lo que elimina cualquier riesgo económico en países con sanidad
-        cara. Además, la eSIM gratuita y la videoconsulta rapidísima le dan un punto premium interesante.
+        👉 Su plan Premium ofrece hasta 10 millones de cobertura médica, lo que elimina cualquier riesgo económico en países con sanidad
+        cara. Además, la eSIM gratuita de 1 GB, la sala VIP incluida y la videoconsulta rapidísima le dan un punto premium interesante.
       </p>
       <p><a href="/iati-vs-intermundial">Ver comparativa →</a></p>
       <BotonAfiliado href={INTERMUNDIAL_URL} text="🗽 Ver precio de Intermundial">
