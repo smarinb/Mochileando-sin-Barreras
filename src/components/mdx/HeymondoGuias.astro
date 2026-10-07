@@ -9,7 +9,7 @@ export interface Props {
 const { actual } = Astro.props;
 
 const guias = [
-  { href: '/descuento-heymondo', titulo: 'Descuento Heymondo', texto: '5% automático, campañas del 15% y cómo llegar al 45%.', destacada: true },
+  { href: '/descuento-heymondo', titulo: 'Descuento Heymondo', texto: '5% automático, campañas del 15% y cómo llegar a ~40%.', destacada: true },
   { href: '/heymondo-opiniones', titulo: 'Opiniones de Heymondo', texto: 'Planes 2026, pros, contras y nuestra experiencia con la app.' },
   { href: '/heymondo-es-fiable', titulo: '¿Heymondo es fiable?', texto: 'Quién está detrás y cómo evitar webs falsas.' },
   { href: '/que-no-cubre-heymondo', titulo: 'Qué no cubre Heymondo', texto: 'Las exclusiones reales de la póliza.' },
@@ -19,6 +19,10 @@ const guias = [
   { href: '/vuelo-retrasado-heymondo', titulo: 'AirHelp y Salas VIP', texto: 'Qué cubren si se retrasa tu vuelo.' },
   { href: '/heymondo-o-iati', titulo: 'Heymondo o IATI', texto: 'Comparativa con 31 simulaciones de precio.' },
   { href: '/seguro-de-viaje-para-sordos', titulo: 'Seguro para personas sordas', texto: 'Qué mirar si tienes hipoacusia.' },
+  { href: '/heymondo-top-o-premium', titulo: 'Heymondo Top o Premium', texto: 'Diferencias reales y cuánto cuesta cada uno.' },
+  { href: '/cuanto-cuesta-heymondo', titulo: '¿Cuánto cuesta Heymondo?', texto: 'Precios reales por plan, duración y viajeros.' },
+  { href: '/heymondo-deportes-aventura', titulo: 'Deportes de aventura', texto: 'Qué actividades cubre y cuáles quedan fuera.' },
+  { href: '/app-heymondo', titulo: 'App de Heymondo', texto: 'Chat médico, videoconsulta y llamada gratis.' },
 ].filter((g) => g.href !== actual);
 ---
 
