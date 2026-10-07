@@ -29,5 +29,7 @@ Totaltravel mini (300.000 € · Europa), Totaltravel (5.000.000 €, desde 1,53
 ## Piezas nuevas (oleada 3)
 `intermundial-wintersports` (Wintersports vs basic: asistencia 500.000 € vs 10.000/25.000 €, forfait y clases 400 € vs 90 €, rescate 20.000 €, basic sin RC ni equipaje).
 
+`intermundial-go-study` (médica ilimitada, preexistentes 50.000 € solo urgencia, grupos de deportes A/B/C; la ficha contradice el epígrafe «esquí y buceo incluidos» con el condicionado, donde son Grupo C ampliación) y `intermundial-go-schengen` (30.000 € médica, 1.000.000 € repatriación; plus 65.000 €; la ficha no publica límites de la plus).
+
 ## Pendiente
-go|study, go|schengen. Verificar con Intermundial: preexistentes en Totaltravel, contratación con viaje iniciado, telemedicina por chat escrito, límites exactos por plan (mini/Total/Premium) más allá de cabecera.
+Verificar con Intermundial: preexistentes en Totaltravel, contratación con viaje iniciado, telemedicina por chat escrito, límites exactos por plan (mini/Total/Premium) más allá de cabecera.
