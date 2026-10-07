@@ -14,8 +14,8 @@ export interface Afiliado {
   href: string;
   /** Página de reseña/guía propia a la que enlazar desde la tarjeta. */
   review?: { href: string; text: string };
-  /** false = no aparece en la barra CTA móvil (esa barra promete «5% dto.», que no aplica a todos). */
-  mobileBar?: boolean;
+  /** Texto corto del descuento para la barra móvil (por defecto «5% dto.»). */
+  mobileDiscount?: string;
 }
 
 /** Intermundial: enlace de afiliado (cupón equivalente: SINBARRERAS). Ver docs/afiliados.md. */
@@ -45,11 +45,11 @@ export const afiliados: Afiliado[] = [
     key: 'intermundial',
     cluster: 'seguros-de-viaje',
     name: 'Intermundial',
-    benefit: 'Cobertura médica de hasta 10 millones y eSIM con datos incluida. Entra desde nuestro enlace de colaborador (cupón SINBARRERAS).',
+    benefit: '10% de descuento desde nuestro enlace (cupón SINBARRERAS), con hasta 10 millones de cobertura médica y eSIM incluida.',
     cta: 'Ver mi precio',
     href: INTERMUNDIAL_URL,
     review: { href: '/iati-vs-intermundial', text: 'Comparativa con IATI' },
-    mobileBar: false,
+    mobileDiscount: '10% dto.',
   },
   {
     key: 'esimflag',

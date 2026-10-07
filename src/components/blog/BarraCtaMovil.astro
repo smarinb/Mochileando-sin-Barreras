@@ -4,7 +4,7 @@
  * al hacer scroll y se pueden cerrar (se recuerda en sessionStorage). Reserva su propio espacio para no tapar contenido.
  */
 import { afiliados } from '~/data/afiliados';
-const seguros = afiliados.filter((a) => a.cluster === 'seguros-de-viaje' && a.mobileBar !== false);
+const seguros = afiliados.filter((a) => a.cluster === 'seguros-de-viaje');
 ---
 
 <div
@@ -23,7 +23,7 @@ const seguros = afiliados.filter((a) => a.cluster === 'seguros-de-viaje' && a.mo
           rel="nofollow sponsored noopener"
           class="flex-1 rounded-lg bg-primary px-3 py-2.5 text-center text-sm font-bold text-white no-underline hover:bg-primary-hover"
         >
-          {a.name}: 5% dto.<span class="sr-only"> (se abre en una pestaña nueva)</span>
+          {a.name}: {a.mobileDiscount ?? '5% dto.'}<span class="sr-only"> (se abre en una pestaña nueva)</span>
         </a>
       ))
     }
