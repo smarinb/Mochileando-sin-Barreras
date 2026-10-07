@@ -110,10 +110,11 @@ Inversión, cripto, préstamos, descubierto, N26 Business, ahorro y tipos de int
 - **Smart** entra en todas las comparativas.
 - **Sin precios de eSIM ni de pase de sala VIP** (no figuran en la web de N26).
 - **Honestidad por encima de la conversión:** se recomienda Go solo cuando sale a cuenta (punto de equilibrio ≈ 580 € al mes en retiradas fuera de la zona euro), se avisa de las exclusiones del seguro (preexistentes) y de que la garantía de depósitos es alemana.
+- **Oleada 2 hecha:** `cuentas-n26`, `n26-go-opiniones` (con tabla de punto de equilibrio), `n26-metal-opiniones` y `n26-opiniones` (incluye sanciones de BaFin 2021-2024 con fuentes y la regla «lleva siempre un plan B»). Enlazadas desde `tarjeta-n26`.
 - **Oleada 1 hecha:** `tarjeta-n26`, `n26-vs-revolut`, `n26-vs-wise` y `n26-vs-imagin` corregidos y con metadatos nuevos para CTR.
 
 ## 7. Preguntas abiertas
-(Pendiente: corpus oficial de Revolut, Wise e imagin para curar lo que decimos de ellos; la comparación de Revolut sobre «recargo de fin de semana» y los límites de Wise (200 €) se han dejado como estaban, sin verificar.)
+(Pendiente: confirmar con N26 si se puede cambiar de plan en cualquier momento (no figura en su web; los posts lo dicen así); corpus oficial de Revolut, Wise e imagin para curar lo que decimos de ellos; la comparación de Revolut sobre «recargo de fin de semana» y los límites de Wise (200 €) se han dejado como estaban, sin verificar.)
 
 ## (antiguo) Preguntas abiertas
 1. **El enlace `n26.com/r/sergiom9699`: ¿es el programa «Invita a un amigo» o tienes un contrato de afiliación?** Cambia lo que podemos prometer al lector (no afirmar ninguna recompensa ni bono sin confirmarlo) y si debemos etiquetar como «código de invitación».
