@@ -14,5 +14,8 @@ Fuente: corpus oficial `www.iatiseguros.com/` (local, ignorado en git).
 ## Piezas nuevas (oleada 1)
 `que-seguro-iati-elegir`, `iati-anulacion-premium` (carencia 7 días si pasan >24 h, no cruceros, preexistencias 30 días), `iati-telefono-contacto` (teléfonos, ARAG/AXA, reembolsos, vías por escrito, intérprete 300 €), `iati-escapadas` (Europa 100.000 €, España 50.000 €, mascotas, equipaje en coche/camper), `iati-familia` (93 días, no ya iniciado, cuidador, pediatría), `iati-camper` (268/380 €, 50.000 € médicos).
 
+## Piezas nuevas (oleada 2)
+`iati-grandes-viajeros` (Europa solo 50.000 €, 72 h carencia, ~2.000 € por un año), `seguro-de-viaje-surf-iati` (Mochilero cubre kitesurf/bodyboard; Estándar solo surf/windsurf; GoPro 60 % del equipaje; tabla retrasada 300 €), `seguro-de-viaje-eeuu-iati` (costes sin seguro, Estrella ilimitado, Aventura Premium 10.000 € rescate), `iati-airhelp` (5,95 €, condiciones de retraso/cancelación).
+
 ## Pendiente
-AirHelp, Grandes Viajeros, surf, EE. UU., Cuba, Orange Friday. Confirmar con IATI: uso del +34 673 885 576 (ARAG) y aceptación del correo como aviso de siniestro.
+Cuba (seguro obligatorio desde 2010; corpus escaso), Orange Friday con fechas cuando IATI las publique, Escapadas/Familia ya hechas. Confirmar con IATI si cada aseguradora acepta correo/WhatsApp como aviso formal.
