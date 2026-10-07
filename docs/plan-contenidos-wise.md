@@ -83,6 +83,11 @@ Pilar `/mejor-tarjeta-para-viajar`, hub dentro de `/tarjeta-wise` y enlaces cruz
 3. **Oleada 3 (Latinoamérica):** `/wise-latinoamerica` y el hub de envíos.
 4. Medir en Search Console a las 4-6 semanas.
 
+## 4b. Hecho (8 oct 2026)
+- **Oleada 1:** `tarjeta-wise` reescrita con datos oficiales (7 €, 250 € y 2,69 %, no es un banco, disponibilidad por país, tabla de países) y corregidas `n26-vs-wise`, `revolut-vs-wise`, `imagin-vs-wise` y el pilar.
+- **Oleadas 2 y 3:** `wise-opiniones` (incluye la multa de la FCA de 2024 a su CEO, aclarando que no fue a la empresa), `comisiones-wise-extranjero` (con tabla frente a N26 y Revolut; Wise sale mejor hasta ≈ 680 € al mes), `como-pedir-tarjeta-wise` y `wise-latinoamerica`.
+- **Enlace:** el usuario confirma que **no tiene afiliación con Wise**: se usa el enlace de invitación y se declara como tal en cada botón.
+
 ## 5. Decisiones propuestas
 - **Enlace de Wise:** los posts actuales enlazan a Wise; hay que comprobar qué tipo de enlace es (invitación de amigo o afiliación) para declararlo. **No se prometen bonos.**
 - **Honestidad:** decir con claridad que Wise no es un banco ni tiene garantía de depósitos; no citar porcentajes de conversión que no estén publicados.
