@@ -37,3 +37,7 @@ pnpm-workspace.yaml
 /condiciones-generales.pdf
 /condiciones-particulares.pdf
 /*.pdf
+
+# Material de trabajo local: corpus oficial de Heymondo y capturas de cotizaciones (no subir)
+/heymondo.es/
+/*.png
