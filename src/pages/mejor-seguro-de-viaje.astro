@@ -6,6 +6,7 @@ import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
 import { getPermalink } from '~/utils/permalinks';
 import { getClusterBySlug } from '~/data/clusters';
 import BotonAfiliado from '~/components/mdx/BotonAfiliado.astro';
+import { INTERMUNDIAL_URL } from '~/data/afiliados';
 import CajaAviso from '~/components/mdx/CajaAviso.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import heroImage from '~/assets/images/mejor-seguro-de-viaje.webp';
@@ -313,6 +314,9 @@ const faqSchema = {
         cara. Además, la eSIM gratuita y la videoconsulta rapidísima le dan un punto premium interesante.
       </p>
       <p><a href="/iati-vs-intermundial">Ver comparativa →</a></p>
+      <BotonAfiliado href={INTERMUNDIAL_URL} text="🗽 Ver precio de Intermundial">
+        Entra desde nuestro enlace de colaborador (cupón SINBARRERAS) y calcula tu seguro en un minuto
+      </BotonAfiliado>
 
       <h3>🕌 Mejor para destinos difíciles y voluntariados: IATI</h3>
       <p>

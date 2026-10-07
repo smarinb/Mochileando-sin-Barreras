@@ -4,7 +4,7 @@
  * al hacer scroll y se pueden cerrar (se recuerda en sessionStorage). Reserva su propio espacio para no tapar contenido.
  */
 import { afiliados } from '~/data/afiliados';
-const seguros = afiliados.filter((a) => a.cluster === 'seguros-de-viaje');
+const seguros = afiliados.filter((a) => a.cluster === 'seguros-de-viaje' && a.mobileBar !== false);
 ---
 
 <div
