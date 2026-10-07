@@ -111,6 +111,7 @@ Inversión, cripto, préstamos, descubierto, N26 Business, ahorro y tipos de int
 - **Sin precios de eSIM ni de pase de sala VIP** (no figuran en la web de N26).
 - **Honestidad por encima de la conversión:** se recomienda Go solo cuando sale a cuenta (punto de equilibrio ≈ 580 € al mes en retiradas fuera de la zona euro), se avisa de las exclusiones del seguro (preexistentes) y de que la garantía de depósitos es alemana.
 - **Oleada 2 hecha:** `cuentas-n26`, `n26-go-opiniones` (con tabla de punto de equilibrio), `n26-metal-opiniones` y `n26-opiniones` (incluye sanciones de BaFin 2021-2024 con fuentes y la regla «lleva siempre un plan B»). Enlazadas desde `tarjeta-n26`.
+- **Oleada 3 hecha:** `seguro-de-viaje-n26` (límites, beneficiarios, exclusiones; el IPID de Go es un PDF escaneado y no se pudo leer entero: duración máxima del viaje y obligación de pagar con la tarjeta quedan **sin confirmar** y así se dice en el post), `comisiones-n26-extranjero`, `n26-esim-viajar` (sin precios: N26 no los publica) y 6 guías por país (`tarjeta-para-viajar-a-` tailandia, japon, mexico, estados-unidos, turquia, brasil) con datos de las guías de N26 (tasas de cajero incluidas). Pendiente decidir: las de Europa fuera del euro (Polonia, Hungría, Suecia, Dinamarca, Reino Unido) en una sola guía.
 - **Oleada 1 hecha:** `tarjeta-n26`, `n26-vs-revolut`, `n26-vs-wise` y `n26-vs-imagin` corregidos y con metadatos nuevos para CTR.
 
 ## 7. Preguntas abiertas
