@@ -101,5 +101,5 @@ Páginas: `esim-holafly-opiniones` 3.023 impresiones, posición 10,4 y 18 clics;
 - **`/esim-holafly-opiniones`:** nuevo título SEO y excerpt; instalación y activación con la guía oficial (incluido el aviso de iPhone); tabla de precios por 18 destinos; secciones de Holafly Plans, Always On, telemedicina, AirHelp, reembolso y compartir datos; descuento sin cifras no verificables, con HolaCoins y referidos oficiales; 7 FAQ nuevas.
 - **Comparativas** (`holafly-vs-airalo`, `roamic-vs-holafly`, `saily-vs-holafly`): cobertura (+200 y +160), hotspot (1 GB al día), recargas, valoración y extras corregidos; caja con lo que ha cambiado en octubre de 2026.
 - **`/esim-japon` y `/esim-eeuu`:** precio de Holafly a 15 días corregido (46,90 €) y sin el «5 % automático».
-- **Pendiente de confirmar por el titular:** qué ventaja da realmente el enlace de afiliado `oN4rme` (si es un descuento, para poder restaurarlo con cifra).
+- **Descuento (confirmado por el titular el 8 de octubre de 2026):** el enlace de afiliado `oN4rme` **no aplica descuento solo**; el código **`MOCHILEANDO` da un 5 %** al pegarlo en «Código de descuento» en el carrito. Reflejado en la reseña, `/esim-japon`, `/esim-eeuu` y las tres comparativas, sin afirmar compatibilidad con otras ofertas.
 
