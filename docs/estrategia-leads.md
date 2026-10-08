@@ -1,6 +1,6 @@
 # Estrategia de leads: lista de correo (Brevo)
 
-_Decidida el 8 de octubre de 2026. Estado: **construido pero desactivado** (`NEWSLETTER_ENABLED = false` en `src/data/newsletter.ts`). Faltan los pasos de la sección 2, que requieren cuentas y datos que solo puede aportar quien gestiona el negocio._
+_Decidida el 8 de octubre de 2026. Estado: **activado** (`NEWSLETTER_ENABLED = true`) con Brevo: lista id 3, plantilla de doble opt-in id 1. Política de privacidad y aviso legal actualizados. Pendiente: autenticar el dominio en Brevo y hacer la prueba real de punta a punta (sección 2, pasos 1 y 9)._
 
 ## 1. Decisiones
 

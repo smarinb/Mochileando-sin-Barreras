@@ -6,7 +6,7 @@
  *   2. las variables de entorno estén en Cloudflare Pages (BREVO_API_KEY, BREVO_LIST_ID, BREVO_DOI_TEMPLATE_ID),
  *   3. la política de privacidad incluya el apartado del boletín (texto listo en docs/estrategia-leads.md).
  */
-export const NEWSLETTER_ENABLED = false;
+export const NEWSLETTER_ENABLED = true;
 
 export type Interes = 'seguros' | 'tarjetas' | 'esim' | 'alquiler' | 'general';
 

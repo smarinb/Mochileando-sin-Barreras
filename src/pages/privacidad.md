@@ -4,7 +4,7 @@ description: 'Cómo trata Mochileando sin Barreras tus datos personales y cómo 
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Última actualización: 6 de octubre de 2026_
+_Última actualización: 8 de octubre de 2026_
 
 Esta política explica cómo se tratan los datos personales de quienes visitan [https://mochileandosinbarreras.com](/), conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).
 
@@ -12,7 +12,7 @@ Esta política explica cómo se tratan los datos personales de quienes visitan [
 
 - **Responsable:** Sergio Marín Barberá
 - **NIF:** 49053006D
-- **Domicilio:** **[RELLENAR: dirección postal]**
+- **Domicilio:** Calle Ramón y Cajal 15, 06228 Hornachos (Badajoz)
 - **Correo electrónico:** [equipo@mochileandosinbarreras.com](mailto:equipo@mochileandosinbarreras.com)
 
 ## 2. Qué datos tratamos y para qué
@@ -25,19 +25,22 @@ Esta política explica cómo se tratan los datos personales de quienes visitan [
 
 **Contenido de terceros.** Si aceptas el contenido de terceros en el banner de cookies, tu navegador se conecta con YouTube, Google Maps o Amazon para mostrarte vídeos, mapas y productos, y esos terceros pueden tratar datos como tu dirección IP o identificadores de cookies bajo sus propias políticas. La base jurídica es tu consentimiento (art. 6.1.a RGPD), que puedes retirar en cualquier momento desde «Configurar cookies» en el pie de página.
 
-Actualmente este sitio **no dispone de comentarios, boletín ni tienda propia**, y **no utiliza herramientas de publicidad propias**. Si se incorporan otras herramientas en el futuro, actualizaremos esta política y pediremos tu consentimiento antes de empezar a tratar esos datos.
+**Boletín por correo electrónico.** Si te suscribes, tratamos tu correo electrónico, el interés que elijas (seguros, tarjetas, eSIM, alquiler de coches o general) y la página desde la que te apuntas, para enviarte avisos y contenidos sobre seguros, tarjetas, eSIM y viajes accesibles. La base jurídica es tu consentimiento (art. 6.1.a RGPD), que confirmas con un correo de doble confirmación y que puedes retirar en cualquier momento con el enlace de baja que incluye cada correo. El formulario usa Cloudflare Turnstile para evitar el spam.
+
+Actualmente este sitio **no dispone de comentarios ni tienda propia**, y **no utiliza herramientas de publicidad propias**. Si se incorporan otras herramientas en el futuro, actualizaremos esta política y pediremos tu consentimiento antes de empezar a tratar esos datos.
 
 ## 3. Plazo de conservación
 
-Los datos de navegación se conservan durante el plazo que establezca el proveedor de alojamiento. Los mensajes de correo se conservan mientras sea necesario para atender tu consulta y, después, durante los plazos legales de prescripción de posibles responsabilidades.
+Los datos de navegación se conservan durante el plazo que establezca el proveedor de alojamiento. Los mensajes de correo se conservan mientras sea necesario para atender tu consulta y, después, durante los plazos legales de prescripción de posibles responsabilidades. Los datos del boletín se conservan hasta que te des de baja; después, solo guardamos lo mínimo para acreditar el consentimiento durante los plazos legales.
 
 ## 4. Destinatarios y encargados del tratamiento
 
 No cedemos tus datos a terceros salvo obligación legal. Para prestar el servicio intervienen proveedores que actúan como encargados del tratamiento:
 
 - **Alojamiento web y red de distribución (CDN):** Cloudflare, Inc. (EE. UU.), adherida al Marco de Privacidad de Datos UE-EE. UU.
-- **Correo electrónico:** **[RELLENAR: proveedor de correo, por ejemplo Google Workspace o el que uses]**
+- **Correo electrónico:** el proveedor del servicio de correo electrónico corporativo del dominio, que aloja los mensajes que nos envías.
 - **Envío del formulario de contacto:** una función alojada en Cloudflare comprueba el captcha (Cloudflare Turnstile) y envía el mensaje a nuestro correo mediante Resend (Resend, Inc., EE. UU.), servicio de envío de correo electrónico.
+- **Envío de los correos del boletín:** Brevo (Sendinblue SAS, Francia), que almacena la lista de suscriptores y envía los mensajes.
 
 Si alguno de estos proveedores está fuera del Espacio Económico Europeo, la transferencia se ampara en las garantías previstas por el RGPD (por ejemplo, cláusulas contractuales tipo o decisión de adecuación).
 

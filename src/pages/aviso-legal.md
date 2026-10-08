@@ -4,7 +4,7 @@ description: 'Datos del titular, condiciones de uso, política de enlaces de afi
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Última actualización: 6 de octubre de 2026_
+_Última actualización: 8 de octubre de 2026_
 
 ## 1. Datos identificativos del titular
 
@@ -12,7 +12,7 @@ En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad 
 
 - **Titular:** Sergio Marín Barberá
 - **NIF:** 49053006D
-- **Domicilio:** **[RELLENAR: dirección postal completa]**
+- **Domicilio:** Calle Ramón y Cajal 15, 06228 Hornachos (Badajoz)
 - **Correo electrónico de contacto:** [equipo@mochileandosinbarreras.com](mailto:equipo@mochileandosinbarreras.com)
 - **Sitio web:** [https://mochileandosinbarreras.com](/)
 - **Nombre comercial:** Mochileando sin Barreras
