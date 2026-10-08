@@ -45,10 +45,10 @@ _8 de octubre de 2026. Fuentes: corpus oficial `esimflag.com/` (182 archivos), f
 1. ~~Instalación, «no funciona» y compatibilidad~~ (hecho).
 3. **`/esimflag-es-confiable`**: garantía, compensación y respaldo (la mayoría de «es confiable / legit» ya llega a la reseña).
 4. **eSIM por destino** con precio y red de ambas marcas: Argentina, Chile, Perú, Colombia, México, EE. UU., Japón, Tailandia, Europa.
-5. **eSIM para el Mundial 2026 en EE. UU., México y Canadá** (landing «eSIM Norteamérica» desde 3,50 €/día) si el calendario encaja.
+5. ~~eSIM para el Mundial 2026~~: **descartado**, el torneo terminó en julio de 2026 (la landing oficial de eSIMFLAG sigue publicada, pero está caducada).
 6. **eSIM para el Camino de Santiago** (España desde 1,60 €/día según su landing; red Movistar).
 7. **Quién es mejor para sordos:** soporte por chat/WhatsApp escrito de ambas marcas y telemedicina de Holafly.
 
 ## 4c. Publicado después
-`/esim-para-viajeros-sordos` (soporte escrito 24/7 de eSIMFLAG y Holafly, telemedicina por chat de Holafly, consejos), y eSIMFLAG añadido con precios y redes oficiales a las comparativas de `/esim-japon` y `/esim-eeuu`. Pendiente de la lista: eSIM por destino, Camino de Santiago y Mundial 2026.
+`/esim-para-viajeros-sordos` (soporte escrito 24/7 de eSIMFLAG y Holafly, telemedicina por chat de Holafly, consejos), y eSIMFLAG añadido con precios y redes oficiales a las comparativas de `/esim-japon` y `/esim-eeuu`. Pendiente de la lista: eSIM por destino y Camino de Santiago.
 
