@@ -37,20 +37,59 @@ export const responsiveTablesRehypePlugin: RehypePlugin = () => {
 };
 
 // Enlaces de afiliado escritos como markdown dentro de los posts: se marcan con rel="nofollow sponsored noopener" y se abren en pestaña nueva.
-const AFFILIATE_HOSTS = ['civitatis.com', 'booking.com', 'discovercars.com', 'rentalcars.com', 'heymondo.es', 'n26.com', 'amazon.es'];
+const AFFILIATE_HOSTS = [
+  'civitatis.com',
+  'booking.com',
+  'discovercars.com',
+  'rentalcars.com',
+  'heymondo.es',
+  'heymondo.com',
+  'n26.com',
+  'amazon.es',
+  'agoda.com',
+  '12go.asia',
+  'iatiseguros.com',
+  'intermundial.es',
+];
 const AFFILIATE_REDIRECTORS = ['holafly.sjv.io', 'clk.tradedoubler.com', 'clk.roamic.com', 'bit.ly', 'amzn.to', 'share.bnext.es', 'go.nordvpn.net'];
+// Enlaces de invitación o referido (sin parámetros reconocibles): se identifican por host y ruta.
+const AFFILIATE_PATHS: [string, RegExp][] = [
+  ['n26.com', /^\/r\//],
+  ['booking.com', /^\/s\//],
+  ['airbnb.es', /^\/c\//],
+  ['airbnb.com', /^\/c\//],
+  ['uber.com', /^\/invite\//],
+  ['revolut.com', /^\/referral/],
+  ['wise.com', /^\/invite\//],
+];
+const AFFILIATE_PARAMS = ['aid', 'a_aid', 'cod_descuento', 'affiliated', 'tag', 'affid', 'cid', 'z', 'r'];
+
+const parseHref = (href: string) => {
+  try {
+    return new URL(href);
+  } catch {
+    return null;
+  }
+};
 
 const isAffiliateHref = (href: string) => {
-  let url: URL;
-  try {
-    url = new URL(href);
-  } catch {
-    return false;
-  }
+  const url = parseHref(href);
+  if (!url) return false;
   const host = url.hostname.replace(/^www\./, '');
   if (AFFILIATE_REDIRECTORS.includes(host)) return true;
+  if (AFFILIATE_PATHS.some(([h, re]) => (host === h || host.endsWith(`.${h}`)) && re.test(url.pathname))) return true;
   const known = AFFILIATE_HOSTS.some((h) => host === h || host.endsWith(`.${h}`));
-  return known && ['aid', 'a_aid', 'cod_descuento', 'affiliated', 'tag'].some((k) => url.searchParams.has(k));
+  return known && AFFILIATE_PARAMS.some((k) => url.searchParams.has(k));
+};
+
+// Donaciones y perfiles sociales/mapas: ni editoriales ni de afiliación, así que no transmiten autoridad (nofollow, sin sponsored).
+const NOFOLLOW_HOSTS = ['instagram.com', 'youtube.com', 'youtu.be', 'facebook.com', 'google.com'];
+const isNofollowHref = (href: string) => {
+  const url = parseHref(href);
+  if (!url) return false;
+  const host = url.hostname.replace(/^www\./, '');
+  if (/(^|\.)paypal\.com$/.test(host)) return url.pathname.startsWith('/donate');
+  return NOFOLLOW_HOSTS.some((h) => host === h || host.endsWith(`.${h}`));
 };
 
 export const affiliateLinksRehypePlugin: RehypePlugin = () => {
@@ -59,6 +98,9 @@ export const affiliateLinksRehypePlugin: RehypePlugin = () => {
       if (node.type === 'element' && node.tagName === 'a' && typeof node.properties?.href === 'string') {
         if (isAffiliateHref(node.properties.href)) {
           node.properties.rel = ['nofollow', 'sponsored', 'noopener'];
+          node.properties.target = '_blank';
+        } else if (isNofollowHref(node.properties.href)) {
+          node.properties.rel = ['nofollow', 'noopener'];
           node.properties.target = '_blank';
         }
       }
