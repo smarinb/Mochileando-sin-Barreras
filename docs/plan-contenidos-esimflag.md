@@ -38,9 +38,11 @@ _8 de octubre de 2026. Fuentes: corpus oficial `esimflag.com/` (182 archivos), f
 ## 4. Publicado hoy
 `/esimflag-opiniones` (curada), `/esimflag-vs-holafly`, `/esimflag-movistar`, `/codigo-descuento-esimflag`, `/roaming-movistar` y `/esim-latinoamerica`.
 
+## 4b. Publicado después (misma jornada)
+`/esimflag-compatibilidad` (lista oficial de 34+ marcas y modelos, avisos por modelo y tablets), `/como-instalar-esimflag` (automática iOS 17.4+/Android 16+, QR, manual y ajustes finales) y `/esimflag-no-funciona` (espera, reinicio, roaming, APN `esimflag`, soporte, garantía y compensación). La ayuda oficial de eSIMFLAG no publica los pasos de QR y manual; en la guía se marcan como pasos generales del sistema.
+
 ## 5. Siguientes ideas
-1. **`/como-instalar-esimflag`** y **`/esimflag-no-funciona`** (guía oficial paso a paso, APN, iPhone y Android).
-2. **`/esimflag-compatibilidad`**: lista oficial de modelos (iPhone XR en adelante, Samsung, Pixel, etc.) y aviso de móviles de China/Hong Kong.
+1. ~~Instalación, «no funciona» y compatibilidad~~ (hecho).
 3. **`/esimflag-es-confiable`**: garantía, compensación y respaldo (la mayoría de «es confiable / legit» ya llega a la reseña).
 4. **eSIM por destino** con precio y red de ambas marcas: Argentina, Chile, Perú, Colombia, México, EE. UU., Japón, Tailandia, Europa.
 5. **eSIM para el Mundial 2026 en EE. UU., México y Canadá** (landing «eSIM Norteamérica» desde 3,50 €/día) si el calendario encaja.
