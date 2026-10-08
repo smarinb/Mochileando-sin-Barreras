@@ -90,7 +90,7 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
 
   // Enlace firmado: contiene el correo, el interés, el origen y la caducidad. No se guarda en ningún sitio.
   const payload = b64url(new TextEncoder().encode(JSON.stringify({ e: email, i: interes, o: origen, x: Date.now() + VALIDEZ_MS })));
-  const firma = await firmar(env.CONFIRM_SECRET, payload);
+  const firma = await firmar(env.CONFIRM_SECRET as string, payload);
   const site = env.SITE_URL || SITE;
   const enlace = `${site}/api/confirmar?t=${payload}.${firma}`;
 
