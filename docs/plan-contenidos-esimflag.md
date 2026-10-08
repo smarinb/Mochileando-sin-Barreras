@@ -48,3 +48,7 @@ _8 de octubre de 2026. Fuentes: corpus oficial `esimflag.com/` (182 archivos), f
 5. **eSIM para el Mundial 2026 en EE. UU., México y Canadá** (landing «eSIM Norteamérica» desde 3,50 €/día) si el calendario encaja.
 6. **eSIM para el Camino de Santiago** (España desde 1,60 €/día según su landing; red Movistar).
 7. **Quién es mejor para sordos:** soporte por chat/WhatsApp escrito de ambas marcas y telemedicina de Holafly.
+
+## 4c. Publicado después
+`/esim-para-viajeros-sordos` (soporte escrito 24/7 de eSIMFLAG y Holafly, telemedicina por chat de Holafly, consejos), y eSIMFLAG añadido con precios y redes oficiales a las comparativas de `/esim-japon` y `/esim-eeuu`. Pendiente de la lista: eSIM por destino, Camino de Santiago y Mundial 2026.
+
