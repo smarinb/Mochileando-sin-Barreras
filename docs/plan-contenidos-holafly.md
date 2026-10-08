@@ -103,3 +103,6 @@ Páginas: `esim-holafly-opiniones` 3.023 impresiones, posición 10,4 y 18 clics;
 - **`/esim-japon` y `/esim-eeuu`:** precio de Holafly a 15 días corregido (46,90 €) y sin el «5 % automático».
 - **Descuento (confirmado por el titular el 8 de octubre de 2026):** el enlace de afiliado `oN4rme` **no aplica descuento solo**; el código **`MOCHILEANDO` da un 5 %** al pegarlo en «Código de descuento» en el carrito. Reflejado en la reseña, `/esim-japon`, `/esim-eeuu` y las tres comparativas, sin afirmar compatibilidad con otras ofertas.
 
+## 8. Páginas nuevas con datos de eSIMFLAG y Holafly (8 de octubre de 2026)
+Ver `docs/plan-contenidos-esimflag.md`: `/esimflag-vs-holafly` (la prioridad nº 1 de este plan), `/esim-latinoamerica`, `/esimflag-movistar`, `/codigo-descuento-esimflag` y `/roaming-movistar`.
+
