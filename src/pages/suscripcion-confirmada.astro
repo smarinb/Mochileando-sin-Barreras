@@ -1,0 +1,47 @@
+---
+// Destino del enlace de confirmación (doble opt-in de Brevo): da acceso al kit y no se indexa.
+import Layout from '~/layouts/PageLayout.astro';
+
+export const prerender = true;
+
+const metadata = {
+  title: 'Suscripción confirmada',
+  description: 'Gracias por confirmar tu correo. Aquí tienes el Kit de comunicación para emergencias en el extranjero.',
+  robots: { index: false, follow: false },
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+    <h1 class="font-heading text-3xl font-bold md:text-4xl">¡Listo, ya estás dentro!</h1>
+    <p class="mt-4 text-lg text-slate-800 dark:text-slate-200">
+      Gracias por confirmar tu correo. Aquí tienes el regalo prometido: el
+      <strong>Kit de comunicación para emergencias en el extranjero</strong>, pensado para viajeros sordos o con hipoacusia.
+    </p>
+
+    <div class="not-prose my-8 rounded-r-xl border-l-4 border-[#36A09F] bg-teal-50 p-5 dark:bg-slate-800">
+      <p class="font-semibold text-slate-900 dark:text-white">Incluye tarjetas de frases en 6 idiomas, checklist antes de salir y pasos ante una emergencia.</p>
+      <a
+        href="/descargas/kit-comunicacion-emergencias.pdf"
+        download
+        class="mt-4 inline-flex items-center justify-center rounded-lg bg-[#36A09F] px-5 py-3 text-sm font-bold text-white no-underline shadow transition hover:bg-[#2c8584] focus:outline-none focus:ring-2 focus:ring-[#36A09F] focus:ring-offset-2"
+      >
+        Descargar el kit (PDF)
+      </a>
+    </div>
+
+    <h2 class="font-heading text-2xl font-bold">Qué vas a recibir de nosotros</h2>
+    <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-800 dark:text-slate-200">
+      <li>Un aviso cuando haya una campaña real de descuento en seguros de viaje.</li>
+      <li>Cambios de condiciones importantes en tarjetas y eSIM que analizamos.</li>
+      <li>De vez en cuando, una guía o un truco útil de ruta. Sin spam y con baja en un clic.</li>
+    </ul>
+
+    <h2 class="mt-8 font-heading text-2xl font-bold">Mientras tanto</h2>
+    <ul class="mt-3 list-disc space-y-2 pl-6">
+      <li><a href="/mejor-seguro-de-viaje">Mejor seguro de viaje: comparativa y descuentos</a></li>
+      <li><a href="/seguro-de-viaje-para-sordos">Seguro de viaje para personas sordas</a></li>
+      <li><a href="/mejor-tarjeta-para-viajar">Mejor tarjeta para viajar sin comisiones</a></li>
+    </ul>
+  </section>
+</Layout>

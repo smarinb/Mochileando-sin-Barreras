@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '~/layouts/PageLayout.astro';
 import ClusterLinks from '~/components/blog/ClusterLinks.astro';
+import Suscripcion from '~/components/common/Suscripcion.astro';
 import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
 import { getPermalink } from '~/utils/permalinks';
 import { getClusterBySlug } from '~/data/clusters';
@@ -506,5 +507,6 @@ const faqSchema = {
       </p>
     </div>
   </section>
+  <section class="px-4 sm:px-6"><Suscripcion interes="tarjetas" /></section>
   <ClusterLinks variant="pillar" cluster={cluster} />
 </Layout>

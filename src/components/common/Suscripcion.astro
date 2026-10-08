@@ -1,0 +1,187 @@
+---
+/**
+ * Formulario de suscripción (doble confirmación vía /api/suscribir → Brevo).
+ * No se muestra mientras NEWSLETTER_ENABLED sea false (src/data/newsletter.ts).
+ * Turnstile se carga solo cuando la persona usa el formulario, para no penalizar el rendimiento.
+ */
+import { Icon } from 'astro-icon/components';
+import { NEWSLETTER_ENABLED, COPY, type Interes } from '~/data/newsletter';
+
+export interface Props {
+  interes?: Interes;
+  titulo?: string;
+  texto?: string;
+}
+
+const { interes = 'general', titulo, texto } = Astro.props;
+const copy = COPY[interes];
+const uid = Math.random().toString(36).slice(2, 8);
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAFPg7ef6ShLMQQFA';
+---
+
+{
+  NEWSLETTER_ENABLED && (
+    <aside
+      class="not-prose mx-auto my-8 max-w-3xl rounded-r-xl border-l-4 border-[#36A09F] bg-teal-50 p-5 dark:bg-slate-800"
+      aria-labelledby={`susc-t-${uid}`}
+      data-suscripcion
+    >
+      <h2 id={`susc-t-${uid}`} class="font-heading text-xl font-bold text-slate-900 dark:text-white">
+        {titulo ?? copy.titulo}
+      </h2>
+      <p class="mt-2 text-sm text-slate-800 dark:text-slate-200 md:text-base">{texto ?? copy.texto}</p>
+      <p class="mt-1 text-sm text-slate-800 dark:text-slate-200">
+        <strong>Al confirmar tu correo recibes gratis el Kit de comunicación para emergencias en el extranjero</strong> (PDF para viajeros sordos o con hipoacusia).
+      </p>
+
+      <form class="mt-4 space-y-3" method="POST" action="/api/suscribir" novalidate>
+        <div>
+          <label for={`susc-e-${uid}`} class="block text-sm font-semibold text-slate-900 dark:text-white">Tu correo electrónico</label>
+          <input
+            id={`susc-e-${uid}`}
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            inputmode="email"
+            maxlength="200"
+            placeholder="tucorreo@ejemplo.com"
+            class="mt-1 w-full rounded-lg border border-slate-400 bg-white px-3 py-2.5 text-base text-slate-900 focus:border-[#36A09F] focus:outline-none focus:ring-2 focus:ring-[#36A09F] dark:border-slate-500 dark:bg-slate-900 dark:text-white"
+          />
+        </div>
+
+        <div class="flex items-start gap-2">
+          <input
+            id={`susc-c-${uid}`}
+            name="consentimiento"
+            type="checkbox"
+            required
+            class="mt-1 h-5 w-5 shrink-0 rounded border-slate-500 text-[#36A09F] focus:ring-[#36A09F]"
+          />
+          <label for={`susc-c-${uid}`} class="text-xs leading-relaxed text-slate-800 dark:text-slate-200">
+            Acepto recibir correos de Mochileando sin Barreras sobre seguros, tarjetas, eSIM y viajes accesibles, y me puedo dar de baja en cualquier momento.
+            Responsable: Sergio Marín Barberá. Encargado: Brevo. Derechos y más información en la
+            <a href="/privacidad" class="font-semibold underline">política de privacidad</a>.
+          </label>
+        </div>
+
+        <div class="sr-only" aria-hidden="true">
+          <label for={`susc-h-${uid}`}>No rellenes este campo</label>
+          <input id={`susc-h-${uid}`} type="text" name="_honey" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="interes" value={interes} />
+        <input type="hidden" name="origen" value="" data-origen />
+
+        <div class="cf-turnstile-slot" data-sitekey={TURNSTILE_SITE_KEY}></div>
+
+        <button
+          type="submit"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#36A09F] px-5 py-3 text-sm font-bold text-white shadow transition hover:bg-[#2c8584] focus:outline-none focus:ring-2 focus:ring-[#36A09F] focus:ring-offset-2 disabled:opacity-60 sm:w-auto"
+        >
+          <Icon name="tabler:mail" class="h-5 w-5" aria-hidden="true" />
+          <span data-label>{copy.boton}</span>
+        </button>
+        <p class="text-xs text-slate-700 dark:text-slate-300">Protegido con Cloudflare Turnstile. Te enviaremos un correo para confirmar la suscripción.</p>
+        <div data-estado role="status" aria-live="polite" aria-atomic="true" tabindex="-1" class="hidden rounded-lg border-l-4 p-3 text-sm focus:outline-none"></div>
+      </form>
+    </aside>
+  )
+}
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-suscripcion] form');
+  let turnstileCargado = false;
+
+  const cargarTurnstile = () => {
+    if (turnstileCargado) return;
+    turnstileCargado = true;
+    const s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    s.async = true;
+    s.onload = () => {
+      forms.forEach((f) => {
+        const slot = f.querySelector<HTMLElement>('.cf-turnstile-slot');
+        if (slot && (window as any).turnstile) {
+          (slot as any).dataset.widget = (window as any).turnstile.render(slot, {
+            sitekey: slot.dataset.sitekey,
+            language: 'es',
+            theme: 'auto',
+            action: 'suscribir',
+          });
+        }
+      });
+    };
+    document.head.appendChild(s);
+  };
+
+  forms.forEach((form) => {
+    const estado = form.querySelector<HTMLElement>('[data-estado]')!;
+    const boton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const etiqueta = form.querySelector<HTMLElement>('[data-label]')!;
+    const textoOriginal = etiqueta.textContent || '';
+    const origen = form.querySelector<HTMLInputElement>('[data-origen]');
+    if (origen) origen.value = location.pathname;
+
+    form.addEventListener('focusin', cargarTurnstile, { once: true });
+
+    const mostrar = (tipo: 'ok' | 'error', html: string) => {
+      estado.className =
+        'rounded-lg border-l-4 p-3 text-sm focus:outline-none ' +
+        (tipo === 'ok'
+          ? 'border-[#36A09F] bg-white text-slate-900 dark:bg-slate-900 dark:text-white'
+          : 'border-red-700 bg-red-50 text-red-900 dark:bg-slate-900 dark:text-red-200');
+      estado.innerHTML = html;
+      estado.focus();
+    };
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const datos = new FormData(form);
+      const email = String(datos.get('email') || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        mostrar('error', 'Escribe un correo válido.');
+        form.querySelector<HTMLInputElement>('input[name="email"]')?.focus();
+        return;
+      }
+      if (datos.get('consentimiento') !== 'on') {
+        mostrar('error', 'Marca la casilla de consentimiento para poder suscribirte.');
+        return;
+      }
+      if (datos.get('_honey')) {
+        mostrar('ok', '<strong>Casi listo.</strong> Revisa tu correo para confirmar la suscripción.');
+        return;
+      }
+      if (!datos.get('cf-turnstile-response')) {
+        cargarTurnstile();
+        mostrar('error', 'Estamos comprobando que no eres un robot. Espera un segundo y vuelve a pulsar el botón.');
+        return;
+      }
+
+      boton.disabled = true;
+      boton.setAttribute('aria-busy', 'true');
+      etiqueta.textContent = 'Enviando…';
+      try {
+        const r = await fetch('/api/suscribir', { method: 'POST', headers: { Accept: 'application/json' }, body: datos });
+        const resultado = (await r.json().catch(() => ({}))) as { success?: boolean; reason?: string };
+        if (!r.ok || !resultado.success) throw new Error(resultado.reason || 'http-' + r.status);
+        form.reset();
+        if (origen) origen.value = location.pathname;
+        mostrar(
+          'ok',
+          '<strong>Casi listo.</strong> Te hemos enviado un correo para confirmar la suscripción. Mira también la carpeta de spam o promociones; al confirmar recibirás el kit.',
+        );
+      } catch (err) {
+        console.error('suscribir:', (err as Error).message);
+        mostrar(
+          'error',
+          '<strong>No hemos podido apuntarte.</strong> Inténtalo de nuevo en unos minutos o escríbenos a <a class="font-semibold underline" href="mailto:equipo@mochileandosinbarreras.com">equipo@mochileandosinbarreras.com</a>.',
+        );
+      } finally {
+        (window as any).turnstile?.reset();
+        boton.disabled = false;
+        boton.removeAttribute('aria-busy');
+        etiqueta.textContent = textoOriginal;
+      }
+    });
+  });
+</script>
