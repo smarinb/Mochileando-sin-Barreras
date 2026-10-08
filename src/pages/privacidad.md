@@ -6,7 +6,7 @@ layout: '~/layouts/MarkdownLayout.astro'
 
 _Última actualización: 6 de octubre de 2026_
 
-Esta política explica cómo se tratan los datos personales de quienes visitan https://mochileandosinbarreras.com, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).
+Esta política explica cómo se tratan los datos personales de quienes visitan [https://mochileandosinbarreras.com](/), conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).
 
 ## 1. Responsable del tratamiento
 

@@ -14,7 +14,7 @@ En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad 
 - **NIF:** 49053006D
 - **Domicilio:** **[RELLENAR: dirección postal completa]**
 - **Correo electrónico de contacto:** [equipo@mochileandosinbarreras.com](mailto:equipo@mochileandosinbarreras.com)
-- **Sitio web:** https://mochileandosinbarreras.com
+- **Sitio web:** [https://mochileandosinbarreras.com](/)
 - **Nombre comercial:** Mochileando sin Barreras
 
 ## 2. Objeto y condiciones de uso

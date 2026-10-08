@@ -77,7 +77,7 @@ export const clusters: Cluster[] = [
     label: 'eSIM para viajar',
     inline: 'eSIM para viajar',
     h1: 'eSIM para viajar: reseñas y comparativas',
-    metaTitle: 'eSIM para viajar: reseñas y comparativas (Holafly, Airalo, Saily)',
+    metaTitle: 'eSIM para viajar: reseñas y comparativas (Holafly, Airalo)',
     metaDescription:
       'Opiniones y comparativas de Holafly, Airalo, Saily, Roamic, SimOptions y eSIMFLAG para tener internet en el extranjero sin pagar roaming. Elige tu eSIM.',
     intro:
