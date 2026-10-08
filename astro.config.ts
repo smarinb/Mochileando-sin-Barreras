@@ -79,7 +79,7 @@ export default defineConfig({
     sitemap({
       // Solo URLs indexables: sin /tag/* (noindex) ni páginas de paginación.
       filter: (page) =>
-        !/\/(aviso-legal|privacidad|cookies|suscripcion-confirmada)\/?$/.test(page) &&
+        !/\/(aviso-legal|privacidad|cookies|suscripcion-confirmada|suscripcion-error)\/?$/.test(page) &&
         !/\/tag\//.test(page) &&
         !/\/(blog|category\/[^/]+)\/\d+\/?$/.test(page),
       // <lastmod> solo en los posts, con su fecha real de actualización.

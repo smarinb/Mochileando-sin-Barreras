@@ -40,7 +40,7 @@ No cedemos tus datos a terceros salvo obligación legal. Para prestar el servici
 - **Alojamiento web y red de distribución (CDN):** Cloudflare, Inc. (EE. UU.), adherida al Marco de Privacidad de Datos UE-EE. UU.
 - **Correo electrónico:** el proveedor del servicio de correo electrónico corporativo del dominio, que aloja los mensajes que nos envías.
 - **Envío del formulario de contacto:** una función alojada en Cloudflare comprueba el captcha (Cloudflare Turnstile) y envía el mensaje a nuestro correo mediante Resend (Resend, Inc., EE. UU.), servicio de envío de correo electrónico.
-- **Envío de los correos del boletín:** Brevo (Sendinblue SAS, Francia), que almacena la lista de suscriptores y envía los mensajes.
+- **Envío de los correos del boletín:** Brevo (Sendinblue SAS, Francia), que almacena la lista de suscriptores y envía los mensajes. El correo de confirmación de la suscripción se envía mediante Resend (Resend, Inc., EE. UU.) y, hasta que confirmas, no guardamos tu correo.
 
 Si alguno de estos proveedores está fuera del Espacio Económico Europeo, la transferencia se ampara en las garantías previstas por el RGPD (por ejemplo, cláusulas contractuales tipo o decisión de adecuación).
 

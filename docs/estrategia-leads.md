@@ -1,6 +1,6 @@
 # Estrategia de leads: lista de correo (Brevo)
 
-_Decidida el 8 de octubre de 2026. Estado: **activado** (`NEWSLETTER_ENABLED = true`) con Brevo: lista id 3, plantilla de doble opt-in id 1. Política de privacidad y aviso legal actualizados. Pendiente: autenticar el dominio en Brevo y hacer la prueba real de punta a punta (sección 2, pasos 1 y 9)._
+_Decidida el 8 de octubre de 2026. Estado: **activado** (`NEWSLETTER_ENABLED = true`) con Brevo: lista id 3, doble confirmación propia (ver «Cómo funciona la confirmación»). Política de privacidad y aviso legal actualizados. Pendiente: autenticar el dominio en Brevo y hacer la prueba real de punta a punta (sección 2, pasos 1 y 9)._
 
 ## 1. Decisiones
 
@@ -13,6 +13,15 @@ _Decidida el 8 de octubre de 2026. Estado: **activado** (`NEWSLETTER_ENABLED = t
 | Segmentación | Atributo `INTERES` (seguros, tarjetas, esim, alquiler, general) y `ORIGEN` (ruta de la página) | Mandar a cada persona lo que pidió. |
 | Dónde | Al final de los posts de los 4 clústeres comerciales y en sus 4 páginas pilar | Es donde está la intención. **Sin popups ni exit-intent** (rendimiento y accesibilidad). |
 | Captcha | Cloudflare Turnstile (ya usado en `/contacto`), cargado solo al interactuar con el formulario | Sin coste de rendimiento para quien no se suscribe. |
+
+## 1b. Cómo funciona la confirmación
+
+La doble confirmación de Brevo por API no resultó fiable con formularios externos (error `An active DOI template does not exist`), así que la hace nuestra función:
+
+1. `/api/suscribir` valida captcha y consentimiento y envía un correo (con Resend, el mismo servicio de `/api/contacto`) con un **enlace firmado con HMAC** y caducidad de 7 días. **No se guarda nada** en este paso.
+2. Al pulsar el enlace, `/api/confirmar` comprueba la firma y da de alta el contacto en la lista de Brevo con `INTERES` y `ORIGEN`, y redirige a `/suscripcion-confirmada`. Si el enlace no vale o ha caducado, a `/suscripcion-error`.
+
+Variables de entorno: `TURNSTILE_SECRET` y `RESEND_API_KEY` (ya existían), **`CONFIRM_SECRET`** (cadena aleatoria de 32 caracteres o más), `BREVO_API_KEY` y `BREVO_LIST_ID`. Ya **no hace falta** `BREVO_DOI_TEMPLATE_ID` ni la plantilla de Brevo.
 
 ## 2. Pasos para activarlo
 
