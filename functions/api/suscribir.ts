@@ -81,7 +81,12 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
   const origen = String(data.get('origen') || '').slice(0, 200);
 
   if (env.DRY_RUN) return json({ success: true });
-  if (!env.RESEND_API_KEY || !env.CONFIRM_SECRET || env.CONFIRM_SECRET.length < 32) return json({ success: false, reason: 'sin-configurar' }, 500);
+  const faltan = [
+    !env.RESEND_API_KEY && 'RESEND_API_KEY',
+    !env.CONFIRM_SECRET && 'CONFIRM_SECRET',
+    env.CONFIRM_SECRET && env.CONFIRM_SECRET.length < 32 && `CONFIRM_SECRET(${env.CONFIRM_SECRET.length}<32)`,
+  ].filter(Boolean);
+  if (faltan.length) return json({ success: false, reason: `sin-configurar:${faltan.join(',')}` }, 500);
 
   // Enlace firmado: contiene el correo, el interés, el origen y la caducidad. No se guarda en ningún sitio.
   const payload = b64url(new TextEncoder().encode(JSON.stringify({ e: email, i: interes, o: origen, x: Date.now() + VALIDEZ_MS })));
