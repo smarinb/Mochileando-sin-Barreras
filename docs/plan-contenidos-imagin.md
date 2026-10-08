@@ -108,6 +108,13 @@ Pilar `/mejor-tarjeta-para-viajar`, hub dentro de `/tarjeta-imagin`, enlaces cru
 3. **Oleada 3:** `/tarjeta-imagin-braille`, `/seguro-de-viaje-imagin`, `/imagin-para-extranjeros`, `/carne-joven-imagin`.
 4. Medir en Search Console a las 4-6 semanas.
 
+## 5b. Hecho (8 oct 2026)
+- **Dato aportado por el usuario:** CaixaBank está adherido al Fondo de Garantía de Depósitos de Entidades de Crédito (100.000 € por depositante; indicador de riesgo 1/6 en cuentas corrientes). Se cita con la fuente «información legal publicada».
+- **Enlace:** al **sitio oficial de imagin**, sin monetizar (el usuario aún no es cliente). Cada botón lo declara: «no recibimos comisión».
+- **Oleada 1:** `tarjeta-imagin` y las tres comparativas corregidas (cambio de la red, crédito con matices, límites, seguro, Braille, FGD).
+- **Oleadas 2 y 3:** `comisiones-imagin-extranjero`, `imagin-opiniones`, `tarjeta-imagin-credito`, `tarjetas-imagin` (incluye Carné Joven), `tarjeta-imagin-braille`, `seguro-de-viaje-imagin` (sin exclusiones publicadas: el post lo dice) e `imagin-para-extranjeros` (NIE, TIE y permanencia de 48 meses).
+- **Pendiente:** conseguir un código de amigo cuando haya cuenta (50 €/amigo, con condiciones).
+
 ## 6. Preguntas abiertas
 1. ¿Tienes cuenta imagin y **código de amigo**? Sin él, no hay monetización posible.
 2. ¿Tienes capturas de la app con las **comisiones de cambio** si imagin las muestra en el detalle de movimientos?
