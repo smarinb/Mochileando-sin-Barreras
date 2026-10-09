@@ -1,0 +1,66 @@
+---
+// Punto exacto en Google Maps, con carga bajo demanda.
+//
+// No se carga NINGÚN recurso de Google hasta que la persona pulsa «Ver mapa»: así no pesa en LCP,
+// no hay cookies de terceros al abrir la página y sirve también sin JavaScript (enlace directo).
+// El iframe usa la URL de incrustación pública (sin API key).
+//
+// Uso en un MDX:
+//   <MapaPunto lat={-32.88187} lng={-68.84744} titulo="Donde acampamos en Mendoza" />
+interface Props {
+  lat: number;
+  lng: number;
+  titulo: string;
+  zoom?: number;
+}
+const { lat, lng, titulo, zoom = 15 } = Astro.props;
+const coords = `${lat}, ${lng}`;
+const abrir = `https://www.google.com/maps?q=${lat},${lng}`;
+const embed = `https://maps.google.com/maps?q=${lat},${lng}&z=${zoom}&output=embed`;
+---
+
+<figure class="not-prose my-6 rounded-xl border border-[#A5CFD2] bg-teal-50 p-4 dark:border-slate-600 dark:bg-slate-800" data-mapa-punto>
+  <figcaption class="mb-3">
+    <p class="m-0 text-base font-bold text-slate-800 dark:text-slate-100">{titulo}</p>
+    <p class="m-0 mt-1 text-sm text-slate-700 dark:text-slate-300">
+      Coordenadas: <code class="rounded bg-white px-1.5 py-0.5 text-[#1f5c5b] dark:bg-slate-900 dark:text-[#A5CFD2]">{coords}</code>
+    </p>
+  </figcaption>
+  <div class="mapa-slot min-h-[56px]" data-embed={embed} data-title={`Mapa: ${titulo}`}>
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <button
+        type="button"
+        class="mapa-btn rounded-lg bg-[#36A09F] px-5 py-2.5 text-sm font-bold text-white shadow transition hover:bg-[#2c8584] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1f5c5b]"
+        aria-label={`Ver mapa: ${titulo}`}
+      >
+        Ver mapa aquí
+      </button>
+      <a
+        href={abrir}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-lg border border-[#36A09F] px-5 py-2.5 text-center text-sm font-bold text-[#1f5c5b] no-underline dark:text-[#A5CFD2]"
+      >
+        Abrir en Google Maps
+      </a>
+    </div>
+  </div>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-mapa-punto]').forEach((fig) => {
+    const slot = fig.querySelector<HTMLElement>('.mapa-slot');
+    const btn = fig.querySelector<HTMLButtonElement>('.mapa-btn');
+    if (!slot || !btn) return;
+    btn.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = slot.dataset.embed ?? '';
+      iframe.title = slot.dataset.title ?? 'Mapa';
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.className = 'h-[320px] w-full rounded-lg border-0';
+      slot.replaceChildren(iframe);
+    });
+  });
+</script>
