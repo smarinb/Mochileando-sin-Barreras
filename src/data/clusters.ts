@@ -128,6 +128,26 @@ export const clusters: Cluster[] = [
     icon: 'tabler:mountain',
   },
   {
+    slug: 'mendoza',
+    category: 'Mendoza',
+    label: 'Mendoza',
+    inline: 'Mendoza',
+    group: 'destinos',
+    bridges: ['alquiler-de-coches', 'esim-para-viajar', 'seguros-de-viaje', 'tarjetas-para-viajar'],
+    h1: 'Mendoza: Valle de Uco, bodegas y qué hacer en los Andes',
+    metaTitle: 'Mendoza: Valle de Uco, bodegas y qué hacer',
+    metaDescription:
+      'Guías de Mendoza (Argentina): Valle de Uco, bodegas para visitar, excursiones de montaña y cómo organizar el viaje con datos de fuentes oficiales.',
+    intro:
+      'Mendoza es vino y montaña. Aquí reunimos guías con datos contrastados en fuentes oficiales: el Valle de Uco, las bodegas que merece la pena reservar y cómo llegar sin complicarte.',
+    pillar: {
+      href: '/valle-de-uco',
+      title: 'Valle de Uco: qué hacer, qué ver y cómo organizar la visita',
+      cta: 'Ver la guía del Valle de Uco',
+    },
+    icon: 'tabler:grape',
+  },
+  {
     slug: 'eslovenia',
     category: 'Eslovenia',
     label: 'Eslovenia',

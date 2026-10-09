@@ -1,0 +1,126 @@
+---
+// Widget de actividades de Civitatis (afiliado aid 5125), cargado en diferido.
+//
+// El código original de Civitatis descarga `iframeResizer` y crea el iframe nada más cargar la
+// página. Aquí no se pide NADA a Civitatis hasta que el widget está cerca del viewport
+// (IntersectionObserver), para no afectar a LCP ni a los Core Web Vitals.
+//
+// Uso en un MDX:
+//   <CivitatisWidget zone="422" cmp="Widget_Mendoza_valle_de_uco" titulo="Excursiones desde Mendoza" href="/es/mendoza/?aid=5125" />
+// `zone` es el id de zona de Civitatis (Mendoza provincia = 422). `cmp` es la campaña para medir en Civitatis.
+interface Props {
+  zone?: string;
+  cmp?: string;
+  cant?: number;
+  titulo?: string;
+  href?: string;
+}
+const { zone = '422', cmp = 'Widget_Mendoza_AR', cant = 6, titulo = 'Excursiones y actividades', href } = Astro.props;
+const params = new URLSearchParams({
+  affiliated: '5125',
+  display: 'cosy',
+  cant: String(cant),
+  lang: 'es',
+  currency: 'EUR',
+  zone,
+  transfer: '0',
+  cmp,
+  width: '100%',
+  hideButton: '0',
+  centerContent: '1',
+  typeSelection: 'all',
+  color: '1f7f7e',
+  typography: 'Open Sans',
+  removeBackground: '1',
+  showShadow: '1',
+  roundedButtons: '1',
+});
+const src = `https://www.civitatis.com/widget-activities/?${params.toString().replace(/%25/g, '%')}`;
+---
+
+<section class="not-prose my-8" aria-label={titulo}>
+  <p class="mb-3 text-lg font-bold text-slate-800 dark:text-slate-100">{titulo}</p>
+  <div class="civitatis-widget min-h-[480px]" data-src={src}>
+    <noscript>
+      {
+        href && (
+          <a
+            href={`https://www.civitatis.com${href}`}
+            target="_blank"
+            rel="nofollow sponsored noopener noreferrer"
+            class="font-semibold text-[#1f7f7e] underline"
+          >
+            Ver actividades en Civitatis
+          </a>
+        )
+      }
+    </noscript>
+  </div>
+  <p class="mt-2 text-xs text-slate-600 dark:text-slate-400">
+    Actividades de Civitatis. Si reservas desde aquí, nos llevamos una pequeña comisión sin coste extra para ti.
+  </p>
+</section>
+
+<script>
+  const widgets = document.querySelectorAll<HTMLElement>('.civitatis-widget');
+  let resizerPromise: Promise<void> | undefined;
+
+  const loadResizer = () => {
+    resizerPromise ??= new Promise<void>((resolve) => {
+      const s = document.createElement('script');
+      s.src = 'https://www.civitatis.com/f/js/vendor/iframeResizer.min.js';
+      s.onload = () => resolve();
+      s.onerror = () => resolve();
+      document.head.appendChild(s);
+    });
+    return resizerPromise;
+  };
+
+  const mount = async (el: HTMLElement) => {
+    if (el.dataset.loaded) return;
+    el.dataset.loaded = '1';
+    const iframe = document.createElement('iframe');
+    iframe.className = 'civitatis-iframe';
+    iframe.src = el.dataset.src ?? '';
+    iframe.title = 'Actividades y excursiones de Civitatis';
+    iframe.loading = 'lazy';
+    iframe.setAttribute('width', '100%');
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('data-maxwidth', '100%');
+    iframe.style.maxWidth = '100%';
+    el.appendChild(iframe);
+    await loadResizer();
+    // @ts-expect-error: iFrameResize lo define el script de Civitatis
+    window.iFrameResize?.(
+      {
+        checkOrigin: false,
+        initCallback: (f: HTMLIFrameElement) => {
+          setTimeout(() => {
+            const ev = document.createEvent('UIEvents');
+            ev.initUIEvent('resize', true, false, window, 0);
+            f.dispatchEvent(ev);
+          });
+        },
+      },
+      iframe
+    );
+    el.style.minHeight = '';
+  };
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            io.unobserve(e.target);
+            mount(e.target as HTMLElement);
+          }
+        }
+      },
+      { rootMargin: '400px 0px' }
+    );
+    widgets.forEach((w) => io.observe(w));
+  } else {
+    widgets.forEach((w) => mount(w));
+  }
+</script>

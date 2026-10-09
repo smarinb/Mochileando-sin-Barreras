@@ -61,6 +61,7 @@ export const headerData = {
       text: 'Destinos',
       links: [
         { text: 'Guía de la Patagonia', href: getPermalink('/guia-patagonia') },
+        { text: 'Valle de Uco (Mendoza)', href: getPermalink('/valle-de-uco') },
         { text: 'Qué ver en Eslovenia', href: getPermalink('/que-ver-y-hacer-en-eslovenia') },
         { text: 'Guía completa de Siberia', href: getPermalink('/guia-siberia') },
         { text: 'Guía de Kazajistán', href: getPermalink('/guia-kazajistan') },
