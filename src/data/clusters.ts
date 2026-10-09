@@ -141,9 +141,9 @@ export const clusters: Cluster[] = [
     intro:
       'Mendoza es vino y montaña. Aquí reunimos guías con datos contrastados en fuentes oficiales: el Valle de Uco, las bodegas que merece la pena reservar y cómo llegar sin complicarte.',
     pillar: {
-      href: '/valle-de-uco',
-      title: 'Valle de Uco: qué hacer, qué ver y cómo organizar la visita',
-      cta: 'Ver la guía del Valle de Uco',
+      href: '/que-hacer-en-mendoza',
+      title: 'Qué hacer en Mendoza capital: 1, 2 y 3 días',
+      cta: 'Ver la guía de Mendoza capital',
     },
     icon: 'tabler:grape',
   },
