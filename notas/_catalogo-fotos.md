@@ -34,7 +34,7 @@ Lugar de todo el lote: **bodega Chañarmuyo (La Rioja)**, seguro (el nombre apar
 |---|---|---|---|---|
 | 005648 | Relieve de un indígena con lanza y greca, firmado «Marino 92» | Famatina, **probable** (placa 005656 y mismo estilo) | Relieve de un indígena con lanza y grecas en un monumento de la plaza | Patrimonio y cultura local |
 | 005653 | Relieve de un minero con poncho y pico | Famatina, **probable** (misma serie) | Relieve de un minero con poncho y pico en un monumento | Minería; tema local |
-| 005656 | Placa de la Comisión Municipal de Cultura «Al pueblo de Famatina… 1592-19 de abril 1992» (homenaje al aborigen) | **Famatina, seguro** | Placa conmemorativa del quinto centenario en Famatina | Contexto histórico |
+| 005656 | Placa de la Comisión Municipal de Cultura «Al pueblo de Famatina… 1592-19 de abril 1992» (homenaje al aborigen) | **Famatina, seguro** | Placa conmemorativa del cuarto centenario (IV centenario, 1592-1992) en Famatina | Contexto histórico |
 | 005658 | Monumento con un indígena y un conquistador español de espaldas, firmado «Marino 92» | Famatina, **probable** | Monumento con un indígena y un conquistador español en relieve | Contexto histórico |
 | 005700 | Sergi junto al cartel luminoso «Yo ♥ Famatina» y tres vasijas con grecas | **Famatina, seguro** | Sergi junto al cartel «Yo ♥ Famatina» en la plaza | Portada de Famatina |
 | 005702 | Cartel «Pampa de Tambería o Pampa Real» (los incas… 09/12/2015) | **Famatina, seguro** | Cartel informativo sobre la Pampa de Tambería y la presencia inca | Excursiones y patrimonio |

@@ -8,21 +8,23 @@
 // Uso en un MDX:
 //   <CivitatisWidget zone="422" cmp="Widget_Mendoza_valle_de_uco" titulo="Excursiones desde Mendoza" href="/es/mendoza/?aid=5125" />
 // `zone` es el id de zona de Civitatis (Mendoza provincia = 422). `cmp` es la campaña para medir en Civitatis.
+// Algunos destinos (La Rioja Argentina = 3094) vienen en su código con `destination=` en vez de `zone=`: usa `destination`.
 interface Props {
   zone?: string;
+  destination?: string;
   cmp?: string;
   cant?: number;
   titulo?: string;
   href?: string;
 }
-const { zone = '422', cmp = 'Widget_Mendoza_AR', cant = 6, titulo = 'Excursiones y actividades', href } = Astro.props;
+const { zone = '422', destination, cmp = 'Widget_Mendoza_AR', cant = 6, titulo = 'Excursiones y actividades', href } = Astro.props;
 const params = new URLSearchParams({
   affiliated: '5125',
   display: 'cosy',
   cant: String(cant),
   lang: 'es',
   currency: 'EUR',
-  zone,
+  ...(destination ? { destination } : { zone }),
   transfer: '0',
   cmp,
   width: '100%',
