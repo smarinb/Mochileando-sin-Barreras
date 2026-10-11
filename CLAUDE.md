@@ -113,3 +113,19 @@ El plan completo (datos de Search Console, pilares, interlinking, redirecciones 
 *   **Cada región/tema = un clúster** en `clusters.ts`, con `category` exacta en los posts. No usar categorías jerárquicas de WordPress.
 *   **Interlinking mínimo por post:** pilar (automático), 2 enlaces laterales con anchor descriptivo y un puente comercial en contexto (alquiler, eSIM o seguro según la intención).
 *   **Migrar siempre con el HTML íntegro de la API REST de WordPress** (`/wp-json/wp/v2/posts?slug=...`), nunca con resúmenes: no se resume ni elimina contenido.
+
+---
+
+## 📝 Notas de campo (Telegram → repo)
+
+Sergi y Cris envían notas de voz, fotos, ubicaciones y textos a un bot de Telegram desde la ruta. Un bot en una EC2 los guarda y hace push a este repo. Detalle completo en `docs/notas-de-campo.md`.
+
+- Ubicación: `notas/campo/*.md` (notas), `notas/fotos/` (imágenes), `notas/docs/` (documentos). Ficheros `AAAA-MM-DD-HHMMSS-tipo.md`, con `fecha` y `tipo` en el frontmatter.
+- Antes de trabajar, haz `git pull`: el bot empuja en cualquier momento.
+- Las horas están en UTC (hora del servidor), no en hora local del viaje.
+- Cada mensaje es una nota independiente; agrupa por proximidad de marca de tiempo (foto + voz + ubicación del mismo lugar).
+- Las transcripciones de voz pueden fallar en nombres propios: verifica topónimos dudosos.
+- NO edites ni borres las notas originales. Lo derivado (fichas de lugar, artículos) va en otras carpetas.
+- Registra lo ya procesado en `notas/_procesadas.md` (nota → dónde se usó).
+- No publiques coordenadas exactas de pernocta sin confirmación de Sergi.
+- Nunca incluyas tokens ni claves en el repo.
