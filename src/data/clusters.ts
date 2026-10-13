@@ -157,9 +157,9 @@ export const clusters: Cluster[] = [
     h1: 'La Rioja (Argentina): Famatina, Chilecito y vinos de altura',
     metaTitle: 'La Rioja (Argentina): Famatina, Chilecito y vinos de altura',
     metaDescription:
-      'Guías de La Rioja argentina en camper: bodega Chañarmuyo, Famatina y Chilecito, con experiencia propia y datos de fuentes oficiales.',
+      'Guías de La Rioja argentina en camper: Famatina, Chilecito, Andolucas y Hualco, con experiencia propia y datos de fuentes oficiales.',
     intro:
-      'La Rioja argentina es de las provincias menos visitadas del noroeste. Aquí reunimos lo que hemos vivido en Famatina, Chilecito y el valle de Chañarmuyo, contrastado con fuentes oficiales.',
+      'La Rioja argentina es de las provincias menos visitadas del noroeste. Aquí reunimos lo que hemos vivido en Famatina, Chilecito, Chañarmuyo y San Blas de los Sauces (Andolucas, Hualco y la Cola de la Novia), contrastado con fuentes oficiales.',
     icon: 'tabler:mountain',
   },
   {
