@@ -150,6 +150,6 @@ export const footerData = {
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
   footNote: `
-    © ${new Date().getFullYear()} Mochileando sin Barreras · Todos los derechos reservados.
+    © ${new Date().getFullYear()} Mochileando sin Barreras · Todos los derechos reservados. · Web desarrollada por <a class="underline hover:text-gray-700 dark:hover:text-gray-200" href="https://sergiomarin.dev" target="_blank" rel="noopener noreferrer">Sergio Marín</a>
   `,
 };
