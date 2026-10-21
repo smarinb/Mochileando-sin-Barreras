@@ -13,14 +13,15 @@ const DESTINO = 'src/assets/images';
 // [carpeta, número DSC, nombre de salida]. La portada se recorta a 16:9; el resto conserva proporción.
 const fotos = [
   // Portadas: siempre fotos reales de los viajeros, con las caras visibles.
-  ['altiplano', 4901, 'uyuni-cover', { w: 1536, h: 864 }],
+  ['Salar de uyuni', 5173, 'uyuni-cover', { w: 1536, h: 864 }],
+  ['altiplano', 4901, 'uyuni-desierto-manos'],
   ['altiplano', 4944, 'uyuni-altura-cover', { w: 1536, h: 864 }],
   ['Salar de uyuni', 5126, 'uyuni-llevar-cover', { w: 1536, h: 864 }],
   ['Salar de uyuni', 5099, 'uyuni-amanecer-siluetas'],
   // Foto vertical de cámara 360: se recorta el cielo para que el grupo ocupe el encuadre.
   ['altiplano', 'IMG_20260504_112917_00_095', 'uyuni-cuatro-laguna-volcanes', { recorteSuperior: 0.3, ancho: 900 }],
   // San Pedro de Atacama (fotos de cámara 360, verticales; se recorta el rótulo de la parte baja).
-  ['san-pedro', 'sp-03.jpeg', 'san-pedro-coche-cover', { recorte: { left: 0, top: 0.16, width: 1, height: 0.35 }, ancho: 1500 }],
+  ['san-pedro', 'sp-03.jpeg', 'san-pedro-coche-cover', { recorte: { left: 0, top: 0.16, width: 1, height: 0.35 }, ancho: 1500, ampliar: true }],
   ['san-pedro', 'sp-02.jpeg', 'san-pedro-valle-de-la-luna', { recorte: { left: 0, top: 0.2, width: 1, height: 0.72 }, ancho: 800 }],
   ['san-pedro', 'sp-09.jpeg', 'san-pedro-laguna-cejar', { recorte: { left: 0, top: 0.2, width: 1, height: 0.56 }, ancho: 1200 }],
   ['san-pedro', 'sp-11.jpeg', 'san-pedro-pozon', { recorte: { left: 0, top: 0.25, width: 1, height: 0.68 }, ancho: 800 }],
@@ -62,7 +63,7 @@ for (const [carpeta, num, nombre, caja] of fotos) {
   const out = join(DESTINO, `${nombre}.webp`);
   const info = await (caja?.w
     ? img.resize(caja.w, caja.h, { fit: 'cover' })
-    : img.resize({ width: caja?.ancho ?? 1200, withoutEnlargement: true })
+    : img.resize({ width: caja?.ancho ?? 1200, withoutEnlargement: !caja?.ampliar })
   )
     .webp({ quality: 78 })
     .toFile(out);

@@ -137,9 +137,9 @@ export const clusters: Cluster[] = [
     h1: 'Bolivia: Salar de Uyuni y altiplano desde San Pedro de Atacama',
     metaTitle: 'Bolivia: Salar de Uyuni y altiplano desde San Pedro de Atacama',
     metaDescription:
-      'Guías de Bolivia desde Chile: tour al Salar de Uyuni desde San Pedro de Atacama, altiplano, lagunas, mal de altura y consejos prácticos con experiencia propia.',
+      'Guías de Bolivia desde Chile: tour al Salar de Uyuni desde San Pedro de Atacama, altiplano, mal de altura y consejos prácticos con experiencia propia.',
     intro:
-      'Cruzamos el altiplano boliviano en 4x4 desde San Pedro de Atacama hasta el Salar de Uyuni. Aquí reunimos la ruta día a día, el mal de altura que sufrimos todos, el dinero y la conexión que necesitas y lo que llevar.',
+      'Cruzamos el altiplano boliviano en 4x4 desde San Pedro de Atacama hasta el Salar de Uyuni. Aquí reunimos la ruta día a día, el mal de altura que sufrimos todos y lo que conviene llevar.',
     pillar: {
       href: '/salar-de-uyuni-desde-san-pedro-de-atacama',
       title: 'Salar de Uyuni desde San Pedro de Atacama: tour de 4 días',

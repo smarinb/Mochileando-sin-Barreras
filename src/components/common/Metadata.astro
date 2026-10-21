@@ -17,7 +17,9 @@ export interface Props extends MetaData {
 const {
   title,
   ignoreTitleTemplate = false,
-  canonical = String(getCanonical(String(Astro.url.pathname))),
+  // `build.format: 'file'` hace que `pathname` termine en `.html`, y Cloudflare redirige esa URL (308) a la limpia:
+  // se normaliza para que canonical y og:url apunten a la URL real, sin `.html` ni `/index`.
+  canonical = String(getCanonical(String(Astro.url.pathname).replace(/\/index\.html$/, '/').replace(/\.html$/, ''))),
   robots = {},
   description,
   openGraph = {},
