@@ -61,6 +61,7 @@ export const headerData = {
       text: 'Destinos',
       links: [
         { text: 'Guía de la Patagonia', href: getPermalink('/guia-patagonia') },
+        { text: 'Salar de Uyuni desde Atacama', href: getPermalink('/salar-de-uyuni-desde-san-pedro-de-atacama') },
         { text: 'Qué hacer en Mendoza', href: getPermalink('/que-hacer-en-mendoza') },
         { text: 'Qué ver en Eslovenia', href: getPermalink('/que-ver-y-hacer-en-eslovenia') },
         { text: 'Guía completa de Siberia', href: getPermalink('/guia-siberia') },

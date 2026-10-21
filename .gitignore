@@ -53,3 +53,6 @@ pnpm-workspace.yaml
 /Keyword Stats*.csv
 /esim.holafly.com/
 /esimflag.com/
+
+# fotos originales y datos de keywords de Bolivia (3 GB, solo local)
+Bolivia/
