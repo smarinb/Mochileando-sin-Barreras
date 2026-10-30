@@ -56,3 +56,6 @@ pnpm-workspace.yaml
 
 # fotos originales y datos de keywords de Bolivia (3 GB, solo local)
 Bolivia/
+
+# SEO: caché y datos crudos de DataForSEO (los informes en docs/seo-dataforseo/ sí se versionan)
+seo/dataforseo/
