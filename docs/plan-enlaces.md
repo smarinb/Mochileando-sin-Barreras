@@ -22,10 +22,35 @@ Nada de esto cuesta dinero; ya existe o está casi hecho:
 ### A. Colaboraciones con blogs de viajes (semanas 1-4)
 Objetivo: 15-20 contactos, esperar 3-5 enlaces.
 - Proponer **un post invitado o una entrevista cruzada** («cómo viajamos con seguro siendo hipoacúsica») en vez de pedir el enlace.
-- Dominios reales que enlazan a los competidores y a ti aún no (candidatos de partida):
-  `viajaralparaiso.com`, `laseddelviajero.com`, `andanzasviajeras.com`, `viajarcongrace.com`, `mundoporlibre.com`, `lascosillasdecarmen.es`, `norkaluque.com`, `viajamosloquepodemos.blogspot.com`, `viatgessun.blogspot.com`, `doshaciendofotos.blogspot.com`, `revi.io` (reseñas).
+- **Candidatos comprobados el 3 nov 2026** (activos, con post reciente; mensajes listos en `docs/mensajes-colaboracion.md`): `losviajesdenena.com`, `autocamperly.com`, `deviajealmundo.com`, `atomarpormundo.com`, `unaideaunviaje.com`, `cruceromundo.com`, `enjoytravelaccessible.com`.
+- **Descartados:** muchos de los blogs que enlazan a los competidores están abandonados (`laseddelviajero.com`, último post en 2017; `viajamosloquepodemos.blogspot.com`, 2014; `viajaralparaiso.com`, marzo 2025). Son enlaces antiguos, no sirven para contactar.
 - Antes de escribir, comprobar a mano que el blog sigue activo y es de viajes en español.
 - Si ofrecen listado de blogs amigos, **enlace recíproco solo si les encaja de verdad** (uno por blog, sin acuerdos en cadena).
+
+#### Propuestas concretas de post de invitado (A)
+Cada una usa un activo que ya tienes, para que el blog receptor reciba algo que no puede escribir él mismo. Ofrecer 2 al contactar y dejar que elija.
+
+| # | Título propuesto | Qué aporta | Enlaza a |
+|---|---|---|---|
+| 1 | «Pedimos el mismo seguro 31 veces: lo que cuesta de verdad viajar con Heymondo o IATI» | Datos propios de precio, con una tabla que el blog puede citar | `/heymondo-o-iati` |
+| 2 | «Seguro de viaje sin poder llamar por teléfono: cómo se pide ayuda siendo hipoacúsica» | Experiencia real y útil para cualquier viajero que no pueda o no quiera llamar | `/heymondo-sin-llamar-por-telefono`, `/iati-telefono-contacto` |
+| 3 | «Tu seguro de viaje en una furgoneta camper: qué cubre el vehículo y qué cubre a las personas» | Tema práctico y poco cubierto, con los tres niveles reales de IATI Camper | `/iati-camper`, `/heymondo-furgoneta-camper` |
+| 4 | «Crucero y seguro de viaje: qué pasa si el vuelo llega tarde y el barco zarpa sin ti» | Caso concreto con la tabla oficial de IATI para cruceros | `/iati-crucero` |
+| 5 | «Cómo reclamar a tu seguro de viaje sin perder la paciencia» | Guía paso a paso, con nuestra reclamación real | `/como-reclamar-seguro-heymondo` |
+| 6 | «Los tres seguros de viaje que no recomendaríamos a cada tipo de viajero» | Opinión honesta, con matices | `/mejor-seguro-de-viaje` |
+
+**Cuál ofrecer a cada tipo de blog**
+- Blogs de **mochileros o viajes largos** (p. ej. `viajarcongrace.com`, `mundoporlibre.com`): propuestas 1 y 5.
+- Blogs de **viajes en furgoneta o por carretera**: propuesta 3.
+- Blogs **familiares o de cruceros**: propuesta 4 (y 1).
+- Blogs de **accesibilidad y discapacidad**, asociaciones y pódcast: propuesta 2.
+- **Antes de contactar**, mira dos o tres posts recientes del blog y cita uno por su nombre. Si no puedes citar nada real, no le escribas.
+
+**Normas del post de invitado**
+- Que sea útil sin el enlace: 800-1.200 palabras, datos reales y sin tono comercial.
+- Un solo enlace a una guía tuya, con un texto de enlace natural (nunca «mejor seguro de viaje» repetido). Ninguno a botones de afiliado.
+- No publicar la misma pieza en dos sitios: cada blog recibe una versión propia.
+- Si el blog pide enlazar a Heymondo o IATI con afiliado, rechazarlo: todo va a tus guías.
 
 ### B. Comunidad sorda y accesibilidad (semanas 1-6)
 Alta autoridad temática y casi nadie lo trabaja desde viajes.
