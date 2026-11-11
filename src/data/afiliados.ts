@@ -16,6 +16,8 @@ export interface Afiliado {
   review?: { href: string; text: string };
   /** Texto corto del descuento para la barra móvil (por defecto «5% dto.»). */
   mobileDiscount?: string;
+  /** `false` = no aparece en la barra inferior móvil (solo caben 3 botones); sí en la barra lateral. */
+  mobile?: boolean;
 }
 
 /** Intermundial: enlace de afiliado (cupón equivalente: SINBARRERAS). Ver docs/afiliados.md. */
@@ -77,6 +79,18 @@ export const afiliados: Afiliado[] = [
     cta: 'Comparar coches',
     href: 'https://www.discovercars.com/es?a_aid=smarinb87',
     review: { href: '/discovercars-opiniones', text: 'Nuestra opinión' },
+  },
+  // Chapka va al final a propósito: en posts de otros clústeres no desplaza a eSIM/tarjetas, y en los de seguros completa las 4 tarjetas.
+  {
+    key: 'chapka',
+    cluster: 'seguros-de-viaje',
+    name: 'Chapka',
+    benefit: '7% de descuento automático desde nuestro enlace (según su página de descuento). Seguros por tipo de viaje: Cap Trip, Trotamundos, Working Holiday.',
+    cta: 'Ver mi precio',
+    href: 'https://www.chapkadirect.es/index.php?action=produit&id=956&app=sinbarreras',
+    review: { href: '/chapka-opiniones', text: 'Análisis de Chapka' },
+    mobileDiscount: '7% dto.',
+    mobile: false,
   },
 ];
 

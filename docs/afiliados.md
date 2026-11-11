@@ -20,3 +20,24 @@ Fuente única de los enlaces en código: `src/data/afiliados.ts` (barra lateral 
 | eSIMFLAG | `afiliados.ts` |
 | N26 | `afiliados.ts` |
 | DiscoverCars | `afiliados.ts` |
+
+## Chapka (seguros de viaje)
+
+- Panel de afiliado: affiliate.chapka (carpeta local `chapka/` con enlaces, logo y banner del 7 %). El **7 % de descuento** sale del banner del panel; sin confirmar en la web pública (ver `docs/plan-contenidos-chapka.md` §5).
+- Enlaces trackeados (`app=sinbarreras`), base `https://www.chapkadirect.es/index.php?action=produit&id=<id>&app=sinbarreras`:
+
+| Producto | id |
+|---|---|
+| Cap Trip (Basic/Plus) | 956 |
+| Cap Cancelación | 959 |
+| Cap Multi-Trip anual | 960 |
+| Cap Voluntariado | 929 |
+| Cap Trotamundos | 958 |
+| Cap Working Holiday | 957 |
+| Cap Student | 968 |
+| Cap Tempo Expat | 942 |
+| Cap Schengen | 930 |
+| Cap Europa | 931 |
+
+- Regla: nunca enlazar a `chapkadirect.es` a secas; siempre con `app=sinbarreras` y `rel="nofollow sponsored noopener"` (`BotonAfiliado`).
+- Pendiente: añadir las constantes a `src/data/afiliados.ts` cuando se publiquen las páginas.
