@@ -123,7 +123,8 @@ Sergi y Cris envían notas de voz, fotos, ubicaciones y textos a un bot de Teleg
 - Ubicación: `notas/campo/*.md` (notas), `notas/fotos/` (imágenes), `notas/docs/` (documentos). Ficheros `AAAA-MM-DD-HHMMSS-tipo.md`, con `fecha` y `tipo` en el frontmatter.
 - Antes de trabajar, haz `git pull`: el bot empuja en cualquier momento.
 - Las horas están en UTC (hora del servidor), no en hora local del viaje.
-- Cada mensaje es una nota independiente; agrupa por proximidad de marca de tiempo (foto + voz + ubicación del mismo lugar).
+- Cada mensaje es una nota, salvo los álbumes (varias fotos = una nota). Agrupa por el campo `lugar` del frontmatter (lugar activo al enviar, puede estar desactualizado) y por proximidad de marca de tiempo; si contradice al pie de foto o la ubicación, pregunta.
+- En imágenes enviadas como archivo, `captura:` (EXIF) es la fecha real de la foto; `fecha:` solo es la hora de envío.
 - Las transcripciones de voz pueden fallar en nombres propios: verifica topónimos dudosos.
 - NO edites ni borres las notas originales. Lo derivado (fichas de lugar, artículos) va en otras carpetas.
 - Registra lo ya procesado en `notas/_procesadas.md` (nota → dónde se usó).

@@ -46,6 +46,7 @@ Formato de cada nota:
 ---
 fecha: 2026-10-11 00:25
 tipo: voz
+lugar: "Cafayate"   # solo si había un /lugar activo
 ---
 
 Texto de la nota (o transcripción, o enlace a la foto/documento).
@@ -53,10 +54,19 @@ Texto de la nota (o transcripción, o enlace a la foto/documento).
 
 Las fotos se enlazan con ruta relativa: `![foto](../fotos/AAAA-MM-DD-HHMMSS.jpg)`.
 
+## 3b. Comandos del bot y cómo enviar material
+
+- **`/lugar Nombre del sitio`**: fija un lugar activo (guardado en el servidor, sobrevive a reinicios). Las notas siguientes llevan `lugar: "..."` en el frontmatter. `/lugar` muestra el activo y `/lugar borrar` lo quita. Hay que cambiarlo al cambiar de sitio; si no, las notas heredan el lugar anterior.
+- **Álbumes**: varias fotos enviadas a la vez se guardan en **una sola nota** con todas las imágenes y pies de foto. Se numeran `-01`, `-02`... en `notas/fotos/`.
+- **Imágenes enviadas «como archivo»** conservan el original y el bot lee su **EXIF**: la nota lleva `captura: AAAA-MM-DD HH:MM:SS` (hora real de la foto) y `coordenadas` con enlace a mapa si hay GPS. Las enviadas como «foto» normal pierden esos metadatos.
+- **Pies de foto**: se guardan en la nota; son la mejor pista de qué se ve y dónde.
+- **`/ayuda`** devuelve un resumen en el chat.
+
 ## 4. Al leer las notas
 
 1. **La hora es UTC (servidor), no la local del viaje.** En Argentina (UTC−3) una nota de las 21:00 locales aparece como del día siguiente 00:00.
-2. **Cada mensaje es una nota independiente.** Foto + voz + ubicación del mismo lugar son tres ficheros: correlaciona por proximidad de marca de tiempo (pocos minutos).
+2. **Cada mensaje es una nota, salvo los álbumes.** Foto + voz + ubicación siguen siendo ficheros distintos. Agrupa primero por el campo `lugar` del frontmatter (si existe) y luego por proximidad de marca de tiempo. Ojo: `lugar` es el activo al enviar; si se olvidó cambiarlo, puede ser el del día anterior. Ante contradicciones entre `lugar`, pie de foto y ubicación, pregunta.
+   - **Fecha real de una foto**: en imágenes enviadas como archivo, `captura:` (EXIF) manda sobre `fecha:` (hora de envío). Si se suben fotos atrasadas sin EXIF, fíate del pie de foto.
 3. **Las transcripciones pueden fallar**, sobre todo en nombres propios. Si un topónimo es dudoso, señálalo y pregunta antes de publicar.
 4. **Son material en bruto**: apuntes hablados, informales y sin verificar. Contrastar y redactar, no copiar.
 5. **Accesibilidad**: si una nota menciona accesos, rampas, superficies, baños, aparcamiento o ayudas para personas ciegas o con movilidad reducida, destácalo en las fichas de lugar.
@@ -81,15 +91,24 @@ journalctl -u botnotas -n 30 --no-pager
 - Config en `/home/botnotas/bot/.env`: `TELEGRAM_TOKEN`, `OPENAI_API_KEY`, `ALLOWED_IDS` (IDs separados por coma), `REPO_DIR`.
 - Añadir persona: añadir su user ID a `ALLOWED_IDS` y reiniciar.
 - «Falló el push»: revisar la deploy key (GitHub → Settings → Deploy keys) con escritura.
-- Si el log muestra la URL de Telegram con el token: poner el logger `httpx` en `WARNING`.
+- Si el log muestra la URL de Telegram con el token: poner los loggers `httpx`/`httpcore` en `WARNING`.
+- El lugar activo está en `/home/botnotas/bot/estado.json`; borrarlo equivale a `/lugar borrar`.
+- Al actualizar `bot.py`, la versión anterior queda como `bot.py.bak`.
+- El clon `/home/botnotas/repos/blog` no se edita a mano: los cambios se hacen desde el PC local y el bot los recoge con `git pull --rebase`.
 - Acceso a la EC2: AWS Systems Manager (Session Manager), sin puerto 22 público.
 
 ## 7. Pendiente
 
-- [ ] Probar la transcripción de voz de extremo a extremo.
+- [x] Probar la transcripción de voz de extremo a extremo.
+- [x] Álbumes en una sola nota, `/lugar` y EXIF en imágenes como archivo (bot v2).
 - [ ] Añadir el user ID de Cris a `ALLOWED_IDS`.
 - [ ] Comprobar si cada push a `main` dispara un despliegue; si es así, excluir `notas/**` del build.
 - [ ] Fase 2: agrupar foto + voz + ubicación enviadas seguidas en una sola nota.
 - [ ] Fase 2: plantilla opcional (lugar, accesibilidad, precios, horarios) estructurada por Claude.
 - [ ] Fase 2: varios proyectos con `/proyecto blog` o grupo de Telegram por temas.
 - [ ] Vigilar el tamaño del repo (fotos en el historial); si crece, mover originales a S3.
+
+## 8. Historial
+
+- **2026-10-10 · v1**: voz (Whisper), texto, foto, ubicación y documento; una nota por mensaje; commit y push automáticos a `main`.
+- **2026-10-11 · v2**: `/lugar`, álbumes en una nota, EXIF (fecha de captura y GPS) en imágenes como archivo, `/ayuda`, logs sin token.
