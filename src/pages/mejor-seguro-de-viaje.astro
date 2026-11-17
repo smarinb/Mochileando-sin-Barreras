@@ -9,6 +9,7 @@ import { getClusterBySlug } from '~/data/clusters';
 import BotonAfiliado from '~/components/mdx/BotonAfiliado.astro';
 import { INTERMUNDIAL_URL } from '~/data/afiliados';
 import CajaAviso from '~/components/mdx/CajaAviso.astro';
+import BannerIntermundialBF from '~/components/mdx/BannerIntermundialBF.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import heroImage from '~/assets/images/mejor-seguro-de-viaje.webp';
 
@@ -315,6 +316,7 @@ const faqSchema = {
         cara. Además, la eSIM gratuita de 1 GB, la sala VIP incluida y la videoconsulta rapidísima le dan un punto premium interesante.
       </p>
       <p><a href="/iati-vs-intermundial">Ver comparativa →</a></p>
+      <BannerIntermundialBF />
       <BotonAfiliado href={INTERMUNDIAL_URL} text="🗽 Ver precio de Intermundial">
         Entra desde nuestro enlace y consigue un 10% de descuento (cupón SINBARRERAS). Calcula tu seguro en 1 minuto
       </BotonAfiliado>

@@ -1,0 +1,47 @@
+---
+/**
+ * Banner Black Friday de Intermundial (campaña 20-30 nov 2026, 15 %).
+ * Es una web estática, así que la ventana de fechas se comprueba en el navegador
+ * (hora de Madrid): el banner está oculto y solo se muestra del 20 al 30 de noviembre.
+ * No hace falta redeploy ni el día 20 ni el 1 de diciembre.
+ * Retirarlo del código después de la campaña (buscar «BannerIntermundialBF»).
+ */
+import { INTERMUNDIAL_URL } from '~/data/afiliados';
+
+const DESDE = '2026-11-20';
+const HASTA = '2026-11-30';
+---
+
+<aside
+  class="intermundial-bf not-prose my-8 text-center"
+  data-desde={DESDE}
+  data-hasta={HASTA}
+  aria-label="Oferta de Black Friday de Intermundial"
+  hidden
+>
+  <a href={INTERMUNDIAL_URL} target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-block">
+    <picture>
+      <source media="(min-width: 768px)" srcset="/images/intermundial/bf-2026-970x250.jpg" width="970" height="250" />
+      <img
+        src="/images/intermundial/bf-2026-300x250.jpg"
+        width="300"
+        height="250"
+        alt="Intermundial Black Friday: 15 % de descuento en tu seguro de viaje, solo hasta el 30 de noviembre. Botón «Contrátalo aquí»"
+        loading="lazy"
+        decoding="async"
+        class="mx-auto h-auto max-w-full rounded-lg shadow"
+      />
+    </picture>
+  </a>
+  <p class="mt-2 mb-0 text-xs text-slate-600 dark:text-slate-400">
+    Publicidad · enlace de afiliado. Mismo precio para ti y una pequeña comisión para nosotros.
+  </p>
+</aside>
+
+<script>
+  const hoyMadrid = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date());
+  document.querySelectorAll<HTMLElement>('.intermundial-bf').forEach((el) => {
+    const { desde, hasta } = el.dataset;
+    if (desde && hasta && hoyMadrid >= desde && hoyMadrid <= hasta) el.hidden = false;
+  });
+</script>
