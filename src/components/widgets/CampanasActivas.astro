@@ -1,0 +1,48 @@
+---
+/**
+ * Franja superior de todas las páginas con las campañas de afiliados activas hoy (datos: src/data/campanas.ts).
+ * Oculta por defecto; un script comprueba las fechas en el navegador (hora de Madrid) y muestra solo las vigentes.
+ * También sustituye el texto de las tarjetas de afiliado (barra lateral y móvil) marcadas con [data-camp-*].
+ */
+import { campanas } from '~/data/campanas';
+---
+
+<div
+  id="campanas-activas"
+  role="region"
+  aria-label="Ofertas activas en seguros y eSIM"
+  hidden
+  class="bg-[#1f6f6e] px-4 py-2 text-center text-sm text-white dark:bg-slate-800"
+>
+  <span class="font-bold">Black Friday:</span>
+  {
+    campanas.map((c) => (
+      <span class="camp-item mx-1 inline-block" data-desde={c.desde} data-hasta={c.hasta} hidden>
+        <a href={c.guia} class="font-semibold text-white underline underline-offset-2 hover:no-underline">
+          {c.nombre} {c.descuento}
+        </a>
+      </span>
+    ))
+  }
+</div>
+
+<script>
+  const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date());
+  const vigente = (el: HTMLElement) => {
+    const { desde, hasta } = el.dataset;
+    return !!desde && !!hasta && hoy >= desde && hoy <= hasta;
+  };
+
+  const items = Array.from(document.querySelectorAll<HTMLElement>('#campanas-activas .camp-item'));
+  const activos = items.filter(vigente);
+  activos.forEach((el) => (el.hidden = false));
+  if (activos.length) document.getElementById('campanas-activas')!.hidden = false;
+
+  // Tarjetas de afiliado: muestra el texto de campaña y oculta el habitual dentro del mismo grupo.
+  document.querySelectorAll<HTMLElement>('[data-camp-desde]').forEach((el) => {
+    const w = { desde: el.dataset.campDesde, hasta: el.dataset.campHasta };
+    if (!w.desde || !w.hasta || hoy < w.desde || hoy > w.hasta) return;
+    el.hidden = false;
+    el.closest('[data-camp-group]')?.querySelectorAll<HTMLElement>('[data-camp-normal]').forEach((n) => (n.hidden = true));
+  });
+</script>

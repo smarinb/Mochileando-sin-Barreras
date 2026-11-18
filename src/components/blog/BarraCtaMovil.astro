@@ -4,6 +4,7 @@
  * al hacer scroll y se pueden cerrar (se recuerda en sessionStorage). Reserva su propio espacio para no tapar contenido.
  */
 import { afiliados } from '~/data/afiliados';
+import { campanaDe } from '~/data/campanas';
 const seguros = afiliados.filter((a) => a.cluster === 'seguros-de-viaje' && a.mobile !== false);
 ---
 
@@ -16,16 +17,25 @@ const seguros = afiliados.filter((a) => a.cluster === 'seguros-de-viaje' && a.mo
 >
   <div class="mx-auto flex max-w-xl items-center gap-2">
     {
-      seguros.map((a) => (
+      seguros.map((a) => {
+        const c = campanaDe(a.key);
+        return (
         <a
+          data-camp-group
           href={a.href}
           target="_blank"
           rel="nofollow sponsored noopener"
           class="flex-1 rounded-lg bg-primary px-3 py-2.5 text-center text-sm font-bold text-white no-underline hover:bg-primary-hover"
         >
-          {a.name}: {a.mobileDiscount ?? '5% dto.'}<span class="sr-only"> (se abre en una pestaña nueva)</span>
+          {a.name}: <span data-camp-normal>{a.mobileDiscount ?? '5% dto.'}</span>
+          {c?.mobileDiscount && (
+            <span data-camp-desde={c.desde} data-camp-hasta={c.hasta} hidden>
+              {c.mobileDiscount}
+            </span>
+          )}<span class="sr-only"> (se abre en una pestaña nueva)</span>
         </a>
-      ))
+        );
+      })
     }
     <button
       type="button"
