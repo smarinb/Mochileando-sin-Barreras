@@ -27,22 +27,27 @@ import { campanas } from '~/data/campanas';
 </div>
 
 <script>
-  const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date());
-  const vigente = (el: HTMLElement) => {
-    const { desde, hasta } = el.dataset;
-    return !!desde && !!hasta && hoy >= desde && hoy <= hasta;
+  // Se ejecuta en cada navegación (ClientRouter solo carga el script una vez) y en la carga inicial.
+  const aplicarCampanas = () => {
+    const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date());
+    const vigente = (el: HTMLElement) => {
+      const { desde, hasta } = el.dataset;
+      return !!desde && !!hasta && hoy >= desde && hoy <= hasta;
+    };
+
+    const items = Array.from(document.querySelectorAll<HTMLElement>('#campanas-activas .camp-item'));
+    const activos = items.filter(vigente);
+    activos.forEach((el) => (el.hidden = false));
+    const franja = document.getElementById('campanas-activas');
+    if (franja && activos.length) franja.hidden = false;
+
+    // Tarjetas de afiliado: muestra el texto de campaña y oculta el habitual dentro del mismo grupo.
+    document.querySelectorAll<HTMLElement>('[data-camp-desde]').forEach((el) => {
+      const w = { desde: el.dataset.campDesde, hasta: el.dataset.campHasta };
+      if (!w.desde || !w.hasta || hoy < w.desde || hoy > w.hasta) return;
+      el.hidden = false;
+      el.closest('[data-camp-group]')?.querySelectorAll<HTMLElement>('[data-camp-normal]').forEach((n) => (n.hidden = true));
+    });
   };
-
-  const items = Array.from(document.querySelectorAll<HTMLElement>('#campanas-activas .camp-item'));
-  const activos = items.filter(vigente);
-  activos.forEach((el) => (el.hidden = false));
-  if (activos.length) document.getElementById('campanas-activas')!.hidden = false;
-
-  // Tarjetas de afiliado: muestra el texto de campaña y oculta el habitual dentro del mismo grupo.
-  document.querySelectorAll<HTMLElement>('[data-camp-desde]').forEach((el) => {
-    const w = { desde: el.dataset.campDesde, hasta: el.dataset.campHasta };
-    if (!w.desde || !w.hasta || hoy < w.desde || hoy > w.hasta) return;
-    el.hidden = false;
-    el.closest('[data-camp-group]')?.querySelectorAll<HTMLElement>('[data-camp-normal]').forEach((n) => (n.hidden = true));
-  });
+  document.addEventListener('astro:page-load', aplicarCampanas);
 </script>
